@@ -159,7 +159,7 @@ def b2 : Bool := false
 <pre><code class="language-lean"><span class="boring">def m : Nat := 1
 </span><span class="boring">def b1 : Bool := true
 </span><span class="boring">def b2 : Bool := false
-</span>-- #check &lt;項の名前(識別子)&gt;
+</span>-- #check &lt;項&gt;
 #check m                   -- output: Nat
 #check b1 &amp;&amp; b2            -- `&amp;&amp;` は「かつ」 output: Bool
 #check b1 || b2            -- `||` は「または」 output: Bool
@@ -168,7 +168,7 @@ def b2 : Bool := false
 <pre><code class="language-lean"><span class="boring">def m : Nat := 1
 </span><span class="boring">def b1 : Bool := true
 </span><span class="boring">def b2 : Bool := false
-</span>-- #eval &lt;項の名前(識別子)&gt;
+</span>-- #eval &lt;項&gt;
 #eval 5 * 4                -- 20
 #eval m + 2                -- 3
 #eval b1 &amp;&amp; b2             -- false
@@ -564,7 +564,7 @@ open Foo
 #check Foo.fa
 </code></pre>
 <p>名前空間 <code>Foo</code> 内で宣言した全ての識別子(定義の名前)は、宣言時の名前の頭に &quot;<code>Foo.</code>&quot; を付けたフルネームを持つ。名前空間 <code>Foo</code> の中では、&quot;<code>Foo.</code>&quot; を省略した短い名前で識別子を参照することができる。しかし、名前空間 <code>Foo</code> の外では、&quot;<code>Foo.</code>&quot; を省略しないフルネームを使って識別子を参照しなければならない。セクションとは違い、名前空間には名前を付ける必要がある。Leanにおいて、ただ1つの無名の名前空間はルートレベルに存在する。これ以外に無名の名前空間の存在は許されない。</p>
-<p><code>open &lt;名前空間名&gt;</code> コマンドを使うと、&quot;<code>&lt;名前空間名&gt;.</code>&quot; を省略した短い名前を使えるようになる。モジュール(外部ファイル)をインポートしたときは、短い名前を使うためにそのモジュールが含む名前空間を開きたくなるかもしれない。一方で、例えば他の名前空間内の識別子と名前が衝突するときは、そのような定義をフルネームで保護されたままにしておきたいと思うかもしれない。このように、名前空間は作業環境において名前を管理する方法を提供する。</p>
+<p><code>open &lt;名前空間名&gt;</code> コマンドを使うと、&quot;<code>&lt;名前空間名&gt;.</code>&quot; を省略した短い名前を使えるようになる。モジュール(外部ファイル)をインポートしたときは、短い名前を使うためにそのモジュールが含む名前空間を開きたくなるかもしれない。一方で、開きたい名前空間A内のある識別子 <code>A.bar</code> と他の名前空間B内の使用したい識別子 <code>B.bar</code> が衝突するときは、名前空間を開かず、そのような定義をフルネームで保護されたままにしておきたいと思うかもしれない。このように、名前空間は作業環境において名前を管理する方法を提供する。</p>
 <p>例えば、Leanはリストに関する定義と定理を名前空間 <code>List</code> の中でグループ化している。</p>
 <pre><code class="language-lean">#check List.nil
 #check List.cons
