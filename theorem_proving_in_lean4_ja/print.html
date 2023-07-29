@@ -153,6 +153,7 @@ Up Lean section</a>をご覧ください。このテキストの最初のバー�
 <h2 id="この翻訳について"><a class="header" href="#この翻訳について">この翻訳について</a></h2>
 <p><em>tranlated by aconite</em></p>
 <p>この翻訳は有志個人による<strong>非公式</strong>翻訳です。翻訳に際して、表現を大きく変えた箇所や、分かりやすさを期すため記述やコード例を追加した箇所があります。また、用語の訳が一般的でない可能性があります。必要に応じて原文<a href="https://leanprover.github.io/theorem_proving_in_lean4/">Theorem Proving in Lean 4</a>もご参照ください。</p>
+<p>翻訳サービス<a href="https://www.deepl.com/ja/translator">DeepL翻訳</a>と<a href="https://translate.google.co.jp/?hl=ja">Google翻訳</a>を使用しています。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-イントロダクション"><a class="header" href="#introduction-イントロダクション">Introduction (イントロダクション)</a></h1>
 <h2 id="computers-and-theorem-proving-コンピュータと定理証明"><a class="header" href="#computers-and-theorem-proving-コンピュータと定理証明">Computers and Theorem Proving (コンピュータと定理証明)</a></h2>
 <p><em>formal verification</em>(形式的検証)には、論理的および計算的手法を用いて、正確な数学的形式言語で表現された主張を実証することが含まれる。形式的検証の対象には、通常の数学の定理だけでなく、ハードウェアやソフトウェア、ネットワークプロトコル、機械システムやハイブリッドシステムがそれらの仕様を満たしているという主張も含まれる。実際、数学の定理の検証とシステムの正しさの検証の間に明確な区別はない: 形式的検証ではハードウェアやソフトウェアのシステムを数学的形式言語で記述する必要があり、その時点でシステムの正しさに関する主張を実証することは定理証明の形式と同じになる。逆に、数学の定理を証明するには長い計算が必要な場合があり、そのような場合で定理の正しさを検証するには、その計算が期待通りのことをしていることの検証が必要となる。</p>
@@ -167,7 +168,7 @@ Up Lean section</a>をご覧ください。このテキストの最初のバー�
 <p>このチュートリアルは、Leanの現行バージョン、Lean 4について記述しています。</p>
 <h2 id="about-this-book-この本について"><a class="header" href="#about-this-book-この本について">About this Book (この本について)</a></h2>
 <p>この本の目的は、Leanで証明を記述および検証する方法を教えることである。この本の前半で学ぶ、Leanで証明を記述および検証するために必要な背景知識は、Leanに固有のものではない。まず、Leanの基礎となる論理体系を学ぶ。これは、従来の数学の定理のほとんど全てを証明するのに十分強力で、証明を自然な方法で行うのに十分な表現力を持つ、<em>dependent type theory</em>(依存型理論)の一つである。より具体的には、Leanは<em>Calculus of Constructions</em>として知られる帰納型を持つシステムの一つに基づいている。Leanは数学的対象を定義し、依存型理論で数学的主張を表現できるだけでなく、証明を書くための言語としても使用できる。</p>
-<p>完全に詳述された公理的証明は非常に複雑であるため、定理証明支援系の課題はコンピュータにできるだけ多くの細部を埋めさせることである。この本を通じて、<a href="./dependent_type_theory.html">依存型理論</a>の枠組みの中でこれをサポートするさまざまな方法、例えば、項書き換えや、項や式を自動的に単純化する自動メソッドなどを学ぶ。同様に、代数的推論の柔軟な形式をサポートする<em>elaboration</em>や<em>type inference</em>(型推論)の方法を学ぶ。</p>
+<p>完全に詳述された公理的証明は非常に複雑であるため、定理証明支援系の課題はコンピュータにできるだけ多くの細部を埋めさせることである。この本を通じて、<a href="./dependent_type_theory.html">依存型理論</a>の枠組みの中でこれをサポートするさまざまな方法、例えば、項書き換えや、項や式を自動的に単純化する自動メソッドなどを学ぶ。同様に、数式推論の柔軟な形式をサポートする<em>elaboration</em>や<em>type inference</em>(型推論)の方法を学ぶ。</p>
 <p>最後に、システムとの対話に使う言語や、複雑な理論やデータを管理するためにLeanが提供するメカニズムなど、Leanに固有の機能について学ぶ。</p>
 <p>テキスト全体を通して、次のようなLeanコードの例が随所に示されている:</p>
 <pre><code class="language-lean">theorem and_commutative (p q : Prop) : p ∧ q → q ∧ p :=
