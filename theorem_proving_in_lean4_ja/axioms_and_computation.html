@@ -476,7 +476,7 @@ notation &quot;{ &quot; a₁ &quot;, &quot; a₂ &quot; }&quot; =&gt; mk a₁ a�
 
 end UProd
 </code></pre>
-<p>非順序対 <code>Quotient.mk (a₁, a₂)</code> に対する略記 <code>{a₁, a₂}</code> をローカルに定義していることに注意してほしい。この略記は説明を目的とするなら便利であるが、レコードや集合のような対象を表すのに波括弧を使いにくくなるので、一般的には良いアイデアではない。</p>
+<p>非順序対 <code>Quotient.mk' (a₁, a₂)</code> に対する略記 <code>{a₁, a₂}</code> をローカルに定義していることに注意してほしい。この略記は説明を目的とするなら便利であるが、レコードや集合のような対象を表すのに波括弧を使いにくくなるので、一般的には良いアイデアではない。</p>
 <p>既に <code>(a₁, a₂) ~ (a₂, a₁)</code> を証明してあるので、<code>Quot.sound</code> を使うことで <code>{a₁, a₂} = {a₂, a₁}</code> を簡単に証明することができる。</p>
 <pre><code class="language-lean"><span class="boring">private def eqv (p₁ p₂ : α × α) : Prop :=
 </span><span class="boring">  (p₁.1 = p₂.1 ∧ p₁.2 = p₂.2) ∨ (p₁.1 = p₂.2 ∧ p₁.2 = p₂.1)
