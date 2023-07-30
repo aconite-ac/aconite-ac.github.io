@@ -442,7 +442,7 @@ def snd {α : Type u} {β : Type v} (p : Prod α β) : β :=
 #eval prod_example (true, 3)
 #eval prod_example (false, 3)
 </code></pre>
-<p>引数 <code>motive</code> は構築したい項の型を指定するために使われる。そして、構築したい項の型は入力データ(この場合はペア)に依存して変わりうるので、<code>motive</code> は関数である。<code>cond</code> 関数はブール値を用いた条件分岐を実現する: <code>cond b t1 t2</code> は <code>b</code> が真なら <code>t1</code> を返し、そうでなければ <code>t2</code> を返す。上記の例で、関数 <code>prod_example</code> はブール値 <code>b</code> と自然数 <code>n</code> を取り、<code>b</code> が真なら <code>2 * n</code> を返し、<code>b</code> が偽なら <code>2 * n+ 1</code> を返す。</p>
+<p>引数 <code>motive</code> は構築したい項の型を指定するために使われる。そして、構築したい項の型は入力データ(この場合はペア)に依存して変わりうるので、<code>motive</code> は関数である。<code>cond</code> 関数はブール値を用いた条件分岐を実現する: <code>cond b t1 t2</code> は <code>b</code> が真なら <code>t1</code> を返し、そうでなければ <code>t2</code> を返す。上記の例で、関数 <code>prod_example</code> はブール値 <code>b</code> と自然数 <code>n</code> を取り、<code>b</code> が真なら <code>2 * n</code> を返し、<code>b</code> が偽なら <code>2 * n + 1</code> を返す。</p>
 <p>対照的に、直和型は<strong>2つの</strong>コンストラクタ <code>inl</code> と <code>inr</code> (&quot;insert left&quot;と&quot;insert right&quot;の略) を持ち、それぞれは<strong>1つの</strong>(明示的な)引数を取る。<code>Sum α β</code> 型の項を引数にとる関数を定義するには、2つの場合に対応しなければならない: 入力が <code>inl a</code> の形なら <code>a</code> を使って出力する値を指定する必要がある。入力が <code>inr b</code> の形なら <code>b</code> を使って出力する値を指定する必要がある。</p>
 <pre><code class="language-lean">def sum_example (s : Sum Nat Nat) : Nat :=
   Sum.casesOn (motive := fun _ =&gt; Nat) s
