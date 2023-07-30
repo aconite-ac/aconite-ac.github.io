@@ -286,7 +286,7 @@ example : f a = f b := congrArg f h₁
 example : f a = g a := congrFun h₂ a
 example : f a = g b := congr h₂ h₁
 </code></pre>
-<p>Leanのライブラリは次のような一般的な恒等式が多数収載されている:</p>
+<p>Leanのライブラリには次のような一般的な恒等式が多数収載されている:</p>
 <pre><code class="language-lean">variable (a b c : Nat)
 
 example : a + 0 = a := Nat.add_zero a
