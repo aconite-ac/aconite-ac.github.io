@@ -188,7 +188,7 @@ Anthony Hart, Simon Hudon, Sean Leather, Assia Mahboubi, Gihan Marasingha, Patri
 Sebastian Ullrich, Floris van Doorn, Daniel Velleman, Théo Zimmerman, Paul Chisholm, Chris Lovett, and Siddhartha Gadgil for their contributions.  Please see <a href="https://github.com/leanprover/">lean prover</a> and <a href="https://github.com/leanprover-community/">lean community</a> for an up to date list
 of our amazing contributors.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dependent-type-theory-依存型理論"><a class="header" href="#dependent-type-theory-依存型理論">Dependent Type Theory (依存型理論)</a></h1>
-<p>Dependent Type Theory(依存型理論)は強力で表現力の高い言語であり、複雑な数学的主張を表現したり、複雑なハードウェアやソフトウェアの仕様を記述したり、これら両方について自然で統一された方法で推論したりすることができる。Leanは「非累積的宇宙の可算無限階層」と「帰納型」を持つ<em>Calculus of Constructions</em>という依存型理論に基づいている。この章が終わるころには、これらが意味するところを理解できているだろう。</p>
+<p>Dependent Type Theory(依存型理論)は強力で表現力の高い言語であり、複雑な数学的主張を表現したり、複雑なハードウェアやソフトウェアの仕様を記述したり、これら両方について自然で統一された方法で推論したりすることができる。Leanは<em>Calculus of Constructions</em>として知られる依存型理論の一種に基づいている。そして、Leanは「非累積的宇宙の可算無限階層」と「帰納型」を備えている。この章が終わるころには、これらが意味するところを理解できているだろう。</p>
 <h2 id="simple-type-theory-単純型理論"><a class="header" href="#simple-type-theory-単純型理論">Simple Type Theory (単純型理論)</a></h2>
 <p>「型理論」という名前は「全てのexpression(式 あるいは 項)はそれに関連した型を持つ」という事実に由来する。例えば、適切な文脈の下で項 <code>x + 0</code> は自然数型を持ち、項 <code>f</code> は自然数を受け取り自然数を返す関数型を持つ。正確な定義を述べると、Leanにおいて「自然数」とは「任意精度の符号なし整数」のことである。</p>
 <p>Leanでは項を次のように宣言する。</p>
