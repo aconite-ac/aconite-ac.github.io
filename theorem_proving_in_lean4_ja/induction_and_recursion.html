@@ -158,7 +158,7 @@ def foo : Nat → Nat → Nat
   | succ x, zero   =&gt; 2
   | succ x, succ y =&gt; 3
 </code></pre>
-<p>があるとき、<code>zero</code> や <code>succ y</code> などを「パターン(pattern)」、<code>| zero  , zero   =&gt; 0</code> などを「ケース(case)」、定義として与えられたケース全てをまとめたものを「ケースリスト(list of cases)」、不足なくケースが与えられたケースリストを用いてパターンマッチングすることを「場合分け(by cases)」あるいは「場合分けする(split on cases)」と呼ぶ。</p>
+<p>があるとき、<code>zero</code> や <code>succ y</code> などを「パターン(pattern)」、<code>| zero  , zero</code> などを「ケース(case)」、定義として与えられたケース全てをまとめたものを「ケースリスト(list of cases)」、不足なくケースが与えられたケースリストを用いてパターンマッチングすることを「場合分け(by cases)」あるいは「場合分けする(split on cases)」と呼ぶ。</p>
 <h2 id="pattern-matching-パターンマッチング"><a class="header" href="#pattern-matching-パターンマッチング">Pattern Matching (パターンマッチング)</a></h2>
 <p>schematic patternsの解釈は、コンパイルの最初のステップである。帰納型のコンストラクタと <code>casesOn</code> 再帰子を使って、関数を定義したり、場合分けによる定理の証明が行えることを見てきた。しかし、複雑な定義は、入れ子になった <code>casesOn</code> 適用をいくつも使うことがあり、そのような記述は読みにくく理解しにくいかもしれない。パターンマッチングはより便利で、関数型プログラミング言語ユーザーに馴染みのあるアプローチを提供する。</p>
 <p>帰納的に定義された自然数の型について考える。全ての自然数は <code>zero</code> か <code>succ x</code> のどちらかの形をとるため、それぞれのケースにおいて出力の値を指定することで、自然数から任意の型への関数を定義することができる:</p>
