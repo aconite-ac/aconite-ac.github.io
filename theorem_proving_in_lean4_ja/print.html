@@ -1473,8 +1473,8 @@ example (a b c d : α) (hab : r a b) (hcb : r c b) (hcd : r c d) : r a d :=
 </code></pre>
 <p>全称量化子の使い方に慣れるために、この章の最後にある練習問題をいくつかやってみるとよい。</p>
 <p>依存関数型には型付け規則があるが、全称量化子には特殊な型付け規則がある。これが <code>Prop</code> と他の型の違いである。<code>α : Sort i</code> と <code>β : Sort j</code> があり、項 <code>β</code> は <code>x : α</code> に依存するかもしれないとする。このとき、<code>(x : α) → β</code> は型 <code>Sort (imax i j)</code> の項である。ここで、<code>imax i j</code> は <code>j</code> が0でないなら <code>i</code> と <code>j</code> の最大値で、<code>j</code> が0なら0である。</p>
-<p><code>imax i j</code> の定義は次のように解釈すればよい。もし <code>j</code> が <code>0</code> でないなら、<code>(x : α) → β</code> は型 <code>Sort (max i j)</code> の項である。言い換えれば、<code>α</code> から <code>β</code> への依存関数型は、インデックスが <code>i</code> と <code>j</code> の最大値である宇宙に「住んで」いる。他方で、<code>β</code> が <code>Sort 0</code>、つまり <code>Prop</code> の項であるとしよう。この場合、<code>α</code> がどの階層的型宇宙に住んでいるかに関わらず、<code>(x : α) → β</code> も <code>Sort 0</code> (<code>Prop</code>) の項となる。言い換えれば、<code>β</code> が <code>α</code> に依存する命題であれば、 <code>∀ x : α, β</code> も命題であるということである。これは、<code>Prop</code> は単なるデータの型ではなく命題の型であるという解釈を反映している。そして以上のことは <code>Prop</code> を<em>impredicative</em>(自己参照可能？)にしている。</p>
-<p><em>predicative</em>(自己参照不能？)という用語は、20世紀初頭の数学基礎論の発展に由来する。当時、ポアンカレやラッセルといった論理学者が、集合論におけるパラドックスを、性質Aを持つ集合を量化することで性質Aを定義するときに生じる「悪循環」のせいにしたのである。任意の型 <code>α</code> に対して、<code>α</code> 上の全ての(一変数)述語からなる型 <code>α → Prop</code> (<code>α</code> の「べき型」)を作れることに注目してほしい。<code>Prop</code> のimpredicativity(自己参照可能性？)とは、<code>α → Prop</code> を量化した命題を作れることを意味する。特に、<code>α</code> 上の述語を全称量化することで、<code>α</code> 上の述語を定義することができ(<code>∀ X : α → Prop, β</code> と書くことで「全ての <code>α</code> 上の述語に対して <code>β</code> が成立する」という <code>α</code> 上の述語を定義することができ)、これはまさにかつて問題視された類の循環である。</p>
+<p><code>imax i j</code> の定義は次のように解釈すればよい。もし <code>j</code> が <code>0</code> でないなら、<code>(x : α) → β</code> は型 <code>Sort (max i j)</code> の項である。言い換えれば、<code>α</code> から <code>β</code> への依存関数型は、インデックスが <code>i</code> と <code>j</code> の最大値である宇宙に「住んで」いる。他方で、<code>β</code> が <code>Sort 0</code>、つまり <code>Prop</code> の項であるとしよう。この場合、<code>α</code> がどの階層的型宇宙に住んでいるかに関わらず、<code>(x : α) → β</code> も <code>Sort 0</code> (<code>Prop</code>) の項となる。言い換えれば、<code>β</code> が <code>α</code> に依存する命題であれば、 <code>∀ x : α, β</code> も命題であるということである。これは、<code>Prop</code> は単なるデータの型ではなく命題の型であるという解釈を反映している。そして以上のことは <code>Prop</code> を<em>impredicative</em>(非可述的)にしている。</p>
+<p><em>predicative</em>(可述的)という用語は、20世紀初頭の数学基礎論の発展に由来する。当時、ポアンカレやラッセルといった論理学者が、集合論におけるパラドックスを、性質Aを持つ集合を量化することで性質Aを定義するときに生じる「悪循環」のせいにしたのである。任意の型 <code>α</code> に対して、<code>α</code> 上の全ての(一変数)述語からなる型 <code>α → Prop</code> (<code>α</code> の「べき型」)を作れることに注目してほしい。<code>Prop</code> のimpredicativity(非可述性)とは、<code>α → Prop</code> を量化した命題を作れることを意味する。特に、<code>α</code> 上の述語を全称量化することで、<code>α</code> 上の述語を定義することができ(<code>∀ X : α → Prop, β</code> と書くことで「全ての <code>α</code> 上の述語に対して <code>β</code> が成立する」という <code>α</code> 上の述語を定義することができ)、これはまさにかつて問題視された類の循環である。</p>
 <h2 id="equality-等号"><a class="header" href="#equality-等号">Equality (等号)</a></h2>
 <p>ここで、Leanのライブラリで定義されている最も基本的な関係の一つである「等号関係」に注目しよう。<a href="./inductive_types.html">7章 Inductive Types (帰納型)</a>では、Leanの<em>logical framework</em>(論理フレームワーク)の根本から「どのように」等号が定義されるかを説明する。その前に、ここでは等号の使い方を説明する。</p>
 <p>もちろん、等号の基本的な性質の一つは、「等号は同値関係である」という性質である:</p>
@@ -6413,11 +6413,11 @@ instance : Inhabited (Set α) :=
 example : Inhabited (Set α) :=
   @inferInstance (Inhabited (α → Prop)) _
 </code></pre>
-<p>時には、型クラス推論が期待されるインスタンスを見つけることに失敗したり、最悪の場合、無限ループに陥ってタイムアウトすることがある。このような状況でのデバッグを手伝ってもらうために、Leanにインスタンス検索の追跡を依頼することができる:</p>
+<p>時には、型クラス推論が期待されるインスタンスを見つけることに失敗したり、最悪の場合、無限ループに陥ってタイムアウトすることがある。このような状況でのデバッグを手伝ってもらうために、Leanにインスタンス探索の追跡を依頼することができる:</p>
 <pre><code class="language-lean">set_option trace.Meta.synthInstance true
 </code></pre>
 <p>VSCodeを使用している場合は、関連する定理や定義にカーソルを合わせるか、<code>Ctrl-Shift-Enter</code> によりメッセージウィンドウを開くことで、追跡結果を読むことができる。Emacsでは、<code>C-c C-x</code> によりファイルと独立したLeanプロセスを実行することができる。その後、出力バッファには型クラス解決手順が起きるたびに追跡内容が表示される。</p>
-<p>次のオプションを使ってインスタンス検索を制限することもできる:</p>
+<p>次のオプションを使ってインスタンス探索を制限することもできる:</p>
 <pre><code class="language-lean">set_option synthInstance.maxHeartbeats 10000
 set_option synthInstance.maxSize 400
 </code></pre>
@@ -6743,7 +6743,7 @@ macro_rules
     . apply h₂
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="axioms-and-computation-公理と計算"><a class="header" href="#axioms-and-computation-公理と計算">Axioms and Computation (公理と計算)</a></h1>
-<p>Leanに実装された<em>Calculus of Constructions</em>には、依存関数型、帰納型、そして最下層にある<em>impredicative</em>(自己参照可能)で<em>proof-irrelevant</em>(証明無関係)な <code>Prop</code> 型から始まる宇宙の階層が含まれていることを見てきた。本章では、Leanに実装されている<em>Calculus of Inductive Constructions</em>(CIC)に公理と規則を追加して、CICを拡張する方法を考える。このような方法で基礎体系を拡張することは、多くの場合便利である。基礎体系を拡張することで、より多くの定理を証明することが可能になるか、そうでなければ以前は簡単に証明できなかった定理を簡単に証明できるようになる。しかし、公理を追加することで、その正しさ(無矛盾性)に関する懸念の増大以上の否定的な結果が生じることもある。特に、追加した公理の使用は、以下で紹介するように定義と定理の計算内容に影響する。</p>
+<p>Leanに実装された<em>Calculus of Constructions</em>には、依存関数型、帰納型、そして最下層にある<em>impredicative</em>(非可述的)で<em>proof-irrelevant</em>(証明無関係)な <code>Prop</code> 型から始まる宇宙の階層が含まれていることを見てきた。本章では、Leanに実装されている<em>Calculus of Inductive Constructions</em>(CIC)に公理と規則を追加して、CICを拡張する方法を考える。このような方法で基礎体系を拡張することは、多くの場合便利である。基礎体系を拡張することで、より多くの定理を証明することが可能になるか、そうでなければ以前は簡単に証明できなかった定理を簡単に証明できるようになる。しかし、公理を追加することで、その正しさ(無矛盾性)に関する懸念の増大以上の否定的な結果が生じることもある。特に、追加した公理の使用は、以下で紹介するように定義と定理の計算内容に影響する。</p>
 <p>Leanは計算的推論と古典論理的推論の両方をサポートするように設計されている。望むなら、ユーザーは<em>computationally pure</em>(計算上純粋)なフラグメントだけを使うことができ、そうすればシステム内の全ての閉じた式が<em>canonical normal form</em>(正規標準形)に評価されることが保証される。特に、例えば <code>Nat</code> 型の計算上純粋な閉じた式は、全て数字に簡約される。</p>
 <p>Leanの標準ライブラリでは、<em>propositional extensionality</em>(命題外延性)という追加の公理と、<em>function extensionality</em>(関数外延性)の原理を含意する<em>quotient</em>(商)の構築が定義されている。これらの公理の拡張は、例えば集合や有限集合の理論を開発するために利用される。これらの公理やそれらに依存する定理を使うと、Leanのカーネルにおける項評価がブロックされ、<code>Nat</code> 型の閉項が数字に評価されなくなることがあることを以下で見る。しかし、これらの公理は新しい命題(の証明項)を(無条件に)追加するだけであり、Leanは仮想マシン評価器用のバイトコード(中間コード)に定義をコンパイルする際に型と命題の情報を消去するため、これらの公理は計算的解釈と両立する。計算に傾倒したユーザーであっても、計算における推論を行うために古典的な排中律を使いたいと思うかもしれない。排中律もカーネルでの項評価をブロックするが、排中律は定義のバイトコードへのコンパイルと両立する。</p>
 <p>また、標準ライブラリは、計算的解釈とは全く相反する<em>choice principle</em>(選択原理)も定義している。選択原理は「データ(証明以外の項)」の存在を主張する命題から魔法のようにデータを生成することができ、便利だからである。いくつかの古典的な構文を使うには選択原理が必須であり、ユーザーは必要なときに選択原理をインポートすることができる。しかし、古典的な構文を使ってデータを生成する式は、計算可能な内容を持っていない。Leanでは、その事実を示すために、このような定義を <code>noncomputable</code> とマークする必要がある。</p>

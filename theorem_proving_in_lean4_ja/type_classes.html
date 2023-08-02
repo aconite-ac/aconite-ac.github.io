@@ -715,11 +715,11 @@ instance : Inhabited (Set α) :=
 example : Inhabited (Set α) :=
   @inferInstance (Inhabited (α → Prop)) _
 </code></pre>
-<p>時には、型クラス推論が期待されるインスタンスを見つけることに失敗したり、最悪の場合、無限ループに陥ってタイムアウトすることがある。このような状況でのデバッグを手伝ってもらうために、Leanにインスタンス検索の追跡を依頼することができる:</p>
+<p>時には、型クラス推論が期待されるインスタンスを見つけることに失敗したり、最悪の場合、無限ループに陥ってタイムアウトすることがある。このような状況でのデバッグを手伝ってもらうために、Leanにインスタンス探索の追跡を依頼することができる:</p>
 <pre><code class="language-lean">set_option trace.Meta.synthInstance true
 </code></pre>
 <p>VSCodeを使用している場合は、関連する定理や定義にカーソルを合わせるか、<code>Ctrl-Shift-Enter</code> によりメッセージウィンドウを開くことで、追跡結果を読むことができる。Emacsでは、<code>C-c C-x</code> によりファイルと独立したLeanプロセスを実行することができる。その後、出力バッファには型クラス解決手順が起きるたびに追跡内容が表示される。</p>
-<p>次のオプションを使ってインスタンス検索を制限することもできる:</p>
+<p>次のオプションを使ってインスタンス探索を制限することもできる:</p>
 <pre><code class="language-lean">set_option synthInstance.maxHeartbeats 10000
 set_option synthInstance.maxSize 400
 </code></pre>
