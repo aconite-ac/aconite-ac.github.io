@@ -202,8 +202,8 @@ variable (trans_r : ∀ {x y z}, r x y → r y z → r x z)
 variable (a b c : α)
 variable (hab : r a b) (hbc : r b c)
 
-#check trans_r          -- r ?m.131 ?m.132 → r ?m.132 ?m.133 → r ?m.131 ?m.133
-#check trans_r hab      -- r b ?m.172 → r a ?m.172
+#check trans_r          -- r ?m.1 ?m.2 → r ?m.2 ?m.3 → r ?m.1 ?m.3
+#check trans_r hab      -- r b ?m.42 → r a ?m.42
 #check trans_r hab hbc  -- r a c
 </code></pre>
 <p><code>x y z</code> を暗黙の引数にする利点は、<code>r a c</code> の証明を <code>trans_r hab hbc</code> と簡単に書けることである。欠点は、項 <code>trans_r</code> と項 <code>trans_r hab</code> の型を推論するのに必要な情報をLeanに与えることができないことである。最初の <code>#check</code> コマンドの出力は <code>r ?m.1 ?m.2 → r ?m.2 ?m.3 → r ?m.1 ?m.3</code> であり、暗黙の引数が特定できなかったことを示している。</p>

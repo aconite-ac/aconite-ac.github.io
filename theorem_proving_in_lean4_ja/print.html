@@ -153,10 +153,10 @@ Up Lean</a>をご覧ください。このテキストの最初のバージョン
 <h2 id="この翻訳について"><a class="header" href="#この翻訳について">この翻訳について</a></h2>
 <p><em>translated by aconite</em>(2章～12章)<em>, Haruhisa Enomoto</em>(1章)</p>
 <p>この翻訳は有志による<strong>非公式</strong>翻訳です。翻訳に際して、表現を大きく変えた箇所や、分かりやすさを期すため記述やコード例を追加した箇所があります。また、用語の訳が一般的でない可能性があります。誤りを含む可能性もあります。必要に応じて原文<a href="https://leanprover.github.io/theorem_proving_in_lean4/">Theorem Proving in Lean 4</a> (<a href="https://github.com/leanprover/theorem_proving_in_lean4">GitHub</a>)もご覧ください。</p>
-<p>この翻訳のソースは<a href="https://github.com/aconite-ac/theorem_proving_in_lean4">GitHubリポジトリ</a>から入手可能です。また、ページ右上端のGitHubマークを押してGitHubリポジトリに移動することもできます。この翻訳の全ページとソースは<a href="LICENSE">Apache License 2.0</a>の下でリリースされています。</p>
+<p>この翻訳のソースは<a href="https://github.com/aconite-ac/theorem_proving_in_lean4">GitHubリポジトリ</a>から入手可能です。また、ページ右上端のGitHubマークを押してGitHubリポジトリに移動することもできます。この翻訳の全ページとソースは<a href="LICENSE">Apache License 2.0</a>の下で公開されています。</p>
+<p>誤字脱字、内容の誤りの指摘、フォークからのPull Request、フォークによる翻訳の改変等は歓迎いたします。基本的に、ご指摘は<a href="https://github.com/aconite-ac/theorem_proving_in_lean4/issues">GitHubリポジトリのIssues</a>で受け付けます。</p>
 <p>mdBook付属の検索機能に関して、今のところ日本語検索は非対応です。お手数ですがページ内検索をご活用ください。章や節の名前、一部の専門用語は英語検索でヒットします。</p>
-<p>誤字脱字、内容の誤りの指摘、フォークからのPull Request、フォークによる翻訳の改変等は歓迎いたします。</p>
-<p>翻訳に際して、翻訳サービス<a href="https://www.deepl.com/ja/translator">DeepL翻訳</a>を参考にしました。</p>
+<p>翻訳に際して、機械翻訳サービス<a href="https://www.deepl.com/ja/translator">DeepL翻訳</a>を参考にしました。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-イントロダクション"><a class="header" href="#introduction-イントロダクション">Introduction (イントロダクション)</a></h1>
 <h2 id="computers-and-theorem-proving-コンピュータと定理証明"><a class="header" href="#computers-and-theorem-proving-コンピュータと定理証明">Computers and Theorem Proving (コンピュータと定理証明)</a></h2>
 <p><em>Formal verification</em>(形式検証)では、論理的・計算的手法を使って、厳密な数学用語で表現された主張を立証する。この主張には、通常の数学の定理の他にも、ハードウェアやソフトウェアの一部、 ネットワークプロトコル、機械的・ハイブリッドシステムがその仕様を満たしているという主張も含まれる。実際には、数学的主張の検証をすることと、システムの正しさを検証することの間には、明確な区別はない。というのも、形式検証では、ハードウェアやソフトウェアのシステムを数学的な言葉で記述する必要があり、その時点で、その正しさに関する主張を立証することは、定理証明の一形態となる。逆に、数学の定理の証明には長い計算が必要な場合があり、その場合、定理の真偽を検証するには、その計算が想定通りに実行されることを検証する必要がある。</p>
@@ -1408,8 +1408,8 @@ variable (trans_r : ∀ {x y z}, r x y → r y z → r x z)
 variable (a b c : α)
 variable (hab : r a b) (hbc : r b c)
 
-#check trans_r          -- r ?m.131 ?m.132 → r ?m.132 ?m.133 → r ?m.131 ?m.133
-#check trans_r hab      -- r b ?m.172 → r a ?m.172
+#check trans_r          -- r ?m.1 ?m.2 → r ?m.2 ?m.3 → r ?m.1 ?m.3
+#check trans_r hab      -- r b ?m.42 → r a ?m.42
 #check trans_r hab hbc  -- r a c
 </code></pre>
 <p><code>x y z</code> を暗黙の引数にする利点は、<code>r a c</code> の証明を <code>trans_r hab hbc</code> と簡単に書けることである。欠点は、項 <code>trans_r</code> と項 <code>trans_r hab</code> の型を推論するのに必要な情報をLeanに与えることができないことである。最初の <code>#check</code> コマンドの出力は <code>r ?m.1 ?m.2 → r ?m.2 ?m.3 → r ?m.1 ?m.3</code> であり、暗黙の引数が特定できなかったことを示している。</p>
