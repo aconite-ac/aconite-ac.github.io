@@ -244,6 +244,7 @@ code --install-extension leanprover.lean4
 <div style="break-before: page; page-break-before: always;"></div><h1 id="macosにlean-4をインストールする方法---簡単な手順"><a class="header" href="#macosにlean-4をインストールする方法---簡単な手順">MacOSにLean 4をインストールする方法 - 簡単な手順</a></h1>
 <p>ここでは、MacOSにLeanをインストールする手順を説明します。</p>
 <p>特に、M1 Macs / Apple Siliconの場合はやや複雑な手順を含みます。行き詰まった場合は、<a href="https://leanprover.zulipchat.com/">Lean - Zulip Chat (英語)</a>で助けを求めてください。</p>
+<p><strong>注意</strong>: 以下では翻訳元に従い、Intel Macsについては <code>curl</code> を利用する方法、M1 Macs / Apple Siliconについては複雑な手順を紹介していますが、翻訳元ならびに以下の記述はLean 3のときの情報から更新されていない可能性があります。少なくとも、<strong>M1 Macs</strong>におけるLeanのインストールについては、Windowsと同様に<a href="https://aconite-ac.github.io/how_to_install_lean/how-to-install/windows-quickstart.html">VS Codeのlean4拡張機能にelanとLeanをインストールしてもらう簡単な方法</a>が有効だったという報告があります。MacOSへのインストールに関して、以下の記述を更新しうる情報をお持ちの方は、<a href="https://github.com/aconite-ac/how_to_install_lean/issues">GitHubのIssues</a>へ連絡して頂けると幸いです。</p>
 <h2 id="intel-macs"><a class="header" href="#intel-macs">Intel Macs</a></h2>
 <p>ここでは簡単で高速なインストール方法を紹介します。この手順を使うと、Lean、そのサポートツールである <code>elan</code> と <code>lake</code>、コードエディタVS CodeとそのLeanプラグインがインストールされます。</p>
 <p>ただし、この方法はbashスクリプトによるsudoコマンドの実行を含むほか、インストールプロセスの細部が分からないというデメリットもあります。ここで紹介するコマンドや、コマンド内で実行されるシェルスクリプトが信頼できない場合は、この方法は使わず、代わりに<a href="how-to-install/./macos-detailed.html">より詳細なインストール手順</a>をご覧ください。</p>
