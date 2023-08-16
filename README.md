@@ -6,7 +6,8 @@ Leanの日本語情報(非公式)を掲載します。
 
 ## コンテンツ
 
-- [Theorem Proving in Lean 4 日本語訳](https://aconite-ac.github.io/theorem_proving_in_lean4_ja/title_page.html)
+- [Theorem Proving in Lean 4 日本語訳](https://aconite-ac.github.io/theorem_proving_in_lean4_ja/)
+- [Leanのインストール方法・elanとLakeの使い方](https://aconite-ac.github.io/how_to_install_lean/)
 
 ## 管理者について
 
