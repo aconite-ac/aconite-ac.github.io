@@ -637,11 +637,6 @@ lake init my_project
 </code></pre>
 </li>
 <li>
-<p>次のコマンドを実行し、<code>my_project</code> 内で使われるLeanのバージョンをMathlib4内で使われるLeanのバージョンに合わせます。</p>
-<pre><code class="language-sh">curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
-</code></pre>
-</li>
-<li>
 <p>次のコマンドを実行し、Mathlib4のキャッシュされたビルド済ファイルをダウンロードします。</p>
 <pre><code class="language-sh">lake exe cache get
 </code></pre>
@@ -700,13 +695,13 @@ lake init my_project
 <p>ターミナルを開き、フォルダ <code>my_project</code> に移動します。</p>
 </li>
 <li>
-<p>次のコマンドを実行し、Mathlib4を含む被依存パッケージをダウンロードします。</p>
-<pre><code class="language-sh">lake update
+<p>パッケージバージョンを固定しなかった場合、次のコマンドを実行し、<code>my_project</code> 内で使われるLeanのバージョンを最新のMathlib4内で使われるLeanのバージョンに合わせます。</p>
+<pre><code class="language-sh">curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
 </code></pre>
 </li>
 <li>
-<p>パッケージバージョンを固定しなかった場合、次のコマンドを実行し、<code>my_project</code> 内で使われるLeanのバージョンをMathlib4内で使われるLeanのバージョンに合わせます。</p>
-<pre><code class="language-sh">curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
+<p>次のコマンドを実行し、Mathlib4を含む被依存パッケージをダウンロードします。</p>
+<pre><code class="language-sh">lake update
 </code></pre>
 </li>
 <li>
@@ -722,13 +717,13 @@ lake init my_project
 <p>ターミナルを開き、フォルダ <code>my_project</code> に移動します。</p>
 </li>
 <li>
-<p>次のコマンドを実行し、Mathlib4を含む被依存パッケージをダウンロードします。</p>
-<pre><code class="language-sh">lake update
+<p>次のコマンドを実行し、<code>my_project</code> 内で使われるLeanのバージョンを最新のMathlib4内で使われるLeanのバージョンに合わせます。</p>
+<pre><code class="language-sh">curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
 </code></pre>
 </li>
 <li>
-<p>次のコマンドを実行し、<code>my_project</code> 内で使われるLeanのバージョンをMathlib4内で使われるLeanのバージョンに合わせます。</p>
-<pre><code class="language-sh">curl -L https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
+<p>次のコマンドを実行し、Mathlib4を含む被依存パッケージをダウンロードします。</p>
+<pre><code class="language-sh">lake update
 </code></pre>
 </li>
 <li>
