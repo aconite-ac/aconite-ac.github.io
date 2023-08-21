@@ -245,14 +245,14 @@ code --install-extension leanprover.lean4
 <p>ここでは、MacOSにLeanをインストールする手順を説明します。</p>
 <p>特に、M1 Mac / Apple Siliconの場合はやや複雑な手順を含みます。行き詰まった場合は、<a href="https://leanprover.zulipchat.com/">Lean - Zulip Chat (英語)</a>で助けを求めてください。</p>
 <h2 id="注意とお願い必ずお読みください"><a class="header" href="#注意とお願い必ずお読みください">注意とお願い(必ずお読みください)</a></h2>
-<p>以下では翻訳元に従い、Intel Macについては <code>curl</code> を利用する方法、M1 Mac / Apple Siliconについては複雑な手順を紹介していますが、翻訳元ならびに以下の記述はLean 3のときの情報から更新されていない可能性があります。少なくとも、<strong>M1 Mac</strong>におけるLeanのインストールについては、Windowsと同様に<a href="how-to-install/./windows-quickstart.html">VS Codeのlean4拡張機能にelanとLeanをインストールしてもらう簡単な方法</a>(以下「Quickstartインストール」とする)が有効だったという報告があります。一方で、<strong>Intel Mac</strong>においては、Quickstartインストールはうまくいかず、<a href="how-to-install/macos.html#intel-mac">下記</a>のインストール方法が有効だったという報告があります。以上の状況を鑑みて、この資料では次のようにインストール手順を案内いたします。</p>
+<p>以下では翻訳元に従い、Intel Macについては <code>curl</code> を利用する方法、M1 Mac / Apple Siliconについては複雑な手順を紹介していますが、翻訳元ならびに以下の記述はLean 3のときの情報から更新されていない可能性があり、Lean 4ではMacOSにおいても<a href="how-to-install/./windows-quickstart.html">VS Codeのlean4拡張機能にelanとLeanをインストールしてもらう簡単な方法</a>(以下「Quickstartインストール」とする)が有効である可能性が示唆されています<sup class="footnote-reference"><a href="#1">1</a></sup>。少なくとも、<strong>M1 Mac</strong>においては、Windowsと同様にQuickstartインストールが有効だったという報告があります。以上の状況を鑑みて、暫定的ではありますが、この資料では次のようにインストール手順を案内いたします。</p>
 <ol>
 <li>
-<p>簡単な方法でのインストールを希望する場合
+<p>簡単な方法でのインストールを希望する場合<br>
 <a href="how-to-install/./windows-quickstart.html">Quickstartインストール</a>を試すことを推奨いたします。</p>
 </li>
 <li>
-<p>より確実な方法でのインストールを希望する場合、またはQuickstartインストールが上手くいかなかった場合
+<p>より確実な方法でのインストールを希望する場合、またはQuickstartインストールが上手くいかなかった場合<br>
 このページの以下に示すインストール方法を推奨いたします。</p>
 </li>
 </ol>
@@ -304,6 +304,9 @@ elan default stable
 <ul>
 <li><a href="https://leanprover-community.github.io/install/macos.html">How to install Lean 4 on MacOS - Lean Community</a> : 翻訳元、公式。</li>
 </ul>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/.E2.9C.94.20Install.20Lean.204.20on.20Mac/near/385825690">Install Lean 4 on Mac - Lean - Zulip</a></p>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="macosintel-macにlean-4をインストールする方法---詳細な手順"><a class="header" href="#macosintel-macにlean-4をインストールする方法---詳細な手順">MacOS(Intel Mac)にLean 4をインストールする方法 - 詳細な手順</a></h1>
 <p>ここでは、MacOS(Intel Mac)にLean 4をインストールする、より詳細な手順を説明します。<a href="how-to-install/./macos.html">簡単で高速なインストール手順</a>もありますが、この手順を利用するには実行されるコマンドやbashスクリプトを信頼する必要があります。</p>
 <p>Leanを使うにあたり、まずLeanと、Leanを扱う機能を持つエディタをセットアップする必要があります。Leanを直接インストールする代わりに、Leanをアップデートしたり、Leanプロジェクトの要求に応じたバージョンのLeanを提供する、<a href="https://github.com/leanprover/elan">elan</a>という名前の小さなプログラム(バージョンマネージャ)をインストールします。elanのインストールは全てのユーザに推奨されます。</p>
