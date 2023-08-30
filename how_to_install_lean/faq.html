@@ -155,7 +155,7 @@
 <p><span class="A">A.</span> <code>elan</code>・<code>lean</code>・<code>lake</code> のバイナリは <code>~/.elan/bin</code>(<code>$HOME/.elan/bin</code>) にインストールされます。</p>
 <hr />
 <p><span class="Q">Q.</span> <span class="question"><code>elan</code>・<code>lean</code>・<code>lake</code>(以下、「<code>lean</code> 等」とする) へのパスは自動で通りますか？</span></p>
-<p><span class="A">A.</span> 例えば、Windowsで<a href="./how-to-install/windows-quickstart.html">QuickStarkインストール</a>を行った場合は環境変数に<code>~/.elan/bin</code>が自動で追加されます。また、Debianでbashをお使いの環境でインストールを行った場合は、設定ファイル<code>~/.profile</code>(あるいは <code>~/.bash_profile</code>) が自動で更新され、パスが通ります。zshをお使いの場合も設定ファイルが自動で更新されます。したがって、インストール後にターミナルを再起動すれば <code>lean</code> 等へのパスは通ります。</p>
+<p><span class="A">A.</span> 例えば、Windowsで<a href="./how-to-install/windows-quickstart.html">Quickstartインストール</a>を行った場合は環境変数に<code>~/.elan/bin</code>が自動で追加されます。また、Debianでbashをお使いの環境でインストールを行った場合は、設定ファイル<code>~/.profile</code>(あるいは <code>~/.bash_profile</code>) が自動で更新され、パスが通ります。zshをお使いの場合も設定ファイルが自動で更新されます。したがって、インストール後にターミナルを再起動すれば <code>lean</code> 等へのパスは通ります。</p>
 <p>ターミナルを再起動したくない場合は、コマンド <code>source ~/.elan/env</code> を実行すれば現在のターミナルでパスが通ります。<code>~/.elan/env</code> の内容は次の通りです。</p>
 <pre><code class="language-sh">export PATH=&quot;$HOME/.elan/bin:$PATH&quot;
 </code></pre>
