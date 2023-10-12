@@ -6041,7 +6041,7 @@ def getUnit [Monoid α] : α :=
 <p>デフォルトでは、Leanは型 <code>T</code> のデフォルト項が既知であり、<code>T</code> が欠落部分を含まない場合にのみ、<code>Inhabited T</code> のインスタンスを合成しようとする。次のコマンドは、型が欠落部分(つまり <code>_</code>)を含むため、&quot;failed to create type class instance for Inhabited (Nat × ?m.1499)&quot; というエラーを生成する。</p>
 <pre><code class="language-lean">#check_failure (inferInstance : Inhabited (Nat × _))
 </code></pre>
-<p><code>Inhabited</code> 型クラスのパラメータは、<code>Inhabited</code> 型クラスのコンストラクタの「入力」の型とみなすことができる。型クラスが複数のパラメータを持つ場合、そのうちのいくつかを出力パラメータ(型クラスの要素である関数の出力の型)としてマークすることができる。出力パラメータに欠落部分があっても、Leanは型クラスのインスタンス合成を開始する。以下の例では、出力パラメータを使って<em>heterogeneous</em>(異種)多相乗法を定義している。</p>
+<p><code>Inhabited</code> 型クラスのパラメータは、<code>Inhabited</code> 型クラスのコンストラクタの「入力」の型とみなすことができる。型クラスが複数のパラメータを持つ場合、そのうちのいくつかを出力パラメータ(型クラスのインスタンス合成時に、既に与えられた型から推論される型)としてマークすることができる。出力パラメータの推論のために使われる型は入力パラメータと呼ばれる。出力パラメータに欠落部分があっても、Leanは型クラスのインスタンス合成を開始する。以下の例では、出力パラメータを使って<em>heterogeneous</em>(異種)多相乗法を定義している。</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
   hMul : α → β → γ
@@ -6058,7 +6058,7 @@ instance : HMul Nat (Array Nat) (Array Nat) where
 #eval hMul 4 #[2, 3, 4]  -- #[8, 12, 16]
 <span class="boring">end Ex
 </span></code></pre>
-<p>パラメータ <code>α</code> と <code>β</code> は入力パラメータ、<code>γ</code> は出力パラメータとみなされる。関数適用 <code>hMul a b</code> が与えられると、<code>a</code> と <code>b</code> の型が分かっているなら型クラスインスタンス合成器が呼び出され、型クラスインスタンス合成器は <code>hMul a b</code> の出力の型情報を出力パラメータ <code>γ</code> から得る。上の例では、2つのインスタンスを定義した。最初のインスタンスは自然数上の同種乗法である。2つ目のインスタンスは配列のスカラー倍である。2つ目のインスタンスの定義では、インスタンスの連鎖が使われていることに注意してほしい。</p>
+<p>パラメータ <code>α</code> と <code>β</code> は入力パラメータ、<code>γ</code> は出力パラメータとみなされる。関数適用 <code>hMul a b</code> が与えられると、<code>a</code> と <code>b</code> の型が分かっているなら型クラスインスタンス合成器が呼び出され、型クラスインスタンス合成器は <code>hMul a b</code> の出力の型情報を(入力パラメータ <code>α</code> と <code>β</code> から推論された)出力パラメータ <code>γ</code> から得る。上の例では、2つのインスタンスを定義した。最初のインスタンスは自然数上の同種乗法である。2つ目のインスタンスは配列のスカラー倍である。2つ目のインスタンスの定義では、インスタンスの連鎖が使われていることに注意してほしい。</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class HMul (α : Type u) (β : Type v) (γ : outParam (Type w)) where
   hMul : α → β → γ
