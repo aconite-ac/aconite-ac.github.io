@@ -156,7 +156,6 @@ Up Lean</a>をご覧ください。このテキストの最初のバージョン
 <p>原文のライセンスは<a href="https://github.com/leanprover/theorem_proving_in_lean4/blob/master/LICENSE">Apache License 2.0</a>であり、それに基づいて原文を翻訳・公開しています。</p>
 <p>この翻訳のソースは<a href="https://github.com/aconite-ac/theorem_proving_in_lean4">GitHubリポジトリ</a>から入手可能です。また、ページ右上端のGitHubマークを押してGitHubリポジトリに移動することもできます。この翻訳の全ページとソースは<a href="LICENSE">Apache License 2.0</a>の下で公開されています。</p>
 <p>誤字脱字、内容の誤りの指摘、フォークからのPull Request、フォークによる翻訳の改変等は歓迎いたします。基本的に、ご指摘は<a href="https://github.com/aconite-ac/theorem_proving_in_lean4/issues">GitHubリポジトリのIssues</a>で受け付けます。</p>
-<p>mdBook付属の検索機能に関して、今のところ日本語検索は非対応です。お手数ですがページ内検索をご活用ください。章や節の名前、一部の専門用語は英語検索でヒットします。</p>
 <p>翻訳に際して、機械翻訳サービス<a href="https://www.deepl.com/ja/translator">DeepL翻訳</a>を参考にしました。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-イントロダクション"><a class="header" href="#introduction-イントロダクション">Introduction (イントロダクション)</a></h1>
 <h2 id="computers-and-theorem-proving-コンピュータと定理証明"><a class="header" href="#computers-and-theorem-proving-コンピュータと定理証明">Computers and Theorem Proving (コンピュータと定理証明)</a></h2>
@@ -7397,6 +7396,8 @@ theorem linv_comp_self {f : α → β} [Inhabited α]
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="assets/fzf.umd.js"></script>
+        <script type="text/javascript" src="assets/elasticlunr.js"></script>
 
         <script type="text/javascript">
         window.addEventListener('load', function() {
