@@ -166,7 +166,7 @@
 <p>項 <code>s : (x : α) → β x</code> が与えられたとき、型 <code>α</code> の任意の項 <code>t : α</code> に対して、項 <code>s t : β t</code> を得ることができる。</p>
 </blockquote>
 <p><code>p x</code> が <code>Prop</code> 型を持つとき、型 <code>(x : α) → β x</code> を型 <code>∀ x : α, p x</code> とみなすことで、依存関数型の導入則と除去則を全称量化子の導入則と除去則とみなすことができる。これらの規則に従って、全称量化子を含む証明を構築することができる。</p>
-<p>「型としての命題」の考え方に従って、Calculus of Constructionsでは、従属関数型と全称量化子を同一視する。つまり、任意の項 <code>p</code> に対して、<code>∀ x : α, p</code> は <code>(x : α) → p</code> の代替表現に過ぎず、<code>p</code> が命題のときは、後者の表現の方が自然である、と考えるのである。</p>
+<p>「型としての命題」の考え方に従って、Calculus of Constructionsでは、従属関数型と全称量化子を同一視する。つまり、任意の項 <code>p</code> に対して、<code>∀ x : α, p</code> は <code>(x : α) → p</code> の代替表現に過ぎず、<code>p</code> が命題のときは、前者の表現の方が後者より自然である、と考えるのである。</p>
 <p>通常の関数の場合、<code>α → β</code> は <code>β</code> が <code>x : α</code> に依存しない場合の <code>(x : α) → β</code> だと解釈できることを思い出してほしい。同様に、命題間の含意 <code>p → q</code> は命題 <code>q</code> が <code>x : p</code> に依存しない場合の <code>∀ x : p, q</code> だと解釈することができる。</p>
 <p>以下は、全称量化子に関する「型としての命題」対応がどのように実践されるかの例である。</p>
 <pre><code class="language-lean">example (α : Type) (p q : α → Prop) : (∀ x : α, p x ∧ q x) → ∀ y : α, p y :=

@@ -1111,7 +1111,7 @@ example (h : p ∨ q) : q ∨ p :=
 </code></pre>
 <p>繰り返しになるが、このような略記が読みやすさを向上させるか低下させるか、書き手が判断する必要がある。</p>
 <h3 id="negation-and-falsity-否定と恒偽"><a class="header" href="#negation-and-falsity-否定と恒偽">Negation and Falsity (否定と恒偽)</a></h3>
-<p>否定 <code>¬p</code> は <code>p → false</code> と定義される。したがって、<code>¬p</code> の証明は <code>p</code> から矛盾を導くことで得られる。同様に、式 <code>hnp hp</code> は <code>hp : p</code> と <code>hnp : ¬p</code> から <code>False</code> の証明を作る。
+<p>否定 <code>¬p</code> は <code>p → False</code> と定義される。したがって、<code>¬p</code> の証明は <code>p</code> から矛盾を導くことで得られる。同様に、式 <code>hnp hp</code> は <code>hp : p</code> と <code>hnp : ¬p</code> から <code>False</code> の証明を作る。
 次の例ではこれらの規則の両方を使って <code>(p → q) → ¬q → ¬p</code> の証明を作る(記号 <code>¬</code> は <code>\not</code> あるいは <code>\neg</code> と打つことで入力できる)。</p>
 <pre><code class="language-lean">variable (p q : Prop)
 
@@ -1135,7 +1135,7 @@ example (hp : p) (hnp : ¬p) : q := absurd hp hnp
 example (hnp : ¬p) (hq : q) (hqp : q → p) : r :=
   absurd (hqp hq) hnp
 </code></pre>
-<p>ちなみに、<code>False</code> が除去則しか持たないように、<code>True</code> は導入則である <code>True.intro : true</code> しか持たない。つまり、<code>True</code> は単に真であり、<code>True.intro</code> という正規の証明を持っている。</p>
+<p>ちなみに、<code>False</code> が除去則しか持たないように、<code>True</code> は導入則である <code>True.intro : True</code> しか持たない。つまり、<code>True</code> は単に真であり、<code>True.intro</code> という正規の証明を持っている。</p>
 <h3 id="logical-equivalence-論理同値"><a class="header" href="#logical-equivalence-論理同値">Logical Equivalence (論理同値)</a></h3>
 <p>式 <code>Iff.intro h1 h2</code> は <code>h1 : p → q</code> と <code>h2 : q → p</code> から <code>p ↔ q</code> の証明を作る。 式 <code>Iff.mp h</code> は <code>h : p ↔ q</code> から <code>p → q</code> の証明を作る。同様に、<code>Iff.mpr h</code> は <code>h : p ↔ q</code> から <code>q → p</code> の証明を作る。以下は <code>p ∧ q ↔ q ∧ p</code> の証明である。</p>
 <pre><code class="language-lean">variable (p q : Prop)
@@ -1195,7 +1195,7 @@ theorem dne {p : Prop} (h : ¬¬p) : p :=
     (fun hp : p =&gt; hp)
     (fun hnp : ¬p =&gt; absurd hnp h)
 </code></pre>
-<p><code>¬p</code> を仮定すると <code>false</code> が導かれるとき、二重否定除去を使うと命題 <code>p</code> を証明することができる。なぜなら、仮定 <code>¬p</code> から <code>false</code> を導いたことは、<code>¬¬p</code> を証明したことと同義だからである。つまり、二重否定消去を使えば、構成的論理では一般には不可能な、矛盾による証明を行うことができる。練習として、逆を、つまり <code>dne</code> から <code>em</code> が証明できることを示してみよう。</p>
+<p><code>¬p</code> を仮定すると <code>False</code> が導かれるとき、二重否定除去を使うと命題 <code>p</code> を証明することができる。なぜなら、仮定 <code>¬p</code> から <code>False</code> を導いたことは、<code>¬¬p</code> を証明したことと同義だからである。つまり、二重否定消去を使えば、構成的論理では一般には不可能な、矛盾による証明を行うことができる。練習として、逆を、つまり <code>dne</code> から <code>em</code> が証明できることを示してみよう。</p>
 <p>古典論理の公理はまた、<code>em</code> により正当化される追加の証明パターンを使えるようにする。例えば、場合分けによる証明を行うことができる:</p>
 <pre><code class="language-lean">open Classical
 variable (p : Prop)
@@ -1215,7 +1215,7 @@ example (h : ¬¬p) : p :=
     (fun h1 : ¬p =&gt;
      show False from h h1)
 </code></pre>
-<p><code>hnpf : ¬p → false</code> のとき、<code>byContradiction hnpf</code> は <code>p</code> の証明を作る。</p>
+<p><code>hnpf : ¬p → False</code> のとき、<code>byContradiction hnpf</code> は <code>p</code> の証明を作る。</p>
 <p>もし構成的論理の考え方に慣れていないなら、古典論理的な推論がどこで使われているのか感覚を掴むのに時間がかかるかもしれない。次の例は、構成的論理では、 <code>p</code> と <code>q</code> が両立しないと分かってもどちらが偽であるかは必ずしも分からないので、古典論理が必要である:</p>
 <pre><code class="language-lean"><span class="boring">open Classical
 </span><span class="boring">variable (p q : Prop)
@@ -1372,7 +1372,7 @@ example : (((p → q) → p) → p) := sorry
 <p>項 <code>s : (x : α) → β x</code> が与えられたとき、型 <code>α</code> の任意の項 <code>t : α</code> に対して、項 <code>s t : β t</code> を得ることができる。</p>
 </blockquote>
 <p><code>p x</code> が <code>Prop</code> 型を持つとき、型 <code>(x : α) → β x</code> を型 <code>∀ x : α, p x</code> とみなすことで、依存関数型の導入則と除去則を全称量化子の導入則と除去則とみなすことができる。これらの規則に従って、全称量化子を含む証明を構築することができる。</p>
-<p>「型としての命題」の考え方に従って、Calculus of Constructionsでは、従属関数型と全称量化子を同一視する。つまり、任意の項 <code>p</code> に対して、<code>∀ x : α, p</code> は <code>(x : α) → p</code> の代替表現に過ぎず、<code>p</code> が命題のときは、後者の表現の方が自然である、と考えるのである。</p>
+<p>「型としての命題」の考え方に従って、Calculus of Constructionsでは、従属関数型と全称量化子を同一視する。つまり、任意の項 <code>p</code> に対して、<code>∀ x : α, p</code> は <code>(x : α) → p</code> の代替表現に過ぎず、<code>p</code> が命題のときは、前者の表現の方が後者より自然である、と考えるのである。</p>
 <p>通常の関数の場合、<code>α → β</code> は <code>β</code> が <code>x : α</code> に依存しない場合の <code>(x : α) → β</code> だと解釈できることを思い出してほしい。同様に、命題間の含意 <code>p → q</code> は命題 <code>q</code> が <code>x : p</code> に依存しない場合の <code>∀ x : p, q</code> だと解釈することができる。</p>
 <p>以下は、全称量化子に関する「型としての命題」対応がどのように実践されるかの例である。</p>
 <pre><code class="language-lean">example (α : Type) (p q : α → Prop) : (∀ x : α, p x ∧ q x) → ∀ y : α, p y :=
@@ -2703,7 +2703,7 @@ example (x y z : Nat) (p : Nat → Prop)
         : p (y + 0 + x) ∧ p (z * x) := by
   simp at * &lt;;&gt; constructor &lt;;&gt; assumption
 </code></pre>
-<p>自然数の乗法のような可換性と結合性を満たす演算の場合、単純化器は可換性と結合性に加えて<em>left commutativity</em>(左結合性)を用いて式を書き換える。乗法の場合、左結合性は次のように表される: <code>x * (y * z) = y * (x * z)</code>。<code>local</code> 修飾子は、現在のファイル(あるいはセクションや名前空間)内でこれらの規則を使用するように単純化器に指示する。可換性と左可換性は、どちらか片方を繰り返し適用するとループが生じるという点で問題があるように思えるかもしれない。しかし、単純化器は引数を並べ替える恒等式を検出し、<em>ordered rewriting</em>(順序付き書き換え)として知られるテクニックを使用する。これは、システムが項の内部的な順序を保持し、項の順序が小さくなる場合にのみ恒等式を適用することを意味する。上記の可換性、結合性、左結合性の恒等式は全て、部分項中の括弧を右に寄せるという効果を持つ。そのため、項を(多少恣意的ではあるが)正規化された順序で並べることができる。したがって、結合性と可換性の下で等価な式は、同じ正規形に書き換えられる。</p>
+<p>自然数の乗法のような可換性と結合性を満たす演算の場合、単純化器は可換性と結合性に加えて<em>left commutativity</em>(左可換性)を用いて式を書き換える。乗法の場合、左可換性は次のように表される: <code>x * (y * z) = y * (x * z)</code>。<code>local</code> 修飾子は、現在のファイル(あるいはセクションや名前空間)内でこれらの規則を使用するように単純化器に指示する。可換性と左可換性は、どちらか片方を繰り返し適用するとループが生じるという点で問題があるように思えるかもしれない。しかし、単純化器は引数を並べ替える恒等式を検出し、<em>ordered rewriting</em>(順序付き書き換え)として知られるテクニックを使用する。これは、システムが項の内部的な順序を保持し、項の順序が小さくなる場合にのみ恒等式を適用することを意味する。上記の可換性、結合性、左可換性の恒等式は全て、部分項中の括弧を右に寄せるという効果を持つ。そのため、項を(多少恣意的ではあるが)正規化された順序で並べることができる。したがって、結合性と可換性の下で等価な式は、同じ正規形に書き換えられる。</p>
 <pre><code class="language-lean">attribute [local simp] Nat.mul_comm Nat.mul_assoc Nat.mul_left_comm
 attribute [local simp] Nat.add_assoc Nat.add_comm Nat.add_left_comm
 example (w x y z : Nat)
@@ -2736,7 +2736,7 @@ example {m n : Nat} (h : n = 1) (h' : 0 = m) : (f m n) = n := by
         : w = z + y + u := by
   simp [*, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
 </code></pre>
-<p>単純化器は命題の書き換えも行う。例えば、仮説 <code>hp : p</code> を用いて、<code>p ∧ q</code> を <code>q</code> に、<code>p v q</code> を <code>true</code> に書き換え、最終的に自明な命題に書き換えられたゴールを閉じる。命題の書き換えを繰り返すことで、非自明な命題推論を行うことができる。</p>
+<p>単純化器は命題の書き換えも行う。例えば、仮説 <code>hp : p</code> を用いて、<code>p ∧ q</code> を <code>q</code> に、<code>p v q</code> を <code>True</code> に書き換え、最終的に自明な命題に書き換えられたゴールを閉じる。命題の書き換えを繰り返すことで、非自明な命題推論を行うことができる。</p>
 <pre><code class="language-lean">example (p q : Prop) (hp : p) : p ∧ q ↔ q := by
   simp [*]
 
@@ -3070,7 +3070,7 @@ open Foo
 -- #eval mul 1 2          -- error
 #eval Nat.mul 1 2         -- 2
 </code></pre>
-<p>ある名前空間から別の名前空間へ、あるいはルートレベルへ別名を <code>export</code> することは時に便利である。現在の名前空間 <code>Foo</code> の中で、コマンド <code>export Nat (succ add sub)</code> は、<code>Nat.succ</code>、<code>Nat.add</code>、<code>Nat.sub</code> に対して別名 <code>Foo.succ</code>、<code>Foo.succ</code>、<code>Foo.sub</code> を生成する。したがって、名前空間が開かれているときは、いつでもこれらの別名を使うことができる。名前空間の外で <code>export</code> コマンドが使われたときは、短い別名がルートレベルにエクスポートされる。</p>
+<p>ある名前空間から別の名前空間へ、あるいはルートレベルへ別名を <code>export</code> することは時に便利である。現在の名前空間 <code>Foo</code> の中で、コマンド <code>export Nat (succ add sub)</code> は、<code>Nat.succ</code>、<code>Nat.add</code>、<code>Nat.sub</code> に対して別名 <code>Foo.succ</code>、<code>Foo.add</code>、<code>Foo.sub</code> を生成する。したがって、名前空間が開かれているときは、いつでもこれらの別名を使うことができる。名前空間の外で <code>export</code> コマンドが使われたときは、短い別名がルートレベルにエクスポートされる。</p>
 <pre><code class="language-lean">namespace Foo
 export And (intro left right)
 
@@ -3273,7 +3273,7 @@ notation:10 Γ &quot; ⊢ &quot; e &quot; : &quot; τ =&gt; Typing Γ e τ
 <pre><code class="language-lean">notation:65 a &quot; + &quot; b:66 &quot; + &quot; c:66 =&gt; a + b - c
 #eval 1 + 2 + 3  -- 0
 </code></pre>
-<p>新しい記法は2項記法よりも優先される。なぜなら後者はパースが連鎖せず、<code>1 + 2</code> をパースしたところで構文解析をやめてしまうからである。最長のパースを受け入れる記法が複数ある場合、どちらが選択されるかはelaborationまで遅延され、ただ1つのオーバーロード記法が正しい型を持つ場合のみ成功し、それ以外の場合は曖昧さを解決できず失敗する。</p>
+<p>新しい記法は2項記法よりも優先される。なぜなら2項記法はパースが連鎖せず、<code>1 + 2</code> をパースしたところで構文解析をやめてしまうからである。最長のパースを受け入れる記法が複数ある場合、どちらが選択されるかはelaborationまで遅延され、ただ1つのオーバーロード記法が正しい型を持つ場合のみ成功し、それ以外の場合は曖昧さを解決できず失敗する。</p>
 <h2 id="coercions-型強制"><a class="header" href="#coercions-型強制">Coercions (型強制)</a></h2>
 <p>Leanでは、自然数の型 <code>Nat</code> と整数の型 <code>Int</code> は異なる。しかし、自然数を整数の中に埋め込む <code>Int.ofNat</code> という関数があり、これを使うと必要なときに自然数を整数に変換することができる。Leanはこの種の型変換の必要性を検出して型変換を実行するメカニズムを持っている。このような自動的な型変換を<em>coercions</em>(強制)と呼ぶ。</p>
 <pre><code class="language-lean">variable (m n : Nat)
@@ -3388,7 +3388,7 @@ Leanはelaborationの戦略をコントロールする属性も持っている�
 #check @Prod.rec
 </code></pre>
 <p><code>Prod.mk</code> はペアを構成するために使われる。一方で、<code>Prod.fst</code> と <code>Prod.snd</code> はそれぞれ直積の1つ目の要素と2つ目の要素を射影する。<code>Prod.rec</code> は直積の2つの構成要素に対する関数から、直積に対する関数を定義するメカニズムを提供する。<code>Prod.rec</code> のような名前は<strong>保護されて</strong>おり、たとえ <code>Prod</code> 名前空間が開いているときでもフルネームを使用しなければならない。</p>
-<p>型としての命題対応において、論理的結合子は帰納型のインスタンスである。したがって、論理的結合子に対してドット記法を使うことが多い:</p>
+<p>型としての命題対応において、論理的結合子は帰納型の例である。したがって、論理的結合子に対してドット記法を使うことが多い:</p>
 <pre><code class="language-lean">#check @And.intro
 #check @And.casesOn
 #check @And.left
@@ -7216,7 +7216,7 @@ theorem em (p : Prop) : p ∨ ¬p :=
 <span class="boring">  sorry
 </span><span class="boring">end Hidden
 </span></code></pre>
-<p>もし <code>p</code> が真なら、<code>Prop</code> 型の任意の項は <code>U</code> と <code>V</code> の両方に属する。もし <code>p</code> が偽なら、<code>U</code> はシングルトン <code>true</code> であり、<code>V</code> はシングルトン <code>false</code> である。</p>
+<p>もし <code>p</code> が真なら、<code>Prop</code> 型の任意の項は <code>U</code> と <code>V</code> の両方に属する。もし <code>p</code> が偽なら、<code>U</code> はシングルトン <code>True</code> であり、<code>V</code> はシングルトン <code>False</code> である。</p>
 <p>次に、<code>choose</code> を使って <code>U</code> の元と <code>V</code> の元を1つ選ぶ:</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">open Classical

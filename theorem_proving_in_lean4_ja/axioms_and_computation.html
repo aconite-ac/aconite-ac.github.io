@@ -667,7 +667,7 @@ theorem em (p : Prop) : p ∨ ¬p :=
 <span class="boring">  sorry
 </span><span class="boring">end Hidden
 </span></code></pre>
-<p>もし <code>p</code> が真なら、<code>Prop</code> 型の任意の項は <code>U</code> と <code>V</code> の両方に属する。もし <code>p</code> が偽なら、<code>U</code> はシングルトン <code>true</code> であり、<code>V</code> はシングルトン <code>false</code> である。</p>
+<p>もし <code>p</code> が真なら、<code>Prop</code> 型の任意の項は <code>U</code> と <code>V</code> の両方に属する。もし <code>p</code> が偽なら、<code>U</code> はシングルトン <code>True</code> であり、<code>V</code> はシングルトン <code>False</code> である。</p>
 <p>次に、<code>choose</code> を使って <code>U</code> の元と <code>V</code> の元を1つ選ぶ:</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span><span class="boring">open Classical
