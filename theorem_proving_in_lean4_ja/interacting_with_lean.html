@@ -149,12 +149,12 @@
 <p>数学的オブジェクトを定義するための言語としての、そして証明を構築するための言語としての依存型理論の基本は理解していただけただろう。読者がまだ手にしていないのは、新しいデータ型を定義する方法である。このギャップを埋めるため、次の章では<em>inductive data type</em>(帰納データ型)の概念を紹介する。その前に、この章では型理論そのものの説明は一旦お休みして、Leanのコードを書く際の実用的な機能について学ぶ。</p>
 <p>ここに掲載されている情報の全てが、すぐ役に立つとは限らない。この章は軽く読んでLeanの特徴を掴み、後で必要に応じて戻ってくることをお勧めする。</p>
 <h2 id="importing-files-ファイルのインポート"><a class="header" href="#importing-files-ファイルのインポート">Importing Files (ファイルのインポート)</a></h2>
-<p>Leanのフロントエンドの目的は、ユーザーの入力を解釈し、形式的な式を構築し、そしてそれらが正しい構文規則に従っており、正しく片付けされることをチェックすることである。Leanは様々なエディタでの使用をサポートしており、ユーザーはエディタ上で継続的なチェックとフィードバックを受けることができる。詳しくはLeanの<a href="http://leanprover.github.io/documentation/">documentation pages</a>を参照してほしい。</p>
+<p>Leanのフロントエンドの目的は、ユーザーの入力を解釈し、形式的な式を構築し、そしてそれらが正しい構文規則に従っており、正しく片付けされることをチェックすることである。Leanは様々なエディタでの使用をサポートしており、ユーザーはエディタ上で継続的なチェックとフィードバックを受けることができる。詳しくはLeanの<a href="http://lean-lang.org/documentation/">documentation pages</a>を参照してほしい。</p>
 <p>Leanの標準ライブラリの定義と定理は複数のファイルに散在している。ユーザーは追加のライブラリを使用したり、複数のファイルからなる独自のプロジェクトを開発することができる。Leanが起動すると、ライブラリの <code>Init</code> フォルダの内容が自動的にインポートされる。<code>Init</code> フォルダには基本的な定義や構文が多数含まれている。その結果、ここで紹介する例のほとんどは追加設定なしでそのまま動作する。</p>
 <p>しかし、追加ファイルを使いたい場合は、ファイルの先頭に <code>import</code> 文を書いて手動でインポートする必要がある。コマンド</p>
 <pre><code>import Bar.Baz.Blah
 </code></pre>
-<p>は <code>Bar/Baz/Blah.olean</code> ファイルを読み込む(<code>.olean</code> はコンパイル済のLeanファイルの拡張子である)。このコマンドにおいて、<code>Bar.Baz.Blah</code> はLeanの<em>search path</em>(検索パス)からの相対パスとして解釈される。検索パスがどのように決定されるかについては、<a href="http://leanprover.github.io/documentation/">documentation pages</a>を参照してほしい。デフォルトでは、標準ライブラリディレクトリと、場合によってはユーザーのローカルプロジェクトのルートが検索パスに含まれる。カレントディレクトリからの相対パスでインポートファイルを指定することもできる。</p>
+<p>は <code>Bar/Baz/Blah.olean</code> ファイルを読み込む(<code>.olean</code> はコンパイル済のLeanファイルの拡張子である)。このコマンドにおいて、<code>Bar.Baz.Blah</code> はLeanの<em>search path</em>(検索パス)からの相対パスとして解釈される。検索パスがどのように決定されるかについては、<a href="http://lean-lang.org/documentation/">documentation pages</a>を参照してほしい。デフォルトでは、標準ライブラリディレクトリと、場合によってはユーザーのローカルプロジェクトのルートが検索パスに含まれる。(Lean4では、カレントディレクトリからの相対パスでインポートファイルを指定することは<strong>できない</strong>。)</p>
 <p>インポートは「推移的」である。言い換えれば、<code>Foo</code> をインポートして、<code>Foo</code> が <code>Bar</code> をインポートする場合、<code>Bar</code> の内容にもアクセスできるようになる。したがって、<code>Bar</code> を明示的にインポートする必要はない。</p>
 <h2 id="more-on-sections-セクションの詳細"><a class="header" href="#more-on-sections-セクションの詳細">More on Sections (セクションの詳細)</a></h2>
 <p>Leanは理論の構造化を手助けするために、様々なセクション分けの仕組みを提供している。<a href="./dependent_type_theory.html#variables-and-sections-%E5%A4%89%E6%95%B0%E3%81%A8%E3%82%BB%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">Variables and Sections (変数とセクション)</a>の節で、<code>section</code> コマンドを使うことで、理論の要素をグループ化できるだけでなく、必要に応じて定理や定義の引数として挿入される変数のスコープを区切ることができることを説明した。<code>variable</code> コマンドのポイントは、次の例のように、定理で使う変数を宣言できることであることを思い出してほしい:</p>
@@ -709,7 +709,7 @@ example (x y : α) : g x y = fun (c : α) =&gt; x + y + c := rfl
 <pre><code class="language-lean">inductive Term where
   | var    (name : String)
   | num    (val : Nat)
-  | add    (fn : Term) (arg : Term)
+  | app    (fn : Term) (arg : Term)
   | lambda (name : String) (type : Term) (body : Term)
 
 def getBinderName : Term → Option String

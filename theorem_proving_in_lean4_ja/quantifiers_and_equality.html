@@ -224,16 +224,16 @@ example (a b c d : α) (hab : r a b) (hcb : r c b) (hcd : r c d) : r a d :=
 <h2 id="equality-等号"><a class="header" href="#equality-等号">Equality (等号)</a></h2>
 <p>ここで、Leanのライブラリで定義されている最も基本的な関係の一つである「等号関係」に注目しよう。<a href="./inductive_types.html">7章 Inductive Types (帰納型)</a>では、Leanの<em>logical framework</em>(論理フレームワーク)の根本から「どのように」等号が定義されるかを説明する。その前に、ここでは等号の使い方を説明する。</p>
 <p>もちろん、等号の基本的な性質の一つは、「等号は同値関係である」という性質である:</p>
-<pre><code class="language-lean">#check Eq.refl    -- {α : Sort u_1} (a : α) : a = a
-#check Eq.symm    -- {α : Sort u} {a b : α} (h : a = b) : b = a
-#check Eq.trans   -- {α : Sort u} {a b c : α} (h₁ : a = b) (h₂ : b = c) : a = c
+<pre><code class="language-lean">#check Eq.refl    -- Eq.refl.{u_1} (a : α) : a = a
+#check Eq.symm    -- Eq.symm.{u} {α : Sort u} {a b : α} (h : a = b) : b = a
+#check Eq.trans   -- Eq.trans.{u} {α : Sort u} {a b c : α} (h₁ : a = b) (h₂ : b = c) : a = c
 </code></pre>
 <p>Leanに暗黙の引数(ここではメタ変数として表示されている)を挿入しないように指示することで、出力を読みやすくすることができる。</p>
 <pre><code class="language-lean">universe u
 
-#check @Eq.refl.{u}   -- ∀ {α : Sort u} (a : α), a = a
-#check @Eq.symm.{u}   -- ∀ {α : Sort u} {a b : α}, a = b → b = a
-#check @Eq.trans.{u}  -- ∀ {α : Sort u} {a b c : α}, a = b → b = c → a = c
+#check @Eq.refl.{u}   -- @Eq.refl : ∀ {α : Sort u} (a : α), a = a
+#check @Eq.symm.{u}   -- @Eq.symm : ∀ {α : Sort u} {a b : α}, a = b → b = a
+#check @Eq.trans.{u}  -- @Eq.trans : ∀ {α : Sort u} {a b c : α}, a = b → b = c → a = c
 </code></pre>
 <p><code>.{u}</code> という記法は、宇宙 <code>u</code> で定数をインスタンス化することをLeanに指示する。</p>
 <p>したがって、例えば、前節の例を等号関係に特化させることができる:</p>

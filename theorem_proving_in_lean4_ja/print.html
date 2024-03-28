@@ -148,15 +148,16 @@
                     <main>
                         <h1 id="theorem-proving-in-lean-4"><a class="header" href="#theorem-proving-in-lean-4">Theorem Proving in Lean 4</a></h1>
 <p><em>by Jeremy Avigad, Leonardo de Moura, Soonho Kong and Sebastian Ullrich, with contributions from the Lean Community</em></p>
-<p>このテキストは読者がLean 4を使うことを前提にしています。Lean 4をインストールするには、<a href="https://leanprover.github.io/lean4/doc/">Lean 4 Manual</a>の節<a href="https://leanprover.github.io/lean4/doc/setup.html">Setting
-Up Lean</a>をご覧ください。このテキストの最初のバージョンはLean 2用に書かれました。Lean 3用のバージョンは<a href="https://leanprover.github.io/theorem_proving_in_lean/">こちら</a>で入手可能です。</p>
+<p>このテキストは読者がLean 4を使うことを前提にしています。Lean 4をインストールするには、<a href="https://lean-lang.org/lean4/doc/">Lean 4 Manual</a>の節<a href="https://lean-lang.org/lean4/doc/quickstart.html">Quickstart</a>をご覧ください。このテキストの最初のバージョンはLean 2用に書かれました。Lean 3用のバージョンは<a href="https://leanprover.github.io/theorem_proving_in_lean/">こちら</a>で入手可能です。</p>
 <h2 id="この翻訳について"><a class="header" href="#この翻訳について">この翻訳について</a></h2>
 <p><em>translated by aconite</em>(2章～12章)<em>, Haruhisa Enomoto</em>(1章)</p>
-<p>この翻訳は有志による<strong>非公式</strong>翻訳です。翻訳に際して、表現を大きく変えた箇所や、分かりやすさを期すため記述やコード例を追加した箇所があります。また、用語の訳が一般的でない可能性があります。誤りを含む可能性もあります。必要に応じて原文<a href="https://leanprover.github.io/theorem_proving_in_lean4/">Theorem Proving in Lean 4</a> (<a href="https://github.com/leanprover/theorem_proving_in_lean4">GitHub</a>)もご覧ください。</p>
+<p>この翻訳は有志による<strong>非公式</strong>翻訳です。翻訳に際して、表現を大きく変えた箇所や、分かりやすさを期すため記述やコード例を追加した箇所があります。また、用語の訳が一般的でない可能性があります。誤りを含む可能性もあります。必要に応じて原文<a href="https://lean-lang.org/theorem_proving_in_lean4/">Theorem Proving in Lean 4</a> (<a href="https://github.com/leanprover/theorem_proving_in_lean4">GitHub</a>)もご覧ください。</p>
 <p>原文のライセンスは<a href="https://github.com/leanprover/theorem_proving_in_lean4/blob/master/LICENSE">Apache License 2.0</a>であり、それに基づいて原文を翻訳・公開しています。</p>
 <p>この翻訳のソースは<a href="https://github.com/aconite-ac/theorem_proving_in_lean4">GitHubリポジトリ</a>から入手可能です。また、ページ右上端のGitHubマークを押してGitHubリポジトリに移動することもできます。この翻訳の全ページとソースは<a href="LICENSE">Apache License 2.0</a>の下で公開されています。</p>
 <p>誤字脱字、内容の誤りの指摘、フォークからのPull Request、フォークによる翻訳の改変等は歓迎いたします。基本的に、ご指摘は<a href="https://github.com/aconite-ac/theorem_proving_in_lean4/issues">GitHubリポジトリのIssues</a>で受け付けます。</p>
 <p>翻訳に際して、機械翻訳サービス<a href="https://www.deepl.com/ja/translator">DeepL翻訳</a>を参考にしました。</p>
+<h2 id="バージョン情報"><a class="header" href="#バージョン情報">バージョン情報</a></h2>
+<p>この翻訳は原文のcommit <a href="https://github.com/leanprover/theorem_proving_in_lean4/tree/81b028359684646f2db48e3909ee81b4fad51dfb">81b028359684646f2db48e3909ee81b4fad51dfb</a> (Date: Fri Mar 1 14:54:59 2024 -0600)に基づいています。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-イントロダクション"><a class="header" href="#introduction-イントロダクション">Introduction (イントロダクション)</a></h1>
 <h2 id="computers-and-theorem-proving-コンピュータと定理証明"><a class="header" href="#computers-and-theorem-proving-コンピュータと定理証明">Computers and Theorem Proving (コンピュータと定理証明)</a></h2>
 <p><em>Formal verification</em>(形式検証)では、論理的・計算的手法を使って、厳密な数学用語で表現された主張を立証する。この主張には、通常の数学の定理の他にも、ハードウェアやソフトウェアの一部、 ネットワークプロトコル、機械的・ハイブリッドシステムがその仕様を満たしているという主張も含まれる。実際には、数学的主張の検証をすることと、システムの正しさを検証することの間には、明確な区別はない。というのも、形式検証では、ハードウェアやソフトウェアのシステムを数学的な言葉で記述する必要があり、その時点で、その正しさに関する主張を立証することは、定理証明の一形態となる。逆に、数学の定理の証明には長い計算が必要な場合があり、その場合、定理の真偽を検証するには、その計算が想定通りに実行されることを検証する必要がある。</p>
@@ -164,10 +165,10 @@ Up Lean</a>をご覧ください。このテキストの最初のバージョン
 <p><em>Automated theorem proving</em>(自動定理証明)は、この「発見」の側面に焦点を当てている。resolution theorem provers(導出原理に基づく証明器)、tableau theorem provers(タブロー定理証明器)、fast satisfiability solvers(高速充足可能性ソルバー)などは、命題論理や一階論理における公式の正しさを証明する手段を提供する。また、整数や実数に対する線形式や非線形式など、特定の言語や領域に対する探索手続きや決定手続きを提供するシステムもある。SMT(satisfiability modulo theories, 充足可能性モジュロ理論)のようなアーキテクチャは、領域一般的な探索手法と領域固有の手続きを組み合わせたものである。数式処理システムや高度な数学ソフトウェア・パッケージは、数学的計算を実行したり、数学的上界または下界を確立したり、数学的対象を見つけたりする手段を提供する。計算は証明と見なすこともでき、これらのシステムも数学的主張の立証に役立つ。</p>
 <p>自動推論システムは、そのパワーと効率性を追求する結果、しばしば健全性の保証を犠牲にしている。このようなシステムにはバグがあることもあり、システムが導いた結果が正しいことを保証するのは難しい。対照的に、<em>interactive theorem proving</em>(対話型定理証明)は、定理証明の「検証」の側面に焦点を当て、全ての主張が適切な公理的基礎づけにおける証明によって保証されることを要求する。その基準は非常に高く、推論の全てのルールと計算の全てのステップは、それ以前の定義や定理に訴えることで正当化されなければならず、それら全ては最終的には基本的な公理や規則にまで遡る。実際、このようなシステムのほとんどは、他のシステムに伝達したり、独立にチェックしたりできる、完全に精緻化された「証明オブジェクト」を提供する。このような証明を構築するためには、通常ユーザーからの入力やインタラクションがより多く必要となるが、それによってより深く複雑な証明を得ることができる。</p>
 <p><em>Lean Theorem Prover</em>(Lean定理証明器)は、これら対話型定理証明と自動定理証明との間のギャップを埋めることを目的としている。このために、ユーザーとのインタラクションと完全に明記された公理的証明の構築が可能であるフレームワークの内部で、自動化されたツールと方法が使えるようにする。そのゴールは、数学的推論と複雑なシステムについての推論の両方をサポートし、両方の領域における主張を検証することである。</p>
-<p>Leanの基礎となる論理は計算的解釈を持ち、Leanはプログラミング言語とみなすこともできる。もっと言えば、Leanは厳密な意味論を持つプログラムを書くためのシステムであり、プログラムが計算する関数について推論を行うためのシステムである。Leanはまた、独自の<em>metaprogramming language</em>(メタプログラミング言語)として機能するメカニズムを持つ。つまり、Leanそのものを使って自動化を実装したり、Leanの機能を拡張したりすることができる。Leanのこのような側面は、このチュートリアルの関連チュートリアルである<a href="TBD">Programming in Lean 4</a>(訳者注: 原文ではリンク切れだが<a href="https://leanprover.github.io/functional_programming_in_lean/">Functional Programming in Lean</a>のこと？)で深く解説されるが、システムの計算的側面はここでも登場するだろう。</p>
+<p>Leanの基礎となる論理は計算的解釈を持ち、Leanはプログラミング言語とみなすこともできる。もっと言えば、Leanは厳密な意味論を持つプログラムを書くためのシステムであり、プログラムが計算する関数について推論を行うためのシステムである。Leanはまた、独自の<em>metaprogramming language</em>(メタプログラミング言語)として機能するメカニズムを持つ。つまり、Leanそのものを使って自動化を実装したり、Leanの機能を拡張したりすることができる。Leanのこのような側面は、無料のオンラインテキスト<a href="https://lean-lang.org/functional_programming_in_lean/">Functional Programming in Lean</a>で解説されるが、システムの計算的側面はここでも登場するだろう。</p>
 <h2 id="about-lean-leanについて"><a class="header" href="#about-lean-leanについて">About Lean (Leanについて)</a></h2>
 <p><em>Lean</em>プロジェクトは、2013年にMicrosoft Research RedmondのLeonardo de Mouraによって立ち上げられた、現在進行中の長期的な取り組みであり、自動化への潜在的可能性の多くは時間をかけて徐々に実現されるだろう。Leanは<a href="LICENSE">Apache License 2.0</a>の下でリリースされている。これは寛容なオープンソースライセンスであり、他の人がコードと数学ライブラリを自由に利用し、拡張することを許可している。</p>
-<p>Leanをあなたのコンピュータにインストールするには、<a href="https://leanprover.github.io/lean4/doc/quickstart.html">Quickstart</a>にある指示を参照するのがよいだろう。LeanのソースコードとLeanのビルド方法は、<a href="https://github.com/leanprover/lean4/">https://github.com/leanprover/lean4/</a>から入手できる。</p>
+<p>Leanをあなたのコンピュータにインストールするには、<a href="https://lean-lang.org/lean4/doc/quickstart.html">Quickstart</a>にある指示を参照するのがよいだろう。LeanのソースコードとLeanのビルド方法は、<a href="https://github.com/leanprover/lean4/">https://github.com/leanprover/lean4/</a>から入手できる。</p>
 <p>このチュートリアルは、Lean 4として知られるLeanの現在のバージョンについて記述する。</p>
 <h2 id="about-this-book-この本について"><a class="header" href="#about-this-book-この本について">About this Book (この本について)</a></h2>
 <p>この本は、Leanで証明を記述し検証する方法を学ぶために意図されている。そのために必要な背景情報の多くは、Lean特有のものではない。まず最初に、Leanがベースにしている論理システムを学ぶ。これは<em>dependent type theory</em>(依存型理論)の一種で、通常の数学の定理のほとんどを証明するのに十分強力であり、またそれを自然な方法で行うのに十分な表現力を持っている。より具体的には、Leanは<em>Calculus of Constructions</em>として知られるシステムのうち、帰納型を持つものの一種に基づいている。Leanは依存型理論で数学的対象を定義し数学的主張を表現できるだけでなく、依存型理論を証明を書くための言語としても使用できる。</p>
@@ -325,10 +326,10 @@ def β : Type := Bool
 <tr><td style="text-align: center">term(項)</td><td style="text-align: center">trivial</td><td style="text-align: center">true</td><td style="text-align: center">fun n =&gt; Fin n</td><td style="text-align: center">fun (_ : Type) =&gt; Type</td><td style="text-align: center">...</td></tr>
 </tbody></table>
 <p>いくつかの演算子は型の宇宙に対して<em>polymorphic</em>(多相)である必要がある。例えば、<code>List α</code> は、<code>α</code> がどの型宇宙にいようと意味をなすべきである。多相な関数 <code>List</code> の型は次のように表記される:</p>
-<pre><code class="language-lean">#check List    -- Type u_1 → Type u_1
+<pre><code class="language-lean">#check List    -- List.{u} (α : Type u) : Type u
 </code></pre>
-<p>ここで、<code>u_1</code> は宇宙レベルを表す変数である。コマンド <code>#check List</code> の出力は、<code>α</code> が型 <code>Type n</code> を持つなら、<code>List α</code> も <code>Type n</code> を持つことを表している。関数 <code>Prod</code> も多相である:</p>
-<pre><code class="language-lean">#check Prod    -- Type u_1 → Type u_2 → Type (max u_1 u_2)
+<p>ここで、<code>u</code> は宇宙レベルを表す変数である。コマンド <code>#check List</code> の出力は、<code>α</code> が型 <code>Type n</code> を持つなら、<code>List α</code> も <code>Type n</code> を持つことを表している。関数 <code>Prod</code> も多相である:</p>
+<pre><code class="language-lean">#check Prod    -- Prod.{u, v} (α : Type u) (β : Type v) : Type (max u v)
 </code></pre>
 <p><code>universe</code> コマンドを使うと、明示的に宇宙変数を宣言することができる。宇宙変数を使うと多相な項を定義することができる:</p>
 <pre><code class="language-lean">universe u
@@ -347,8 +348,8 @@ def F (α : Type u) : Type u := Prod α α       -- `Type u` に属する型 `α
 -- λ (&lt;入力引数の名前&gt; : &lt;入力引数の型名&gt;) =&gt; &lt;関数の出力を定義する式&gt;
 #check fun (x : Nat) =&gt; x + 5   -- Nat → Nat
 #check λ (x : Nat) =&gt; x + 5     -- `λ` と `fun` は同じ意味
-#check fun x : Nat =&gt; x + 5
-#check λ x : Nat =&gt; x + 5
+#check fun x =&gt; x + 5           -- `x`は`Nat`型だと推論される
+#check λ x =&gt; x + 5             -- `x`は`Nat`型だと推論される
 </code></pre>
 <p>要求されたパラメータを通すことにより、ラムダ関数を評価することができる。</p>
 <pre><code class="language-lean">#eval (λ x : Nat =&gt; x + 5) 10    -- 15
@@ -701,7 +702,7 @@ end Foo
 #check @List.length  -- {α : Type u_1} → List α → Nat
 #check @List.append  -- {α : Type u_1} → List α → List α → List α
 </code></pre>
-<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、依存積型 <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存積型は<em>sigma</em>(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。</p>
+<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、依存積型 <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存積型は<em>sigma</em>(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。<code>⟨</code> は &quot;\langle&quot; または &quot;&lt;&quot; と打つと入力でき、<code>⟩</code> は &quot;\rangle&quot; または &quot;&gt;&quot; と打つと入力できる。</p>
 <pre><code class="language-lean">universe u v
 
 def f (α : Type u) (β : α → Type v) (a : α) (b : β a) : (a : α) × β a :=
@@ -738,10 +739,10 @@ def test : i := 5 + 5
 </span><span class="boring">def Lst.cons (α : Type u) (a : α) (as : Lst α) : Lst α := List.cons a as
 </span><span class="boring">def Lst.nil (α : Type u) : Lst α := List.nil
 </span><span class="boring">def Lst.append (α : Type u) (as bs : Lst α) : Lst α := List.append as bs
-</span>#check Lst          -- Type u_1 → Type u_1
-#check Lst.cons     -- (α : Type u_1) → α → Lst α → Lst α
-#check Lst.nil      -- (α : Type u_1) → Lst α
-#check Lst.append   -- (α : Type u_1) → Lst α → Lst α → Lst α
+</span>#check Lst          -- Lst.{u} (α : Type u) : Type u
+#check Lst.cons     -- Lst.cons.{u} (α : Type u) (a : α) (as : Lst α) : Lst α
+#check Lst.nil      -- Lst.nil.{u} (α : Type u) : Lst α
+#check Lst.append   -- Lst.append.{u} (α : Type u) (as bs : Lst α) : Lst α
 </code></pre>
 <p>このとき、次のように <code>Nat</code> の項からなるリストを作ることができる:</p>
 <pre><code class="language-lean"><span class="boring">universe u
@@ -835,7 +836,7 @@ end
 #check (2 : Int)    -- Int
 </code></pre>
 <p>しかし、ある関数の引数を暗黙の引数として宣言しておきながら、その引数を明示的に与えたいという状況に陥ることがある。<code>foo</code> がそのような関数である場合、<code>@foo</code> という表記は、すべての引数を明示的にした同じ関数を表す。</p>
-<pre><code class="language-lean">#check @id        -- {α : Type u_1} → α → α
+<pre><code class="language-lean">#check @id        -- {α : Sort u_1} → α → α
 #check @id Nat    -- Nat → Nat
 #check @id Bool   -- Bool → Bool
 
@@ -1136,7 +1137,7 @@ example (hnp : ¬p) (hq : q) (hqp : q → p) : r :=
   absurd (hqp hq) hnp
 </code></pre>
 <p>ちなみに、<code>False</code> が除去則しか持たないように、<code>True</code> は導入則である <code>True.intro : True</code> しか持たない。つまり、<code>True</code> は単に真であり、<code>True.intro</code> という正規の証明を持っている。</p>
-<h3 id="logical-equivalence-論理同値"><a class="header" href="#logical-equivalence-論理同値">Logical Equivalence (論理同値)</a></h3>
+<h3 id="logical-equivalence-論理的同値"><a class="header" href="#logical-equivalence-論理的同値">Logical Equivalence (論理的同値)</a></h3>
 <p>式 <code>Iff.intro h1 h2</code> は <code>h1 : p → q</code> と <code>h2 : q → p</code> から <code>p ↔ q</code> の証明を作る。 式 <code>Iff.mp h</code> は <code>h : p ↔ q</code> から <code>p → q</code> の証明を作る。同様に、<code>Iff.mpr h</code> は <code>h : p ↔ q</code> から <code>q → p</code> の証明を作る。以下は <code>p ∧ q ↔ q ∧ p</code> の証明である。</p>
 <pre><code class="language-lean">variable (p q : Prop)
 
@@ -1430,16 +1431,16 @@ example (a b c d : α) (hab : r a b) (hcb : r c b) (hcd : r c d) : r a d :=
 <h2 id="equality-等号"><a class="header" href="#equality-等号">Equality (等号)</a></h2>
 <p>ここで、Leanのライブラリで定義されている最も基本的な関係の一つである「等号関係」に注目しよう。<a href="./inductive_types.html">7章 Inductive Types (帰納型)</a>では、Leanの<em>logical framework</em>(論理フレームワーク)の根本から「どのように」等号が定義されるかを説明する。その前に、ここでは等号の使い方を説明する。</p>
 <p>もちろん、等号の基本的な性質の一つは、「等号は同値関係である」という性質である:</p>
-<pre><code class="language-lean">#check Eq.refl    -- {α : Sort u_1} (a : α) : a = a
-#check Eq.symm    -- {α : Sort u} {a b : α} (h : a = b) : b = a
-#check Eq.trans   -- {α : Sort u} {a b c : α} (h₁ : a = b) (h₂ : b = c) : a = c
+<pre><code class="language-lean">#check Eq.refl    -- Eq.refl.{u_1} (a : α) : a = a
+#check Eq.symm    -- Eq.symm.{u} {α : Sort u} {a b : α} (h : a = b) : b = a
+#check Eq.trans   -- Eq.trans.{u} {α : Sort u} {a b c : α} (h₁ : a = b) (h₂ : b = c) : a = c
 </code></pre>
 <p>Leanに暗黙の引数(ここではメタ変数として表示されている)を挿入しないように指示することで、出力を読みやすくすることができる。</p>
 <pre><code class="language-lean">universe u
 
-#check @Eq.refl.{u}   -- ∀ {α : Sort u} (a : α), a = a
-#check @Eq.symm.{u}   -- ∀ {α : Sort u} {a b : α}, a = b → b = a
-#check @Eq.trans.{u}  -- ∀ {α : Sort u} {a b c : α}, a = b → b = c → a = c
+#check @Eq.refl.{u}   -- @Eq.refl : ∀ {α : Sort u} (a : α), a = a
+#check @Eq.symm.{u}   -- @Eq.symm : ∀ {α : Sort u} {a b : α}, a = b → b = a
+#check @Eq.trans.{u}  -- @Eq.trans : ∀ {α : Sort u} {a b c : α}, a = b → b = c → a = c
 </code></pre>
 <p><code>.{u}</code> という記法は、宇宙 <code>u</code> で定数をインスタンス化することをLeanに指示する。</p>
 <p>したがって、例えば、前節の例を等号関係に特化させることができる:</p>
@@ -2974,12 +2975,12 @@ example (x : α) (h : p) : x = x ∧ p := by
 <p>数学的オブジェクトを定義するための言語としての、そして証明を構築するための言語としての依存型理論の基本は理解していただけただろう。読者がまだ手にしていないのは、新しいデータ型を定義する方法である。このギャップを埋めるため、次の章では<em>inductive data type</em>(帰納データ型)の概念を紹介する。その前に、この章では型理論そのものの説明は一旦お休みして、Leanのコードを書く際の実用的な機能について学ぶ。</p>
 <p>ここに掲載されている情報の全てが、すぐ役に立つとは限らない。この章は軽く読んでLeanの特徴を掴み、後で必要に応じて戻ってくることをお勧めする。</p>
 <h2 id="importing-files-ファイルのインポート"><a class="header" href="#importing-files-ファイルのインポート">Importing Files (ファイルのインポート)</a></h2>
-<p>Leanのフロントエンドの目的は、ユーザーの入力を解釈し、形式的な式を構築し、そしてそれらが正しい構文規則に従っており、正しく片付けされることをチェックすることである。Leanは様々なエディタでの使用をサポートしており、ユーザーはエディタ上で継続的なチェックとフィードバックを受けることができる。詳しくはLeanの<a href="http://leanprover.github.io/documentation/">documentation pages</a>を参照してほしい。</p>
+<p>Leanのフロントエンドの目的は、ユーザーの入力を解釈し、形式的な式を構築し、そしてそれらが正しい構文規則に従っており、正しく片付けされることをチェックすることである。Leanは様々なエディタでの使用をサポートしており、ユーザーはエディタ上で継続的なチェックとフィードバックを受けることができる。詳しくはLeanの<a href="http://lean-lang.org/documentation/">documentation pages</a>を参照してほしい。</p>
 <p>Leanの標準ライブラリの定義と定理は複数のファイルに散在している。ユーザーは追加のライブラリを使用したり、複数のファイルからなる独自のプロジェクトを開発することができる。Leanが起動すると、ライブラリの <code>Init</code> フォルダの内容が自動的にインポートされる。<code>Init</code> フォルダには基本的な定義や構文が多数含まれている。その結果、ここで紹介する例のほとんどは追加設定なしでそのまま動作する。</p>
 <p>しかし、追加ファイルを使いたい場合は、ファイルの先頭に <code>import</code> 文を書いて手動でインポートする必要がある。コマンド</p>
 <pre><code>import Bar.Baz.Blah
 </code></pre>
-<p>は <code>Bar/Baz/Blah.olean</code> ファイルを読み込む(<code>.olean</code> はコンパイル済のLeanファイルの拡張子である)。このコマンドにおいて、<code>Bar.Baz.Blah</code> はLeanの<em>search path</em>(検索パス)からの相対パスとして解釈される。検索パスがどのように決定されるかについては、<a href="http://leanprover.github.io/documentation/">documentation pages</a>を参照してほしい。デフォルトでは、標準ライブラリディレクトリと、場合によってはユーザーのローカルプロジェクトのルートが検索パスに含まれる。カレントディレクトリからの相対パスでインポートファイルを指定することもできる。</p>
+<p>は <code>Bar/Baz/Blah.olean</code> ファイルを読み込む(<code>.olean</code> はコンパイル済のLeanファイルの拡張子である)。このコマンドにおいて、<code>Bar.Baz.Blah</code> はLeanの<em>search path</em>(検索パス)からの相対パスとして解釈される。検索パスがどのように決定されるかについては、<a href="http://lean-lang.org/documentation/">documentation pages</a>を参照してほしい。デフォルトでは、標準ライブラリディレクトリと、場合によってはユーザーのローカルプロジェクトのルートが検索パスに含まれる。(Lean4では、カレントディレクトリからの相対パスでインポートファイルを指定することは<strong>できない</strong>。)</p>
 <p>インポートは「推移的」である。言い換えれば、<code>Foo</code> をインポートして、<code>Foo</code> が <code>Bar</code> をインポートする場合、<code>Bar</code> の内容にもアクセスできるようになる。したがって、<code>Bar</code> を明示的にインポートする必要はない。</p>
 <h2 id="more-on-sections-セクションの詳細"><a class="header" href="#more-on-sections-セクションの詳細">More on Sections (セクションの詳細)</a></h2>
 <p>Leanは理論の構造化を手助けするために、様々なセクション分けの仕組みを提供している。<a href="./dependent_type_theory.html#variables-and-sections-%E5%A4%89%E6%95%B0%E3%81%A8%E3%82%BB%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">Variables and Sections (変数とセクション)</a>の節で、<code>section</code> コマンドを使うことで、理論の要素をグループ化できるだけでなく、必要に応じて定理や定義の引数として挿入される変数のスコープを区切ることができることを説明した。<code>variable</code> コマンドのポイントは、次の例のように、定理で使う変数を宣言できることであることを思い出してほしい:</p>
@@ -3534,7 +3535,7 @@ example (x y : α) : g x y = fun (c : α) =&gt; x + y + c := rfl
 <pre><code class="language-lean">inductive Term where
   | var    (name : String)
   | num    (val : Nat)
-  | add    (fn : Term) (arg : Term)
+  | app    (fn : Term) (arg : Term)
   | lambda (name : String) (type : Term) (body : Term)
 
 def getBinderName : Term → Option String
@@ -5080,10 +5081,10 @@ example (x y : Nat) (h : 0 &lt; y ∧ y ≤ x) : div x y = div (x - y) y + 1 := 
   | 0,   y   =&gt; y+1
   | x+1, 0   =&gt; ack x 1
   | x+1, y+1 =&gt; ack x (ack (x+1) y)
-termination_by ack x y =&gt; (x, y)
+termination_by x y =&gt; (x, y)
 
 #eval ack 3 5
--- アッカーマン関数は急速に増加する関数であり、
+-- アッカーマン関数は入力値の増加に伴い出力値が急速に増加する関数であり、
 -- 例えば `#eval ack 4 1` などはバッファオーバーフロー等のエラーを引き起こす可能性が高いため、
 -- 実行しないことをお勧めする。
 </code></pre>
@@ -5106,7 +5107,7 @@ where
         r
     else
       r
-termination_by go i r =&gt; as.size - i
+termination_by as.size - i
 
 #eval takeWhile (fun n : Nat =&gt; if n % 2 = 1 then true else false) #[1, 3, 5, 6, 7]
 </code></pre>
@@ -5127,11 +5128,12 @@ decreasing_by apply div_lemma; assumption
   | 0,   y   =&gt; y+1
   | x+1, 0   =&gt; ack x 1
   | x+1, y+1 =&gt; ack x (ack (x+1) y)
-termination_by ack x y =&gt; (x, y)
+termination_by x y =&gt; (x, y)
 decreasing_by
-  simp_wf -- unfolds well-founded recursion auxiliary definitions
-  first | apply Prod.Lex.right; simp_arith
-        | apply Prod.Lex.left; simp_arith
+  all_goals simp_wf -- unfolds well-founded recursion auxiliary definitions
+  · apply Prod.Lex.left; simp_arith
+  · apply Prod.Lex.right; simp_arith
+  · apply Prod.Lex.left; simp_arith
 </code></pre>
 <p><code>decreasing_by sorry</code> を使えば、Leanに関数が停止することを「信じ」させることができる。</p>
 <pre><code class="language-lean">def natToBin : Nat → List Nat
@@ -5290,7 +5292,7 @@ mutual
 end
 </code></pre>
 <h2 id="dependent-pattern-matching-依存パターンマッチング"><a class="header" href="#dependent-pattern-matching-依存パターンマッチング">Dependent Pattern Matching (依存パターンマッチング)</a></h2>
-<p><a href="induction_and_recursion.html#pattern-matching-%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0">Pattern Matching (パターンマッチング)</a>の節で説明した全ての例は、<code>cases_on</code> と <code>rec_on</code> を使って簡単に書くことができる。しかし、<code>Vector α n</code> のような添字付き帰納族では、ケース分割が添字の値に制約を課すため、簡単に書けないことがよくある。もし等式コンパイラが無かったら、再帰子だけを使って <code>map</code>、<code>zip</code>、<code>unzip</code> などの非常に単純な関数を定義するために、多くの定型的なコードが必要になっただろう。その難しさを理解するために、ベクトル <code>v : Vector α (succ n)</code> を受け取り、最初の要素を削除したベクトルを返す関数 <code>tail</code> を定義するためには何が必要かを考えてみよう。まずは、<code>casesOn</code> 関数を使うことが考えられる:</p>
+<p><a href="induction_and_recursion.html#pattern-matching-%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0">Pattern Matching (パターンマッチング)</a>の節で説明した全ての例は、<code>casesOn</code> と <code>recOn</code> を使って簡単に書くことができる。しかし、<code>Vector α n</code> のような添字付き帰納族では、ケース分割が添字の値に制約を課すため、簡単に書けないことがよくある。もし等式コンパイラが無かったら、再帰子だけを使って <code>map</code>、<code>zip</code>、<code>unzip</code> などの非常に単純な関数を定義するために、多くの定型的なコードが必要になっただろう。その難しさを理解するために、ベクトル <code>v : Vector α (succ n)</code> を受け取り、最初の要素を削除したベクトルを返す関数 <code>tail</code> を定義するためには何が必要かを考えてみよう。まずは、<code>casesOn</code> 関数を使うことが考えられる:</p>
 <pre><code class="language-lean">inductive Vector (α : Type u) : Nat → Type u
   | nil  : Vector α 0
   | cons : α → {n : Nat} → Vector α n → Vector α (n+1)

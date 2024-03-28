@@ -635,10 +635,10 @@ example (x y : Nat) (h : 0 &lt; y ∧ y ≤ x) : div x y = div (x - y) y + 1 := 
   | 0,   y   =&gt; y+1
   | x+1, 0   =&gt; ack x 1
   | x+1, y+1 =&gt; ack x (ack (x+1) y)
-termination_by ack x y =&gt; (x, y)
+termination_by x y =&gt; (x, y)
 
 #eval ack 3 5
--- アッカーマン関数は急速に増加する関数であり、
+-- アッカーマン関数は入力値の増加に伴い出力値が急速に増加する関数であり、
 -- 例えば `#eval ack 4 1` などはバッファオーバーフロー等のエラーを引き起こす可能性が高いため、
 -- 実行しないことをお勧めする。
 </code></pre>
@@ -661,7 +661,7 @@ where
         r
     else
       r
-termination_by go i r =&gt; as.size - i
+termination_by as.size - i
 
 #eval takeWhile (fun n : Nat =&gt; if n % 2 = 1 then true else false) #[1, 3, 5, 6, 7]
 </code></pre>
@@ -682,11 +682,12 @@ decreasing_by apply div_lemma; assumption
   | 0,   y   =&gt; y+1
   | x+1, 0   =&gt; ack x 1
   | x+1, y+1 =&gt; ack x (ack (x+1) y)
-termination_by ack x y =&gt; (x, y)
+termination_by x y =&gt; (x, y)
 decreasing_by
-  simp_wf -- unfolds well-founded recursion auxiliary definitions
-  first | apply Prod.Lex.right; simp_arith
-        | apply Prod.Lex.left; simp_arith
+  all_goals simp_wf -- unfolds well-founded recursion auxiliary definitions
+  · apply Prod.Lex.left; simp_arith
+  · apply Prod.Lex.right; simp_arith
+  · apply Prod.Lex.left; simp_arith
 </code></pre>
 <p><code>decreasing_by sorry</code> を使えば、Leanに関数が停止することを「信じ」させることができる。</p>
 <pre><code class="language-lean">def natToBin : Nat → List Nat
@@ -845,7 +846,7 @@ mutual
 end
 </code></pre>
 <h2 id="dependent-pattern-matching-依存パターンマッチング"><a class="header" href="#dependent-pattern-matching-依存パターンマッチング">Dependent Pattern Matching (依存パターンマッチング)</a></h2>
-<p><a href="#pattern-matching-%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0">Pattern Matching (パターンマッチング)</a>の節で説明した全ての例は、<code>cases_on</code> と <code>rec_on</code> を使って簡単に書くことができる。しかし、<code>Vector α n</code> のような添字付き帰納族では、ケース分割が添字の値に制約を課すため、簡単に書けないことがよくある。もし等式コンパイラが無かったら、再帰子だけを使って <code>map</code>、<code>zip</code>、<code>unzip</code> などの非常に単純な関数を定義するために、多くの定型的なコードが必要になっただろう。その難しさを理解するために、ベクトル <code>v : Vector α (succ n)</code> を受け取り、最初の要素を削除したベクトルを返す関数 <code>tail</code> を定義するためには何が必要かを考えてみよう。まずは、<code>casesOn</code> 関数を使うことが考えられる:</p>
+<p><a href="#pattern-matching-%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3%E3%83%9E%E3%83%83%E3%83%81%E3%83%B3%E3%82%B0">Pattern Matching (パターンマッチング)</a>の節で説明した全ての例は、<code>casesOn</code> と <code>recOn</code> を使って簡単に書くことができる。しかし、<code>Vector α n</code> のような添字付き帰納族では、ケース分割が添字の値に制約を課すため、簡単に書けないことがよくある。もし等式コンパイラが無かったら、再帰子だけを使って <code>map</code>、<code>zip</code>、<code>unzip</code> などの非常に単純な関数を定義するために、多くの定型的なコードが必要になっただろう。その難しさを理解するために、ベクトル <code>v : Vector α (succ n)</code> を受け取り、最初の要素を削除したベクトルを返す関数 <code>tail</code> を定義するためには何が必要かを考えてみよう。まずは、<code>casesOn</code> 関数を使うことが考えられる:</p>
 <pre><code class="language-lean">inductive Vector (α : Type u) : Nat → Type u
   | nil  : Vector α 0
   | cons : α → {n : Nat} → Vector α n → Vector α (n+1)

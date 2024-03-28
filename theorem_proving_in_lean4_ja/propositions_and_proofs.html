@@ -438,7 +438,7 @@ example (hnp : ¬p) (hq : q) (hqp : q → p) : r :=
   absurd (hqp hq) hnp
 </code></pre>
 <p>ちなみに、<code>False</code> が除去則しか持たないように、<code>True</code> は導入則である <code>True.intro : True</code> しか持たない。つまり、<code>True</code> は単に真であり、<code>True.intro</code> という正規の証明を持っている。</p>
-<h3 id="logical-equivalence-論理同値"><a class="header" href="#logical-equivalence-論理同値">Logical Equivalence (論理同値)</a></h3>
+<h3 id="logical-equivalence-論理的同値"><a class="header" href="#logical-equivalence-論理的同値">Logical Equivalence (論理的同値)</a></h3>
 <p>式 <code>Iff.intro h1 h2</code> は <code>h1 : p → q</code> と <code>h2 : q → p</code> から <code>p ↔ q</code> の証明を作る。 式 <code>Iff.mp h</code> は <code>h : p ↔ q</code> から <code>p → q</code> の証明を作る。同様に、<code>Iff.mpr h</code> は <code>h : p ↔ q</code> から <code>q → p</code> の証明を作る。以下は <code>p ∧ q ↔ q ∧ p</code> の証明である。</p>
 <pre><code class="language-lean">variable (p q : Prop)
 
