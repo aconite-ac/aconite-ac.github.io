@@ -175,7 +175,7 @@
   show p y from (h y).left
 </code></pre>
 <p>表記上の慣習として、Leanは全称量化子に可能な限り広いスコープを与えるので、上の例では <code>x</code> に対する量化子のスコープを限定するために括弧が必要である。そして、<code>∀ y : α, p y</code> を証明する正規の方法は、<code>y</code> を任意に取り、<code>p y</code> を証明することである。これが全称量化子の導入則の使用例である。次に、型 <code>∀ x : α, p x ∧ q x</code> を持つ項 <code>h</code> が与えられると、項 <code>h y</code> は型 <code>p y ∧ q y</code> を持つ。これが全称量化子の除去則の使用例である。連言命題 <code>h y</code> の左の命題を取ると、所望の結論 <code>p y</code> が得られる。</p>
-<p>束縛変数の名前を変えることで同じにできる2つの式は、等価であるとみなされる(α-同値)ことを思い出してほしい。例えば、上記の例について、結論の前件と後件の両方で同じ変数名 <code>x</code> を用いて、証明の中では別の変数名 <code>z</code> を使ってインスタンスを表現することもできる。</p>
+<p>束縛変数の名前を変えることで同じにできる2つの式は、等価であるとみなされる(α-同値)ことを思い出してほしい。例えば、上記の例について、結論の前件と後件の両方で同じ束縛変数名 <code>x</code> を用いて、証明の中では別の束縛変数名 <code>z</code> を使うこともできる。</p>
 <pre><code class="language-lean">example (α : Type) (p q : α → Prop) : (∀ x : α, p x ∧ q x) → ∀ x : α, p x :=
   fun h : ∀ x : α, p x ∧ q x =&gt;
   fun z : α =&gt;
@@ -194,7 +194,7 @@ variable (hab : r a b) (hbc : r b c)
 #check trans_r a b c hab      -- r b c → r a c
 #check trans_r a b c hab hbc  -- r a c
 </code></pre>
-<p>この例で何が起こっているのかを考えてみよう。<code>trans_r</code> を値 <code>a b c</code> でインスタンス化すると、これは <code>r a b → r b c → r a c</code> の証明になる。これを「前提」<code>hab : r a b</code> に適用すると、含意命題 <code>r b c → r a c</code> の証明が得られる。最後に、これを前提 <code>hbc</code> に適用すると、結論 <code>r a c</code> の証明が得られる。</p>
+<p>この例で何が起こっているのかを考えてみよう。<code>trans_r</code> を値 <code>a b c</code> に適用すると、これは <code>r a b → r b c → r a c</code> の証明になる。これを「前提」<code>hab : r a b</code> に適用すると、含意命題 <code>r b c → r a c</code> の証明が得られる。最後に、これを前提 <code>hbc</code> に適用すると、結論 <code>r a c</code> の証明が得られる。</p>
 <p><code>hab</code> と <code>hbc</code> があれば最初の3つの引数が <code>a b c</code> であることは容易に推論できる。このような状況において、引数 <code>a b c</code> を毎回与えるのは面倒かもしれない。そのため、これらを暗黙の引数にするのが一般的である:</p>
 <pre><code class="language-lean">variable (α : Type) (r : α → α → Prop)
 variable (trans_r : ∀ {x y z}, r x y → r y z → r x z)
@@ -235,7 +235,7 @@ example (a b c d : α) (hab : r a b) (hcb : r c b) (hcd : r c d) : r a d :=
 #check @Eq.symm.{u}   -- @Eq.symm : ∀ {α : Sort u} {a b : α}, a = b → b = a
 #check @Eq.trans.{u}  -- @Eq.trans : ∀ {α : Sort u} {a b c : α}, a = b → b = c → a = c
 </code></pre>
-<p><code>.{u}</code> という記法は、宇宙 <code>u</code> で定数をインスタンス化することをLeanに指示する。</p>
+<p><code>.{u}</code> という記法は、宇宙パラメータとして <code>u</code> を使うことをLeanに指示する。</p>
 <p>したがって、例えば、前節の例を等号関係に特化させることができる:</p>
 <pre><code class="language-lean">variable (α : Type) (a b c d : α)
 variable (hab : a = b) (hcb : c = b) (hcd : c = d)
@@ -313,7 +313,7 @@ example : (a + b) * c = a * c + b * c := Nat.right_distrib a b c
 <p><code>Eq.subst</code> の2番目の暗黙の引数は、置換が行われる文脈を提供するもので、<code>α → Prop</code> 型を持っていることに注意してほしい。</p>
 <pre><code class="language-lean">#check Eq.subst  -- {α : Sort u} {motive : α → Prop} {a b : α} (h₁ : a = b) (h₂ : motive a) : motive b
 </code></pre>
-<p>したがって、この述語を推論するには、<em>higher-order unification</em>(高階ユニフィケーション)のインスタンス(高階単一子)が必要である。一般論として、高階単一子が存在するかを決定する問題は決定不能であり、Leanはせいぜいこの問題に対して不完全で近似的な解を提供することしかできない。そのため、<code>Eq.subst</code> は必ずしも思い通りに動くとは限らない。マクロ <code>h ▸ e</code> はこの暗黙の引数を計算する際により効果的なヒューリスティクスを使う。そのため、<code>Eq.subst</code> の適用が失敗するような状況でも、<code>h ▸ e</code> が成功することがしばしばある。</p>
+<p>したがって、この述語を推論するには、<em>higher-order unification</em>(高階ユニフィケーション)の解(高階単一子)が必要である。一般論として、高階単一子が存在するかを決定する問題は決定不能であり、Leanはせいぜいこの問題に対して不完全で近似的な解を提供することしかできない。そのため、<code>Eq.subst</code> は必ずしも思い通りに動くとは限らない。マクロ <code>h ▸ e</code> はこの暗黙の引数を計算する際により効果的なヒューリスティクスを使う。そのため、<code>Eq.subst</code> の適用が失敗するような状況でも、<code>h ▸ e</code> が成功することがしばしばある。</p>
 <p>等式の推論は非常に一般的で重要であるため、Leanはそれをより効率的に実行するためのメカニズムを数多く提供している。次の節では、より自然で簡潔な方法で計算的証明を書くための構文を提供する。しかし、より重要なのは、等式推論が<em>rewriter</em>(項書き換え器)、<em>simplifier</em>(単純化器)、その他の自動化によって成り立っていることである。項書き換え器と単純化器については次の節で簡単に説明し、次の章でさらに詳しく説明する。</p>
 <h2 id="calculational-proofs-計算的証明"><a class="header" href="#calculational-proofs-計算的証明">Calculational Proofs (計算的証明)</a></h2>
 <p>計算的証明は、等号の推移律などの基本原則によって構成される中間結果の連鎖にすぎない。Leanにおいて、計算的証明はキーワード <code>calc</code> から始まる以下の構文を持つ:</p>
@@ -400,7 +400,7 @@ theorem T : a = e :=
     _ ≤ c + 1 := Nat.succ_le_succ h2
     _ &lt; d     := h3
 </code></pre>
-<p><code>Trans</code> 型クラスの新しいインスタンスを追加することで、<code>calc</code> に新しい推移律の定理を「教える」ことができる。型クラスは後で紹介するが、とりあえず以下に新しい <code>Trans</code> インスタンスを使って <code>calc</code> 記法を拡張する方法を示す小さな例を挙げる。</p>
+<p><code>Trans</code> 型クラスの新しいインスタンスを追加することで、<code>calc</code> に新しい推移律の定理を「教える」ことができる。型クラスについては後で紹介するが、ここではとりあえず新しい <code>Trans</code> インスタンスを使って <code>calc</code> 記法を拡張する方法を示す小さな例を以下に挙げる。</p>
 <pre><code class="language-lean">def divides (x y : Nat) : Prop :=
   ∃ k, k*x = y
 
@@ -550,7 +550,7 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
 </span>example : (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x :=
   fun ⟨w, hpw, hqw⟩ =&gt; ⟨w, hqw, hpw⟩
 </code></pre>
-<p><a href="./induction_and_recursion.html">8章 Induction and Recursion (帰納と再帰)</a> では、これらの派生構文は全てより一般的なパターンマッチング構文のインスタンスであることを説明する。</p>
+<p><a href="./induction_and_recursion.html">8章 Induction and Recursion (帰納と再帰)</a> では、これらの派生構文は全てより一般的なパターンマッチング構文の特殊例であることを説明する。</p>
 <p>次の例では、<code>is_even a</code> を <code>∃ b, a = 2 * b</code> と定義し、2つの偶数の和は偶数であることを示す。</p>
 <pre><code class="language-lean">def is_even (a : Nat) : Prop := ∃ b : Nat, a = 2 * b
 

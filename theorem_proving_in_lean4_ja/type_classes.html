@@ -692,7 +692,7 @@ def bar : Inhabited (Nat → Nat) := inferInstance
 #check @inferInstance
 -- {α : Sort u} → [α] → α
 </code></pre>
-<p>Leanの <code>(t : T)</code> 記法を使えば、インスタンス <code>t</code> を探している型クラス <code>T</code> を簡潔に指定することができる:</p>
+<p>Leanの <code>(t : T)</code> 記法を使えば、今探している <code>t</code> がどの型クラス <code>T</code> のインスタンスなのかを簡潔に指定することができる:</p>
 <pre><code class="language-lean">#check (inferInstance : Add Nat)
 </code></pre>
 <p>型 <code>T</code> を引数に取る補助定義 <code>inferInstanceAs</code> を使うこともできる:</p>

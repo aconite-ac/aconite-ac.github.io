@@ -146,7 +146,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="inductive-types-帰納型"><a class="header" href="#inductive-types-帰納型">Inductive Types (帰納型)</a></h1>
-<p>Leanの形式的基礎は <code>Prop, Type 0, Type 1, Type 2, ...</code> という基本的な型を含み、<code>(x : α) → β</code> といった依存関数型の形成を可能にすることが分かった。例の中では、<code>Bool</code>、<code>Nat</code>、<code>Int</code> などの追加的な型や、<code>List</code>、直積型 <code>×</code> などの型コンストラクタも使用した。実際、Leanのライブラリにおいて、宇宙以外の全ての具体的な型と、依存関数型以外の全ての型コンストラクタは、<em>inductive types</em>(帰納型)として知られる型コンストラクタの集まりのインスタンスである(逆に、宇宙と依存関数型は<em>foundational types</em>(基礎型)として知られる)。型宇宙、依存関数型、そして帰納型のみで巨大で頑丈な数学の体系を構築できることは驚くべきことである。それ以外の全てはこの3種類の型から派生する。</p>
+<p>Leanの形式的基礎は <code>Prop, Type 0, Type 1, Type 2, ...</code> という基本的な型を含み、<code>(x : α) → β</code> といった依存関数型の形成を可能にすることが分かった。例の中では、<code>Bool</code>、<code>Nat</code>、<code>Int</code> などの追加的な型や、<code>List</code>、直積型 <code>×</code> などの型コンストラクタも使用した。実際、Leanのライブラリにおいて、宇宙以外の全ての具体的な型と、依存関数型以外の全ての型コンストラクタは、<em>inductive types</em>(帰納型)と呼ばれる型コンストラクタの集まりである(逆に、宇宙と依存関数型は<em>foundational types</em>(基礎型)として知られる)。型宇宙、依存関数型、そして帰納型のみで巨大で頑丈な数学の体系を構築できることは驚くべきことである。それ以外の全てはこの3種類の型から派生する。</p>
 <p>直感的には、帰納型は指定されたコンストラクタのリストから構築される。Leanにおいて、帰納型を指定する構文は次の通りである:</p>
 <pre><code>inductive Foo where
   | constructor₁ : ... → Foo
@@ -393,7 +393,7 @@ end Weekday
 </code></pre>
 <p>以下の節 <a href="#tactics-for-inductive-types-%E5%B8%B0%E7%B4%8D%E5%9E%8B%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%BF%E3%82%AF%E3%83%86%E3%82%A3%E3%82%AF">Tactics for Inductive Types (帰納型のためのタクティク)</a> では、帰納型を利用するのに特化したタクティクを紹介する。</p>
 <p>「型としての命題対応」の下では、定理証明と関数定義の両方に <code>match</code> を使えることに注目してほしい。言い換えれば、「型としての命題対応」の下では、場合分けによる証明は場合分けによる定義の一種なのである。そこには「定義」されるものが「データ型の項」なのか「命題型の証明」なのかの違いしかない。</p>
-<p>Leanのライブラリにおいて、<code>Bool</code> 型は列挙型のインスタンスである。</p>
+<p>Leanのライブラリにおいて、<code>Bool</code> 型は列挙型の一例である。</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>inductive Bool where
   | false : Bool
@@ -1113,7 +1113,7 @@ theorem congr {α β : Type u} {a b : α} (f : α → β) (h : Eq a b) : Eq (f a
 <h2 id="axiomatic-details-公理の詳細"><a class="header" href="#axiomatic-details-公理の詳細">Axiomatic Details (公理の詳細)</a></h2>
 <p>これまで、例を通して帰納型とその構文について説明してきた。この節では、公理的な基礎に興味のある人のために、追加の情報を提供する。</p>
 <p>帰納型のコンストラクタは、<em>parameters</em>(パラメータ, 帰納的な構築の間、固定されたままの引数)と<em>indices</em>(添字, 同時進行で構築される型の族をパラメータ化する引数)を取りうることを見てきた。各コンストラクタは、型を持つ必要がある。ここで、コンストラクタの引数の型は既に定義された型、パラメータと添字の型、現在定義中の帰納族の要素だけから構成される必要がある。コンストラクタの引数の型に現在定義中の帰納族の要素が現れる場合、それは<em>strictly positively</em>に出現しなければならないという要件がある。これは単純に、任意のコンストラクタの任意の引数の型は、定義中の帰納型が結果としてのみ出現する依存関数型でなければならないことを意味する。ここで、添字は定数と前の引数を使って与えられる。</p>
-<p>帰納型はある <code>u</code> が存在して <code>Sort u</code> の項なので、<strong>どの</strong>宇宙レベル <code>u</code> が当該帰納型にインスタンス化されるかを問うのは合理的である。帰納族 <code>C</code> の定義内の各コンストラクタ <code>c</code> は以下の形式をとる。</p>
+<p>帰納型はある <code>u</code> が存在して <code>Sort u</code> の項なので、当該帰納型を項としてみたとき、その項が持つ型宇宙として<strong>どの</strong>宇宙レベル <code>u</code> がふさわしいかを問うのは合理的である。帰納族 <code>C</code> の定義内の各コンストラクタ <code>c</code> は以下の形式をとる。</p>
 <pre><code>  c : (a : α) → (b : β[a]) → C a p[a,b]
 </code></pre>
 <p>ここで、<code>a</code> はデータ型パラメータの列、<code>b</code> はコンストラクタへの引数の列、<code>p[a, b]</code> は添字である。この添字 <code>p[a, b]</code> によって、そのコンストラクタが帰納族のどの要素の項を構築するかが決まる。(この説明はやや不正確である。実際には、コンストラクタへの引数は、依存関係が意味をなす限りどのような順番で現れてもよい。)<code>C</code> の宇宙レベルは、その帰納型が <code>Prop</code>(つまり、<code>Sort 0</code>)に属するように指定されているかどうかによって、2種類の制約を持つ。</p>

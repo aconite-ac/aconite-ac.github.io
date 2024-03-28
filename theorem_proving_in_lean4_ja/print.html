@@ -348,8 +348,8 @@ def F (α : Type u) : Type u := Prod α α       -- `Type u` に属する型 `α
 -- λ (&lt;入力引数の名前&gt; : &lt;入力引数の型名&gt;) =&gt; &lt;関数の出力を定義する式&gt;
 #check fun (x : Nat) =&gt; x + 5   -- Nat → Nat
 #check λ (x : Nat) =&gt; x + 5     -- `λ` と `fun` は同じ意味
-#check fun x =&gt; x + 5           -- `x`は`Nat`型だと推論される
-#check λ x =&gt; x + 5             -- `x`は`Nat`型だと推論される
+#check fun x =&gt; x + 5           -- `x` は `Nat` 型だと推論される
+#check λ x =&gt; x + 5             -- `x` は `Nat` 型だと推論される
 </code></pre>
 <p>要求されたパラメータを通すことにより、ラムダ関数を評価することができる。</p>
 <pre><code class="language-lean">#eval (λ x : Nat =&gt; x + 5) 10    -- 15
@@ -702,7 +702,7 @@ end Foo
 #check @List.length  -- {α : Type u_1} → List α → Nat
 #check @List.append  -- {α : Type u_1} → List α → List α → List α
 </code></pre>
-<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、依存積型 <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存積型は<em>sigma</em>(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。<code>⟨</code> は &quot;\langle&quot; または &quot;&lt;&quot; と打つと入力でき、<code>⟩</code> は &quot;\rangle&quot; または &quot;&gt;&quot; と打つと入力できる。</p>
+<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、依存積型 <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存積型は<em>sigma</em>(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。<code>⟨</code> は <code>\langle</code> または <code>\&lt;</code> と打つと入力でき、<code>⟩</code> は <code>\rangle</code> または <code>\&gt;</code> と打つと入力できる。</p>
 <pre><code class="language-lean">universe u v
 
 def f (α : Type u) (β : α → Type v) (a : α) (b : β a) : (a : α) × β a :=
@@ -1382,7 +1382,7 @@ example : (((p → q) → p) → p) := sorry
   show p y from (h y).left
 </code></pre>
 <p>表記上の慣習として、Leanは全称量化子に可能な限り広いスコープを与えるので、上の例では <code>x</code> に対する量化子のスコープを限定するために括弧が必要である。そして、<code>∀ y : α, p y</code> を証明する正規の方法は、<code>y</code> を任意に取り、<code>p y</code> を証明することである。これが全称量化子の導入則の使用例である。次に、型 <code>∀ x : α, p x ∧ q x</code> を持つ項 <code>h</code> が与えられると、項 <code>h y</code> は型 <code>p y ∧ q y</code> を持つ。これが全称量化子の除去則の使用例である。連言命題 <code>h y</code> の左の命題を取ると、所望の結論 <code>p y</code> が得られる。</p>
-<p>束縛変数の名前を変えることで同じにできる2つの式は、等価であるとみなされる(α-同値)ことを思い出してほしい。例えば、上記の例について、結論の前件と後件の両方で同じ変数名 <code>x</code> を用いて、証明の中では別の変数名 <code>z</code> を使ってインスタンスを表現することもできる。</p>
+<p>束縛変数の名前を変えることで同じにできる2つの式は、等価であるとみなされる(α-同値)ことを思い出してほしい。例えば、上記の例について、結論の前件と後件の両方で同じ束縛変数名 <code>x</code> を用いて、証明の中では別の束縛変数名 <code>z</code> を使うこともできる。</p>
 <pre><code class="language-lean">example (α : Type) (p q : α → Prop) : (∀ x : α, p x ∧ q x) → ∀ x : α, p x :=
   fun h : ∀ x : α, p x ∧ q x =&gt;
   fun z : α =&gt;
@@ -1401,7 +1401,7 @@ variable (hab : r a b) (hbc : r b c)
 #check trans_r a b c hab      -- r b c → r a c
 #check trans_r a b c hab hbc  -- r a c
 </code></pre>
-<p>この例で何が起こっているのかを考えてみよう。<code>trans_r</code> を値 <code>a b c</code> でインスタンス化すると、これは <code>r a b → r b c → r a c</code> の証明になる。これを「前提」<code>hab : r a b</code> に適用すると、含意命題 <code>r b c → r a c</code> の証明が得られる。最後に、これを前提 <code>hbc</code> に適用すると、結論 <code>r a c</code> の証明が得られる。</p>
+<p>この例で何が起こっているのかを考えてみよう。<code>trans_r</code> を値 <code>a b c</code> に適用すると、これは <code>r a b → r b c → r a c</code> の証明になる。これを「前提」<code>hab : r a b</code> に適用すると、含意命題 <code>r b c → r a c</code> の証明が得られる。最後に、これを前提 <code>hbc</code> に適用すると、結論 <code>r a c</code> の証明が得られる。</p>
 <p><code>hab</code> と <code>hbc</code> があれば最初の3つの引数が <code>a b c</code> であることは容易に推論できる。このような状況において、引数 <code>a b c</code> を毎回与えるのは面倒かもしれない。そのため、これらを暗黙の引数にするのが一般的である:</p>
 <pre><code class="language-lean">variable (α : Type) (r : α → α → Prop)
 variable (trans_r : ∀ {x y z}, r x y → r y z → r x z)
@@ -1442,7 +1442,7 @@ example (a b c d : α) (hab : r a b) (hcb : r c b) (hcd : r c d) : r a d :=
 #check @Eq.symm.{u}   -- @Eq.symm : ∀ {α : Sort u} {a b : α}, a = b → b = a
 #check @Eq.trans.{u}  -- @Eq.trans : ∀ {α : Sort u} {a b c : α}, a = b → b = c → a = c
 </code></pre>
-<p><code>.{u}</code> という記法は、宇宙 <code>u</code> で定数をインスタンス化することをLeanに指示する。</p>
+<p><code>.{u}</code> という記法は、宇宙パラメータとして <code>u</code> を使うことをLeanに指示する。</p>
 <p>したがって、例えば、前節の例を等号関係に特化させることができる:</p>
 <pre><code class="language-lean">variable (α : Type) (a b c d : α)
 variable (hab : a = b) (hcb : c = b) (hcd : c = d)
@@ -1520,7 +1520,7 @@ example : (a + b) * c = a * c + b * c := Nat.right_distrib a b c
 <p><code>Eq.subst</code> の2番目の暗黙の引数は、置換が行われる文脈を提供するもので、<code>α → Prop</code> 型を持っていることに注意してほしい。</p>
 <pre><code class="language-lean">#check Eq.subst  -- {α : Sort u} {motive : α → Prop} {a b : α} (h₁ : a = b) (h₂ : motive a) : motive b
 </code></pre>
-<p>したがって、この述語を推論するには、<em>higher-order unification</em>(高階ユニフィケーション)のインスタンス(高階単一子)が必要である。一般論として、高階単一子が存在するかを決定する問題は決定不能であり、Leanはせいぜいこの問題に対して不完全で近似的な解を提供することしかできない。そのため、<code>Eq.subst</code> は必ずしも思い通りに動くとは限らない。マクロ <code>h ▸ e</code> はこの暗黙の引数を計算する際により効果的なヒューリスティクスを使う。そのため、<code>Eq.subst</code> の適用が失敗するような状況でも、<code>h ▸ e</code> が成功することがしばしばある。</p>
+<p>したがって、この述語を推論するには、<em>higher-order unification</em>(高階ユニフィケーション)の解(高階単一子)が必要である。一般論として、高階単一子が存在するかを決定する問題は決定不能であり、Leanはせいぜいこの問題に対して不完全で近似的な解を提供することしかできない。そのため、<code>Eq.subst</code> は必ずしも思い通りに動くとは限らない。マクロ <code>h ▸ e</code> はこの暗黙の引数を計算する際により効果的なヒューリスティクスを使う。そのため、<code>Eq.subst</code> の適用が失敗するような状況でも、<code>h ▸ e</code> が成功することがしばしばある。</p>
 <p>等式の推論は非常に一般的で重要であるため、Leanはそれをより効率的に実行するためのメカニズムを数多く提供している。次の節では、より自然で簡潔な方法で計算的証明を書くための構文を提供する。しかし、より重要なのは、等式推論が<em>rewriter</em>(項書き換え器)、<em>simplifier</em>(単純化器)、その他の自動化によって成り立っていることである。項書き換え器と単純化器については次の節で簡単に説明し、次の章でさらに詳しく説明する。</p>
 <h2 id="calculational-proofs-計算的証明"><a class="header" href="#calculational-proofs-計算的証明">Calculational Proofs (計算的証明)</a></h2>
 <p>計算的証明は、等号の推移律などの基本原則によって構成される中間結果の連鎖にすぎない。Leanにおいて、計算的証明はキーワード <code>calc</code> から始まる以下の構文を持つ:</p>
@@ -1607,7 +1607,7 @@ theorem T : a = e :=
     _ ≤ c + 1 := Nat.succ_le_succ h2
     _ &lt; d     := h3
 </code></pre>
-<p><code>Trans</code> 型クラスの新しいインスタンスを追加することで、<code>calc</code> に新しい推移律の定理を「教える」ことができる。型クラスは後で紹介するが、とりあえず以下に新しい <code>Trans</code> インスタンスを使って <code>calc</code> 記法を拡張する方法を示す小さな例を挙げる。</p>
+<p><code>Trans</code> 型クラスの新しいインスタンスを追加することで、<code>calc</code> に新しい推移律の定理を「教える」ことができる。型クラスについては後で紹介するが、ここではとりあえず新しい <code>Trans</code> インスタンスを使って <code>calc</code> 記法を拡張する方法を示す小さな例を以下に挙げる。</p>
 <pre><code class="language-lean">def divides (x y : Nat) : Prop :=
   ∃ k, k*x = y
 
@@ -1757,7 +1757,7 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
 </span>example : (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x :=
   fun ⟨w, hpw, hqw⟩ =&gt; ⟨w, hqw, hpw⟩
 </code></pre>
-<p><a href="./induction_and_recursion.html">8章 Induction and Recursion (帰納と再帰)</a> では、これらの派生構文は全てより一般的なパターンマッチング構文のインスタンスであることを説明する。</p>
+<p><a href="./induction_and_recursion.html">8章 Induction and Recursion (帰納と再帰)</a> では、これらの派生構文は全てより一般的なパターンマッチング構文の特殊例であることを説明する。</p>
 <p>次の例では、<code>is_even a</code> を <code>∃ b, a = 2 * b</code> と定義し、2つの偶数の和は偶数であることを示す。</p>
 <pre><code class="language-lean">def is_even (a : Nat) : Prop := ∃ b : Nat, a = 2 * b
 
@@ -2331,7 +2331,7 @@ example (p q : Nat → Prop) : (∃ x, p x) → ∃ x, p x ∨ q x := by
   cases h with
   | intro x px =&gt; apply Exists.intro; apply Or.inl; exact px
 </code></pre>
-<p>ここでは、<code>constructor</code> タクティクは <code>Exists.intro</code> の最初の引数である <code>x</code> の値を暗黙のままにしている。これは一旦メタ変数で表され、後でインスタンス化される。前の例では、メタ変数の適切な値はタクティク <code>exact px</code> が使われた時点で決定される。なぜなら、<code>px</code> は型 <code>p x</code> を持つからである。存在量化子に対する証人を明示的に指定したい場合は、代わりに <code>exists</code> タクティクを使うことができる:</p>
+<p>ここでは、<code>constructor</code> タクティクは <code>Exists.intro</code> の最初の引数である <code>x</code> の値を暗黙のままにしている。これは一旦メタ変数で表され、そのメタ変数の値は後で決定される。前の例では、メタ変数の適切な値はタクティク <code>exact px</code> が使われた時点で決定される。なぜなら、<code>px</code> は型 <code>p x</code> を持つからである。存在量化子に対する証人を明示的に指定したい場合は、代わりに <code>exists</code> タクティクを使うことができる:</p>
 <pre><code class="language-lean">example (p q : Nat → Prop) : (∃ x, p x) → ∃ x, p x ∨ q x := by
   intro h
   cases h with
@@ -2620,7 +2620,7 @@ example (p q r : Prop) (hr : r) : p ∨ q ∨ r :=
 <p>タクティク <code>focus t</code> は、他のゴールを一時的にスコープから隠し、<code>t</code> を現在のゴール(一番上のゴール)だけに作用させる。したがって、通常は <code>t</code> が現在のゴールだけに作用する場合、<code>focus (all_goals t)</code> は <code>all_goals</code> の機能を打ち消して <code>t</code> と同じ作用を持つ。</p>
 <h2 id="rewriting-書き換え"><a class="header" href="#rewriting-書き換え">Rewriting (書き換え)</a></h2>
 <p><a href="./quantifiers_and_equality.html#calculational-proofs-%E8%A8%88%E7%AE%97%E7%9A%84%E8%A8%BC%E6%98%8E">Calculational Proofs (計算的証明)</a>の節で、<code>rewrite</code> タクティク(省略版: <code>rw</code>)と <code>simp</code> タクティクを簡単に紹介した。本節と次節では、これらについてさらに詳しく説明する。</p>
-<p><code>rewrite</code> タクティクはターゲットとコンテキストに置換を適用するための基本的なメカニズムであり、等式を扱う便利で効率的な方法を提供する。このタクティクの最も基本的な構文は <code>rewrite [t]</code> である。ここで、<code>t</code> はある等式が成立することを主張する型である。例えば、仮説 <code>h : x = y</code> を <code>t</code> として採用することができる。<code>t</code> は <code>add_comm : ∀ x y, x + y = y + x</code> のような全称命題でもよい。その場合、<code>rewrite</code> タクティクは <code>x</code> と <code>y</code> に対して適切なインスタンスを見つけようとする。あるいは、それが具体的な等式あるいは等式に関する全称命題であれば、<code>t</code> は複合的な項であってもよい。次の例では、仮説を用いてターゲットを書き換えるために基本的な構文 <code>rewrite [t]</code> を使う。</p>
+<p><code>rewrite</code> タクティクはターゲットとコンテキストに置換を適用するための基本的なメカニズムであり、等式を扱う便利で効率的な方法を提供する。このタクティクの最も基本的な構文は <code>rewrite [t]</code> である。ここで、<code>t</code> はある等式が成立することを主張する型である。例えば、仮説 <code>h : x = y</code> を <code>t</code> として採用することができる。<code>t</code> は <code>add_comm : ∀ x y, x + y = y + x</code> のような全称命題でもよい。その場合、<code>rewrite</code> タクティクは <code>x</code> と <code>y</code> に対して適切な項を見つけようとする。あるいは、それが具体的な等式あるいは等式に関する全称命題であれば、<code>t</code> は関数適用などを含む複合的な項であってもよい。次の例では、仮説を用いてターゲットを書き換えるために基本的な構文 <code>rewrite [t]</code> を使う。</p>
 <pre><code class="language-lean">example (f : Nat → Nat) (k : Nat) (h₁ : f 0 = 0) (h₂ : k = 0) : f k = 0 := by
   rw [h₂] -- replace k with 0
   rw [h₁] -- replace f 0 with 0
@@ -3198,7 +3198,7 @@ variable (euclr : euclidean r)
 #check @euclr  -- euclidean r
 #check euclr   -- r ?m1 ?m2 → r ?m1 ?m3 → r ?m2 ?m3
 </code></pre>
-<p>この例は3つの小さなステップからなっている: <code>th1</code> は反射的かつユークリッド的な関係が対称的であることを示す。<code>th2</code> は対称的かつユークリッド的な関係が推移的であることを示す。そして <code>th3</code> は2つの定理を組み合わせ、反射的かつユークリッド的な関係が推移的であることを示している。しかし、<code>th3</code> の証明において、<code>euclr</code> の暗黙の引数を手動で無効にしなければならない。そうしなければ、証明中の <code>euclr</code> に必要以上に多くの暗黙の引数が挿入されてしまうからである。つまり、証明内の <code>@euclr</code> は命題 <code>∀ {a b c : α}, r a b → r a c → r b c</code> の証明項である一方で、証明内の <code>euclr</code> は暗黙の引数 <code>a b c : α</code> が挿入されてインスタンス化された後の命題 <code>r ?m1 ?m2 → r ?m1 ?m3 → r ?m2 ?m3</code> の証明項なのである。弱い暗黙の引数を使えばこの問題は解決する:</p>
+<p>この例は3つの小さなステップからなっている: <code>th1</code> は反射的かつユークリッド的な関係が対称的であることを示す。<code>th2</code> は対称的かつユークリッド的な関係が推移的であることを示す。そして <code>th3</code> は2つの定理を組み合わせ、反射的かつユークリッド的な関係が推移的であることを示している。しかし、<code>th3</code> の証明において、<code>euclr</code> の暗黙の引数を手動で無効にしなければならない。そうしなければ、証明中の <code>euclr</code> に必要以上に多くの暗黙の引数が挿入されてしまうからである。つまり、証明内の <code>@euclr</code> は命題 <code>∀ {a b c : α}, r a b → r a c → r b c</code> の証明項である一方で、証明内の <code>euclr</code> は <code>@euclr</code> を暗黙のメタ引数 <code>?m1 ?m2 ?m3 : α</code> に適用してできた、命題 <code>r ?m1 ?m2 → r ?m1 ?m3 → r ?m2 ?m3</code> の証明項なのである。弱い暗黙の引数を使えばこの問題は解決する:</p>
 <pre><code class="language-lean">def reflexive {α : Type u} (r : α → α → Prop) : Prop :=
   ∀ (a : α), r a a
 
@@ -3551,7 +3551,7 @@ def getBinderType : Term → Option Term
   congrArg f (Nat.add_assoc ..)
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="inductive-types-帰納型"><a class="header" href="#inductive-types-帰納型">Inductive Types (帰納型)</a></h1>
-<p>Leanの形式的基礎は <code>Prop, Type 0, Type 1, Type 2, ...</code> という基本的な型を含み、<code>(x : α) → β</code> といった依存関数型の形成を可能にすることが分かった。例の中では、<code>Bool</code>、<code>Nat</code>、<code>Int</code> などの追加的な型や、<code>List</code>、直積型 <code>×</code> などの型コンストラクタも使用した。実際、Leanのライブラリにおいて、宇宙以外の全ての具体的な型と、依存関数型以外の全ての型コンストラクタは、<em>inductive types</em>(帰納型)として知られる型コンストラクタの集まりのインスタンスである(逆に、宇宙と依存関数型は<em>foundational types</em>(基礎型)として知られる)。型宇宙、依存関数型、そして帰納型のみで巨大で頑丈な数学の体系を構築できることは驚くべきことである。それ以外の全てはこの3種類の型から派生する。</p>
+<p>Leanの形式的基礎は <code>Prop, Type 0, Type 1, Type 2, ...</code> という基本的な型を含み、<code>(x : α) → β</code> といった依存関数型の形成を可能にすることが分かった。例の中では、<code>Bool</code>、<code>Nat</code>、<code>Int</code> などの追加的な型や、<code>List</code>、直積型 <code>×</code> などの型コンストラクタも使用した。実際、Leanのライブラリにおいて、宇宙以外の全ての具体的な型と、依存関数型以外の全ての型コンストラクタは、<em>inductive types</em>(帰納型)と呼ばれる型コンストラクタの集まりである(逆に、宇宙と依存関数型は<em>foundational types</em>(基礎型)として知られる)。型宇宙、依存関数型、そして帰納型のみで巨大で頑丈な数学の体系を構築できることは驚くべきことである。それ以外の全てはこの3種類の型から派生する。</p>
 <p>直感的には、帰納型は指定されたコンストラクタのリストから構築される。Leanにおいて、帰納型を指定する構文は次の通りである:</p>
 <pre><code>inductive Foo where
   | constructor₁ : ... → Foo
@@ -3798,7 +3798,7 @@ end Weekday
 </code></pre>
 <p>以下の節 <a href="inductive_types.html#tactics-for-inductive-types-%E5%B8%B0%E7%B4%8D%E5%9E%8B%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%82%BF%E3%82%AF%E3%83%86%E3%82%A3%E3%82%AF">Tactics for Inductive Types (帰納型のためのタクティク)</a> では、帰納型を利用するのに特化したタクティクを紹介する。</p>
 <p>「型としての命題対応」の下では、定理証明と関数定義の両方に <code>match</code> を使えることに注目してほしい。言い換えれば、「型としての命題対応」の下では、場合分けによる証明は場合分けによる定義の一種なのである。そこには「定義」されるものが「データ型の項」なのか「命題型の証明」なのかの違いしかない。</p>
-<p>Leanのライブラリにおいて、<code>Bool</code> 型は列挙型のインスタンスである。</p>
+<p>Leanのライブラリにおいて、<code>Bool</code> 型は列挙型の一例である。</p>
 <pre><code class="language-lean"><span class="boring">namespace Hidden
 </span>inductive Bool where
   | false : Bool
@@ -4518,7 +4518,7 @@ theorem congr {α β : Type u} {a b : α} (f : α → β) (h : Eq a b) : Eq (f a
 <h2 id="axiomatic-details-公理の詳細"><a class="header" href="#axiomatic-details-公理の詳細">Axiomatic Details (公理の詳細)</a></h2>
 <p>これまで、例を通して帰納型とその構文について説明してきた。この節では、公理的な基礎に興味のある人のために、追加の情報を提供する。</p>
 <p>帰納型のコンストラクタは、<em>parameters</em>(パラメータ, 帰納的な構築の間、固定されたままの引数)と<em>indices</em>(添字, 同時進行で構築される型の族をパラメータ化する引数)を取りうることを見てきた。各コンストラクタは、型を持つ必要がある。ここで、コンストラクタの引数の型は既に定義された型、パラメータと添字の型、現在定義中の帰納族の要素だけから構成される必要がある。コンストラクタの引数の型に現在定義中の帰納族の要素が現れる場合、それは<em>strictly positively</em>に出現しなければならないという要件がある。これは単純に、任意のコンストラクタの任意の引数の型は、定義中の帰納型が結果としてのみ出現する依存関数型でなければならないことを意味する。ここで、添字は定数と前の引数を使って与えられる。</p>
-<p>帰納型はある <code>u</code> が存在して <code>Sort u</code> の項なので、<strong>どの</strong>宇宙レベル <code>u</code> が当該帰納型にインスタンス化されるかを問うのは合理的である。帰納族 <code>C</code> の定義内の各コンストラクタ <code>c</code> は以下の形式をとる。</p>
+<p>帰納型はある <code>u</code> が存在して <code>Sort u</code> の項なので、当該帰納型を項としてみたとき、その項が持つ型宇宙として<strong>どの</strong>宇宙レベル <code>u</code> がふさわしいかを問うのは合理的である。帰納族 <code>C</code> の定義内の各コンストラクタ <code>c</code> は以下の形式をとる。</p>
 <pre><code>  c : (a : α) → (b : β[a]) → C a p[a,b]
 </code></pre>
 <p>ここで、<code>a</code> はデータ型パラメータの列、<code>b</code> はコンストラクタへの引数の列、<code>p[a, b]</code> は添字である。この添字 <code>p[a, b]</code> によって、そのコンストラクタが帰納族のどの要素の項を構築するかが決まる。(この説明はやや不正確である。実際には、コンストラクタへの引数は、依存関係が意味をなす限りどのような順番で現れてもよい。)<code>C</code> の宇宙レベルは、その帰納型が <code>Prop</code>(つまり、<code>Sort 0</code>)に属するように指定されているかどうかによって、2種類の制約を持つ。</p>
@@ -5328,7 +5328,7 @@ def tail (v : Vector α (n+1)) : Vector α n :=
   tailAux v rfl
 <span class="boring">end Vector
 </span></code></pre>
-<p>補助関数 <code>tailAux</code> において、<code>v</code> が <code>nil</code> の場合、<code>m</code> は <code>0</code> にインスタンス化され、<code>noConfusion</code> は <code>0 = succ n</code> は成立しえないという事実を使う。そうでなければ、<code>v</code> は <code>a :: w</code> の形をとり、<code>w</code> を長さ <code>m</code> のベクトルから長さ <code>n</code> のベクトルへキャストした後、単純に <code>w</code> を返すことができる(<code>h1 ▸ as</code>)。</p>
+<p>補助関数 <code>tailAux</code> において、<code>v</code> が <code>nil</code> の場合、<code>m</code> の値は <code>0</code> に決定し、<code>noConfusion</code> は <code>0 = succ n</code> は成立しえないという事実を使う。そうでなければ、<code>v</code> は <code>a :: w</code> の形をとり、<code>w</code> を長さ <code>m</code> のベクトルから長さ <code>n</code> のベクトルへキャストした後、単純に <code>w</code> を返すことができる(<code>h1 ▸ as</code>)。</p>
 <p><code>tail</code> を定義する上で難しいのは、添字間の関係を維持することである。<code>tailAux</code> 内の仮説 <code>e : m = n + 1</code> は、<code>n</code> と小前提(<code>Vector.casesOn</code> の4番目と5番目の引数)に関連した添字(<code>0</code> と <code>m + 1</code>)の関係を <code>noConfusion</code> 等に伝えるために使われる。さらに、<code>zero = n + 1</code> のケースは到達不能である。このようなケースを破棄する正規の方法は <code>noConfusion</code> を使うことである。</p>
 <p>しかし、実際は <code>tail</code> 関数は再帰を使って簡単に定義できる。そして、等式コンパイラが全ての定型コードを自動的に生成してくれる。似た例をいくつか紹介しよう:</p>
 <pre><code class="language-lean"><span class="boring">inductive Vector (α : Type u) : Nat → Type u
@@ -5621,9 +5621,9 @@ theorem fuse_eq (v : Nat → Nat)
 </code></pre>
 <p>最後の2つの定理は、<code>simpConst</code> や <code>fuse</code> が式の値を保存することを表す。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="structures-and-records-構造体とレコード"><a class="header" href="#structures-and-records-構造体とレコード">Structures and Records (構造体とレコード)</a></h1>
-<p>Leanの基礎システムは帰納型を含むことを見てきた。さらに、型宇宙、依存関数型、そして帰納型のみで巨大で頑丈な数学の体系を構築できるという驚くべき事実を説明した。それ以外の全てはこの3種類の型から派生するのである。Leanの標準ライブラリには帰納型のインスタンス(例えば <code>Nat</code>、<code>Prod</code>、<code>List</code>)が多数含まれており、論理的結合子でさえも帰納型を用いて定義されている。</p>
+<p>Leanの基礎システムは帰納型を含むことを見てきた。さらに、型宇宙、依存関数型、そして帰納型のみで巨大で頑丈な数学の体系を構築できるという驚くべき事実を説明した。それ以外の全てはこの3種類の型から派生するのである。Leanの標準ライブラリには帰納型の具体例(例えば <code>Nat</code>、<code>Prod</code>、<code>List</code>)が多数含まれており、論理的結合子でさえも帰納型を用いて定義されている。</p>
 <p>コンストラクタを1つだけ持つ非再帰的帰納型は<em>structure</em>(構造体)または<em>record</em>(レコード)と呼ばれることを思い出してほしい。直積型は構造体であり、依存積型(シグマ型)も同様に構造体である。一般に、構造体 <code>S</code> が定義されるとき、<code>S</code> の各インスタンス(レコード or オブジェクト)を「分解」し、そのフィールドに格納されている値を取り出すことができる<em>projection</em>(射影)関数も同時に定義することが多い。直積ペアの1番目の要素を返す関数 <code>prod.fst</code> と2番目の要素を返す関数 <code>prod.snd</code> はそのような射影関数の例である。</p>
-<p>プログラムを書いたり数学を形式化するとき、多くのフィールドを含む構造を定義することは珍しくない。Leanでは、<code>structure</code> コマンドが構造体の定義をサポートするインフラを提供する。このコマンドを使って構造体を定義すると、Leanは各フィールドに対する射影関数を自動生成する。<code>structure</code> コマンドは、以前に定義した構造体に基づいて新しい構造体を定義することもできる。さらに、Leanは与えられた構造のインスタンスを定義するための便利な記法も提供する。</p>
+<p>プログラムを書いたり数学を形式化するとき、多くのフィールドを含む構造を定義することは珍しくない。Leanでは、<code>structure</code> コマンドが構造体の定義をサポートするインフラを提供する。このコマンドを使って構造体を定義すると、Leanは各フィールドに対する射影関数を自動生成する。<code>structure</code> コマンドは、以前に定義した構造体に基づいて新しい構造体を定義することもできる。さらに、Leanは与えられた構造体のインスタンスを定義するための便利な記法も提供する。</p>
 <h2 id="declaring-structures-構造体を定義する"><a class="header" href="#declaring-structures-構造体を定義する">Declaring Structures (構造体を定義する)</a></h2>
 <p><code>structure</code> コマンドは、言わば帰納データ型を定義するための「フロントエンド」である。全ての <code>structure</code> 宣言は、構造体に与えられた名前と同じ名前の名前空間を導入する。<code>structure</code> コマンドの構文の一般的な形式は次の通りである:</p>
 <pre><code>    structure &lt;name&gt; &lt;parameters&gt; &lt;parent-structures&gt; where
@@ -6344,7 +6344,7 @@ def bar : Inhabited (Nat → Nat) := inferInstance
 #check @inferInstance
 -- {α : Sort u} → [α] → α
 </code></pre>
-<p>Leanの <code>(t : T)</code> 記法を使えば、インスタンス <code>t</code> を探している型クラス <code>T</code> を簡潔に指定することができる:</p>
+<p>Leanの <code>(t : T)</code> 記法を使えば、今探している <code>t</code> がどの型クラス <code>T</code> のインスタンスなのかを簡潔に指定することができる:</p>
 <pre><code class="language-lean">#check (inferInstance : Add Nat)
 </code></pre>
 <p>型 <code>T</code> を引数に取る補助定義 <code>inferInstanceAs</code> を使うこともできる:</p>

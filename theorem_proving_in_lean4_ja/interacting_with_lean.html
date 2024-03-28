@@ -372,7 +372,7 @@ variable (euclr : euclidean r)
 #check @euclr  -- euclidean r
 #check euclr   -- r ?m1 ?m2 → r ?m1 ?m3 → r ?m2 ?m3
 </code></pre>
-<p>この例は3つの小さなステップからなっている: <code>th1</code> は反射的かつユークリッド的な関係が対称的であることを示す。<code>th2</code> は対称的かつユークリッド的な関係が推移的であることを示す。そして <code>th3</code> は2つの定理を組み合わせ、反射的かつユークリッド的な関係が推移的であることを示している。しかし、<code>th3</code> の証明において、<code>euclr</code> の暗黙の引数を手動で無効にしなければならない。そうしなければ、証明中の <code>euclr</code> に必要以上に多くの暗黙の引数が挿入されてしまうからである。つまり、証明内の <code>@euclr</code> は命題 <code>∀ {a b c : α}, r a b → r a c → r b c</code> の証明項である一方で、証明内の <code>euclr</code> は暗黙の引数 <code>a b c : α</code> が挿入されてインスタンス化された後の命題 <code>r ?m1 ?m2 → r ?m1 ?m3 → r ?m2 ?m3</code> の証明項なのである。弱い暗黙の引数を使えばこの問題は解決する:</p>
+<p>この例は3つの小さなステップからなっている: <code>th1</code> は反射的かつユークリッド的な関係が対称的であることを示す。<code>th2</code> は対称的かつユークリッド的な関係が推移的であることを示す。そして <code>th3</code> は2つの定理を組み合わせ、反射的かつユークリッド的な関係が推移的であることを示している。しかし、<code>th3</code> の証明において、<code>euclr</code> の暗黙の引数を手動で無効にしなければならない。そうしなければ、証明中の <code>euclr</code> に必要以上に多くの暗黙の引数が挿入されてしまうからである。つまり、証明内の <code>@euclr</code> は命題 <code>∀ {a b c : α}, r a b → r a c → r b c</code> の証明項である一方で、証明内の <code>euclr</code> は <code>@euclr</code> を暗黙のメタ引数 <code>?m1 ?m2 ?m3 : α</code> に適用してできた、命題 <code>r ?m1 ?m2 → r ?m1 ?m3 → r ?m2 ?m3</code> の証明項なのである。弱い暗黙の引数を使えばこの問題は解決する:</p>
 <pre><code class="language-lean">def reflexive {α : Type u} (r : α → α → Prop) : Prop :=
   ∀ (a : α), r a a
 

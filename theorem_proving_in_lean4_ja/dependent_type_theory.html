@@ -303,8 +303,8 @@ def F (α : Type u) : Type u := Prod α α       -- `Type u` に属する型 `α
 -- λ (&lt;入力引数の名前&gt; : &lt;入力引数の型名&gt;) =&gt; &lt;関数の出力を定義する式&gt;
 #check fun (x : Nat) =&gt; x + 5   -- Nat → Nat
 #check λ (x : Nat) =&gt; x + 5     -- `λ` と `fun` は同じ意味
-#check fun x =&gt; x + 5           -- `x`は`Nat`型だと推論される
-#check λ x =&gt; x + 5             -- `x`は`Nat`型だと推論される
+#check fun x =&gt; x + 5           -- `x` は `Nat` 型だと推論される
+#check λ x =&gt; x + 5             -- `x` は `Nat` 型だと推論される
 </code></pre>
 <p>要求されたパラメータを通すことにより、ラムダ関数を評価することができる。</p>
 <pre><code class="language-lean">#eval (λ x : Nat =&gt; x + 5) 10    -- 15
@@ -657,7 +657,7 @@ end Foo
 #check @List.length  -- {α : Type u_1} → List α → Nat
 #check @List.append  -- {α : Type u_1} → List α → List α → List α
 </code></pre>
-<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、依存積型 <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存積型は<em>sigma</em>(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。<code>⟨</code> は &quot;\langle&quot; または &quot;&lt;&quot; と打つと入力でき、<code>⟩</code> は &quot;\rangle&quot; または &quot;&gt;&quot; と打つと入力できる。</p>
+<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、依存積型 <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存積型は<em>sigma</em>(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。<code>⟨</code> は <code>\langle</code> または <code>\&lt;</code> と打つと入力でき、<code>⟩</code> は <code>\rangle</code> または <code>\&gt;</code> と打つと入力できる。</p>
 <pre><code class="language-lean">universe u v
 
 def f (α : Type u) (β : α → Type v) (a : α) (b : β a) : (a : α) × β a :=
