@@ -480,7 +480,7 @@ instance : ToString Rational where
 
 #check 2 -- Rational
 </code></pre>
-<p>優先度は、異なるデフォルトインスタンス間の相互作用を制御するのにも便利である。例えば、<code>xs</code> が <code>List α</code> 型を持つとする。elaboratorが式 <code>xs.map (fun x =&gt; 2 * x)</code> を解釈するとき、この式が多相性を持つために、同種乗法のデフォルトインスタンスが <code>OfNat</code> のデフォルトインスタンスより高い優先度を持つようにしたい。これは、<code>Hmul α α α</code> のインスタンスを実装し、<code>HMul Nat α α</code> のインスタンスは実装しなかった場合に特に重要である。ここで、Leanにおいて表記 <code>a*b</code> がどう定義されているかを種明かしする。</p>
+<p>優先度は、異なるデフォルトインスタンス間の相互作用を制御するのにも便利である。例えば、<code>xs</code> が <code>List α</code> 型を持つとする。elaboratorが式 <code>xs.map (fun x =&gt; 2 * x)</code> を解釈するとき、この式が多相性を持つために、同種乗法のデフォルトインスタンスが <code>OfNat</code> のデフォルトインスタンスより高い優先度を持つようにしたい。これは、<code>HMul α α α</code> のインスタンスを実装し、<code>HMul Nat α α</code> のインスタンスは実装しなかった場合に特に重要である。ここで、Leanにおいて表記 <code>a*b</code> がどう定義されているかを種明かしする。</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class OfNat (α : Type u) (n : Nat) where
   ofNat : α
@@ -844,7 +844,7 @@ example (S : Semigroup) (a b c : S) : (a * b) * c = a * (b * c) :=
   Semigroup.mul_assoc _ a b c
 </code></pre>
 <p>上記の <code>CoeSort Semigroup (Type u)</code> のインスタンスは、<code>(a b c : S)</code> と書くことを可能にする強制である。ここで、2種類目の強制では <code>Coe Semigroup (Type u)</code> ではなく <code>CoeSort Semigroup (Type u)</code> のインスタンスを定義したことに注意してほしい。</p>
-<p>最後に、3種類目の強制について考えよう。「関数型のクラス」とは、依存関数型(Π型) <code>(z : B) → C</code> の集まりを意味する。3種類目の強制は次のような形をとる:</p>
+<p>最後に、3種類目の強制について考えよう。「関数型のクラス」とは、依存関数型(パイ型) <code>(z : B) → C</code> の集まりを意味する。3種類目の強制は次のような形をとる:</p>
 <pre><code>    c : (x1 : A1) → ... → (xn : An) → (y : F x1 ... xn) → (z : B) → C
 </code></pre>
 <p>ここで、<code>F</code> は再び型の族であり、<code>F x1 ... xn</code> は型の族に属する特定の型である。<code>B</code> と <code>C</code> は <code>x1, ..., xn, y</code> に依存することができる。この種類の強制により、<code>t</code> が <code>F a1 ... an</code> の項であるときは、いつでも <code>t s</code> と書くことができる。言い換えれば、この強制は <code>F a1 ... an</code> の項を関数として見ることを可能にする。上記の例の続きとして、半群 <code>S1</code> と <code>S2</code> の間の<em>morphism</em>(射)あるいは<em>homomorphism</em>(準同型)という概念を定義できる。射とは、<code>S1</code> の台から <code>S2</code> の台への、乗法を保存する(<code>mor (a * b) = (mor a) * (mor b)</code>)関数である。次のコードでは、<code>S1</code>、<code>S2</code>、<code>*</code> に関する暗黙の強制に注意してほしい。射影 <code>Morphism.mor</code> は、構造体 <code>Morphism S1 S2</code> の項を受け取り、射の台関数を返す:</p>

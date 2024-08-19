@@ -1056,7 +1056,7 @@ example : filter isNotZero [1, 0, 0, 3, 0] = [1, 3] := rfl
 
 example : foo 7 true false = 9 := rfl
 </code></pre>
-<p>Leanは、システムの全ての部分で、パターンマッチングを実装するために内部で <code>match</code> 構文を使用する。したがって、以下の4つの定義は全て同じ効果を持つ。</p>
+<p>Leanは、システムの全ての部分で、パターンマッチングを実装するために内部で <code>match</code> 式を使用する。したがって、以下の4つの定義は全て同じ効果を持つ。</p>
 <pre><code class="language-lean">def bar₁ : Nat × Nat → Nat
   | (m, n) =&gt; m + n
 

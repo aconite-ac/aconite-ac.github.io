@@ -693,7 +693,7 @@ end Foo
 #check cons Bool       -- Bool → List Bool → List Bool
 #check cons            -- (α : Type) → α → List α → List α
 </code></pre>
-<p>これは<em>dependent function type</em>(依存関数型)あるいは<em>dependent arrow type</em>(依存矢印型)の一例である。<code>α : Type</code> と <code>β : α → Type</code> があるとき、<code>β</code> は <code>α</code> 上の型の族だと思ってほしい。つまり、項 <code>β : α → Type</code> を任意の <code>a : α</code> に <code>β a : Type</code> を割り当てる関数だと考えるのである。このとき、型 <code>(a : α) → β a</code> は任意の <code>a : α</code> に型 <code>β a</code> の項 <code>f a</code> を割り当てる関数 <code>f</code> の型を表す。言い換えると、関数 <code>f</code> によって返される値 <code>f a</code> の型 <code>β a</code> は入力 <code>a</code> に依存して変わる。<code>(a : α) → β a</code> という記法は、入力に依存して出力の型が変わるような関数の型を記述することができるのである。</p>
+<p>これは<em>dependent function type</em>(依存関数型 あるいは 依存積型 あるいは パイ(Π)型)あるいは<em>dependent arrow type</em>(依存矢印型)の一例である。<code>α : Type</code> と <code>β : α → Type</code> があるとき、<code>β</code> は <code>α</code> 上の型の族だと思ってほしい。つまり、項 <code>β : α → Type</code> を任意の <code>a : α</code> に <code>β a : Type</code> を割り当てる関数だと考えるのである。このとき、型 <code>(a : α) → β a</code> は任意の <code>a : α</code> に型 <code>β a</code> の項 <code>f a</code> を割り当てる関数 <code>f</code> の型を表す。言い換えると、関数 <code>f</code> によって返される値 <code>f a</code> の型 <code>β a</code> は入力 <code>a</code> に依存して変わる。<code>(a : α) → β a</code> という記法は、入力に依存して出力の型が変わるような関数の型を記述することができるのである。</p>
 <p><code>(a : α) → β</code> という依存関数型の記法は、任意の式 <code>β</code> に対して、たとえ <code>β</code> が引数 <code>a : α</code> に依存して変わるときでも、意味をなすのである。これは <code>α → β</code> という単純関数型の記法は <code>β</code> が引数 <code>a : α</code> に依存して変わるときには意味をなさないことと対照的である。つまり、依存関数型は単純関数型より表現の幅が広い。<code>β</code> が <code>a</code> に依存しないときは、型 <code>(a : α) → β</code> と 型 <code>α → β</code> に違いはない。実際、依存型理論において、そしてLeanにおいて、<code>α → β</code> という記法は、<code>β</code> が <code>a : α</code> に依存しないときの <code>(a : α) → β</code> の略記に過ぎない。</p>
 <p>リストの例に戻る。<code>#check</code> コマンドを使うと、以下の <code>List</code> に関する関数の型をチェックすることができる。
 記号 <code>@</code>、それから括弧 <code>()</code> と波括弧 <code>{}</code> の違いについてはすぐ後で説明する。</p>
@@ -702,7 +702,7 @@ end Foo
 #check @List.length  -- {α : Type u_1} → List α → Nat
 #check @List.append  -- {α : Type u_1} → List α → List α → List α
 </code></pre>
-<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、依存積型 <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存積型は<em>sigma</em>(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。<code>⟨</code> は <code>\langle</code> または <code>\&lt;</code> と打つと入力でき、<code>⟩</code> は <code>\rangle</code> または <code>\&gt;</code> と打つと入力できる。</p>
+<p><code>β</code> が <code>α</code> に依存できるようにすることで依存関数型 <code>(a : α) → β a</code> が関数型 <code>α → β</code> を一般化するのと同様に、<em>dependent Cartesian product type</em>(依存直積型 あるいは 依存和型 あるいは シグマ型) <code>(a : α) × β a</code> は直積型 <code>α × β</code> を一般化する。依存直積型は <code>β</code> が <code>a</code> に依存することを可能にする。依存直積型はシグマ(Σ)型とも呼ばれ、<code>(a : α) × β a</code> は <code>Σ a : α, β a</code> とも書かれる。Leanにおいて、<code>⟨a, b⟩</code> あるいは <code>Sigma.mk a b</code> と書くと依存ペアを作ることができる。<code>⟨</code> は <code>\langle</code> または <code>\&lt;</code> と打つと入力でき、<code>⟩</code> は <code>\rangle</code> または <code>\&gt;</code> と打つと入力できる。</p>
 <pre><code class="language-lean">universe u v
 
 def f (α : Type u) (β : α → Type v) (a : α) (b : β a) : (a : α) × β a :=
@@ -1714,7 +1714,7 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
 </code></pre>
 <p>ここで、匿名コンストラクタ表記 <code>⟨w, hw.right, hw.left⟩</code> が入れ子になったコンストラクタの適用を省略していることに注意。<code>⟨w, hw.right, hw.left⟩</code> は <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> と書いたのと同じである。</p>
 <p>存在量化子除去則と選言除去則を比較することは有用であろう: 主張 <code>∃ x : α, p x</code> は、 <code>a</code> が型 <code>α</code> の全ての項をわたるときの、命題 <code>p a</code> 全てを選言で繋げたものと考えることができる。</p>
-<p>存在命題は、2章の従属型の節で説明したシグマ型(依存積型)に非常に似ていることに注目しよう。<code>a : α</code> と <code>h : p a</code> が与えられたとき、項 <code>Exists.intro a h</code> は型 <code>(∃ x : α, p x) : Prop</code> を持つ一方で、<code>Sigma.mk a h</code> は型 <code>(Σ x : α, p x) : Type</code> を持つ。この <code>∃</code> と <code>Σ</code> の類似性はカリー=ハワード同型のもう一つの例である。</p>
+<p>存在命題は、2章の従属型の節で説明したシグマ型(依存直積型)に非常に似ていることに注目しよう。<code>a : α</code> と <code>h : p a</code> が与えられたとき、項 <code>Exists.intro a h</code> は型 <code>(∃ x : α, p x) : Prop</code> を持つ一方で、<code>Sigma.mk a h</code> は型 <code>(Σ x : α, p x) : Type</code> を持つ。この <code>∃</code> と <code>Σ</code> の類似性はカリー=ハワード同型のもう一つの例である。</p>
 <pre><code class="language-lean">section exist_prop
 variable (a : α) (p : α → Prop) (h : p a)
 
@@ -1734,13 +1734,13 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   match h with
   | ⟨w, hw⟩ =&gt; ⟨w, hw.right, hw.left⟩
 </code></pre>
-<p><code>match</code> 式はLeanの関数定義システムの一部であり、複雑な関数を定義する便利で表現力豊かな方法を提供する。再びカリー=ハワード同型により、この関数定義方法 <code>match</code> を証明の記述にも応用させることができる。<code>match</code> 文は存在量化された主張を <code>w</code> と <code>hw</code> に「分解」する。これらは命題の証明記述内で使うことができる。より明確にするために、マッチで分解されてできた要素に型の注釈を付けることができる:</p>
+<p><code>match</code> 式はLeanの関数定義システムの一部であり、複雑な関数を定義する便利で表現力豊かな方法を提供する。再びカリー=ハワード同型により、この関数定義方法 <code>match</code> を証明の記述にも応用させることができる。<code>match</code> 式は存在量化された主張を <code>w</code> と <code>hw</code> に「分解」する。これらは命題の証明記述内で使うことができる。より明確にするために、マッチで分解されてできた要素に型の注釈を付けることができる:</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   match h with
   | ⟨(w : α), (hw : p w ∧ q w)⟩ =&gt; ⟨w, hw.right, hw.left⟩
 </code></pre>
-<p>match文を使って、存在量化子と連言を同時に分解することもできる:</p>
+<p>match 式を使って、存在量化子と連言を同時に分解することもできる:</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   match h with
@@ -1752,7 +1752,7 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
   let ⟨w, hpw, hqw⟩ := h
   ⟨w, hqw, hpw⟩
 </code></pre>
-<p>これは、基本的に上記の <code>match</code> 構文の代替表記に過ぎない。Leanでは、<code>fun</code> キーワードの中で暗黙の <code>match</code> を使うこともできる:</p>
+<p>これは、基本的に上記の <code>match</code> 式の代替表記に過ぎない。Leanでは、<code>fun</code> キーワードの中で暗黙の <code>match</code> を使うこともできる:</p>
 <pre><code class="language-lean"><span class="boring">variable (α : Type) (p q : α → Prop)
 </span>example : (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x :=
   fun ⟨w, hpw, hqw⟩ =&gt; ⟨w, hqw, hpw⟩
@@ -1780,7 +1780,7 @@ theorem even_plus_even2 : ∀ a b : Nat, is_even a → is_even b → is_even (a 
         _ = 2 * (w1 + w2)   := by rw [Nat.mul_add]
     ⟨(w1 + w2 : Nat), (hw3 : a + b = 2 * (w1 + w2))⟩
 </code></pre>
-<p>マッチ文、匿名コンストラクタ、<code>rewrite</code> タクティク……、この章で説明した様々な小道具を使ってこの証明を簡潔に書くと次のようになる:</p>
+<p>マッチ式、匿名コンストラクタ、<code>rewrite</code> タクティク……、この章で説明した様々な小道具を使ってこの証明を簡潔に書くと次のようになる:</p>
 <pre><code class="language-lean"><span class="boring">def is_even (a : Nat) := ∃ b, a = 2 * b
 </span>theorem even_plus_even (h1 : is_even a) (h2 : is_even b) : is_even (a + b) :=
   match h1, h2 with
@@ -3603,7 +3603,7 @@ open Weekday
   | saturday
 </code></pre>
 <p><code>sunday</code>、<code>monday</code>、...、<code>saturday</code> は <code>Weekday</code> の互いに異なる項であり、それ以外に互いに異なる項はないと考えてほしい。除去則 <code>Weekday.rec</code> は 型 <code>Weekday</code> とそのコンストラクタを用いて定義されている。除去則は<em>recursor</em>(再帰子)とも呼ばれ、この型を<em>inductive</em>(帰納的)にしている: 除去則は、各コンストラクタに対応する値を割り当てることで、<code>Weekday</code> 上の関数を定義することを可能にしている。直感的には、帰納型の項は各コンストラクタによって網羅的に生成され、帰納型はコンストラクタが構築する項以外の項を持たないということである。</p>
-<p><code>Weekday</code> から自然数への関数を定義するには、<code>match</code> 文を使うことができる:</p>
+<p><code>Weekday</code> から自然数への関数を定義するには、<code>match</code> 式を使うことができる:</p>
 <pre><code class="language-lean"><span class="boring">inductive Weekday where
 </span><span class="boring"> | sunday : Weekday
 </span><span class="boring"> | monday : Weekday
@@ -4398,7 +4398,7 @@ example (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
       rw [← Nat.mod_eq_of_lt hgt] at hgt
       assumption
 </code></pre>
-<p>タクティク証明の中で <code>match</code> 記法を使うこともできる:</p>
+<p>タクティク証明の中で <code>match</code> を使うこともできる:</p>
 <pre><code class="language-lean">example : p ∨ q → q ∨ p := by
   intro h
   match h with
@@ -5502,7 +5502,7 @@ example : filter isNotZero [1, 0, 0, 3, 0] = [1, 3] := rfl
 
 example : foo 7 true false = 9 := rfl
 </code></pre>
-<p>Leanは、システムの全ての部分で、パターンマッチングを実装するために内部で <code>match</code> 構文を使用する。したがって、以下の4つの定義は全て同じ効果を持つ。</p>
+<p>Leanは、システムの全ての部分で、パターンマッチングを実装するために内部で <code>match</code> 式を使用する。したがって、以下の4つの定義は全て同じ効果を持つ。</p>
 <pre><code class="language-lean">def bar₁ : Nat × Nat → Nat
   | (m, n) =&gt; m + n
 
@@ -5622,7 +5622,7 @@ theorem fuse_eq (v : Nat → Nat)
 <p>最後の2つの定理は、<code>simpConst</code> や <code>fuse</code> が式の値を保存することを表す。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="structures-and-records-構造体とレコード"><a class="header" href="#structures-and-records-構造体とレコード">Structures and Records (構造体とレコード)</a></h1>
 <p>Leanの基礎システムは帰納型を含むことを見てきた。さらに、型宇宙、依存関数型、そして帰納型のみで巨大で頑丈な数学の体系を構築できるという驚くべき事実を説明した。それ以外の全てはこの3種類の型から派生するのである。Leanの標準ライブラリには帰納型の具体例(例えば <code>Nat</code>、<code>Prod</code>、<code>List</code>)が多数含まれており、論理的結合子でさえも帰納型を用いて定義されている。</p>
-<p>コンストラクタを1つだけ持つ非再帰的帰納型は<em>structure</em>(構造体)または<em>record</em>(レコード)と呼ばれることを思い出してほしい。直積型は構造体であり、依存積型(シグマ型)も同様に構造体である。一般に、構造体 <code>S</code> が定義されるとき、<code>S</code> の各インスタンス(レコード or オブジェクト)を「分解」し、そのフィールドに格納されている値を取り出すことができる<em>projection</em>(射影)関数も同時に定義することが多い。直積ペアの1番目の要素を返す関数 <code>prod.fst</code> と2番目の要素を返す関数 <code>prod.snd</code> はそのような射影関数の例である。</p>
+<p>コンストラクタを1つだけ持つ非再帰的帰納型は<em>structure</em>(構造体)または<em>record</em>(レコード)と呼ばれることを思い出してほしい。直積型は構造体であり、依存直積型(シグマ型)も同様に構造体である。一般に、構造体 <code>S</code> が定義されるとき、<code>S</code> の各インスタンス(レコード or オブジェクト)を「分解」し、そのフィールドに格納されている値を取り出すことができる<em>projection</em>(射影)関数も同時に定義することが多い。直積ペアの1番目の要素を返す関数 <code>prod.fst</code> と2番目の要素を返す関数 <code>prod.snd</code> はそのような射影関数の例である。</p>
 <p>プログラムを書いたり数学を形式化するとき、多くのフィールドを含む構造を定義することは珍しくない。Leanでは、<code>structure</code> コマンドが構造体の定義をサポートするインフラを提供する。このコマンドを使って構造体を定義すると、Leanは各フィールドに対する射影関数を自動生成する。<code>structure</code> コマンドは、以前に定義した構造体に基づいて新しい構造体を定義することもできる。さらに、Leanは与えられた構造体のインスタンスを定義するための便利な記法も提供する。</p>
 <h2 id="declaring-structures-構造体を定義する"><a class="header" href="#declaring-structures-構造体を定義する">Declaring Structures (構造体を定義する)</a></h2>
 <p><code>structure</code> コマンドは、言わば帰納データ型を定義するための「フロントエンド」である。全ての <code>structure</code> 宣言は、構造体に与えられた名前と同じ名前の名前空間を導入する。<code>structure</code> コマンドの構文の一般的な形式は次の通りである:</p>
@@ -6132,7 +6132,7 @@ instance : ToString Rational where
 
 #check 2 -- Rational
 </code></pre>
-<p>優先度は、異なるデフォルトインスタンス間の相互作用を制御するのにも便利である。例えば、<code>xs</code> が <code>List α</code> 型を持つとする。elaboratorが式 <code>xs.map (fun x =&gt; 2 * x)</code> を解釈するとき、この式が多相性を持つために、同種乗法のデフォルトインスタンスが <code>OfNat</code> のデフォルトインスタンスより高い優先度を持つようにしたい。これは、<code>Hmul α α α</code> のインスタンスを実装し、<code>HMul Nat α α</code> のインスタンスは実装しなかった場合に特に重要である。ここで、Leanにおいて表記 <code>a*b</code> がどう定義されているかを種明かしする。</p>
+<p>優先度は、異なるデフォルトインスタンス間の相互作用を制御するのにも便利である。例えば、<code>xs</code> が <code>List α</code> 型を持つとする。elaboratorが式 <code>xs.map (fun x =&gt; 2 * x)</code> を解釈するとき、この式が多相性を持つために、同種乗法のデフォルトインスタンスが <code>OfNat</code> のデフォルトインスタンスより高い優先度を持つようにしたい。これは、<code>HMul α α α</code> のインスタンスを実装し、<code>HMul Nat α α</code> のインスタンスは実装しなかった場合に特に重要である。ここで、Leanにおいて表記 <code>a*b</code> がどう定義されているかを種明かしする。</p>
 <pre><code class="language-lean"><span class="boring">namespace Ex
 </span>class OfNat (α : Type u) (n : Nat) where
   ofNat : α
@@ -6496,7 +6496,7 @@ example (S : Semigroup) (a b c : S) : (a * b) * c = a * (b * c) :=
   Semigroup.mul_assoc _ a b c
 </code></pre>
 <p>上記の <code>CoeSort Semigroup (Type u)</code> のインスタンスは、<code>(a b c : S)</code> と書くことを可能にする強制である。ここで、2種類目の強制では <code>Coe Semigroup (Type u)</code> ではなく <code>CoeSort Semigroup (Type u)</code> のインスタンスを定義したことに注意してほしい。</p>
-<p>最後に、3種類目の強制について考えよう。「関数型のクラス」とは、依存関数型(Π型) <code>(z : B) → C</code> の集まりを意味する。3種類目の強制は次のような形をとる:</p>
+<p>最後に、3種類目の強制について考えよう。「関数型のクラス」とは、依存関数型(パイ型) <code>(z : B) → C</code> の集まりを意味する。3種類目の強制は次のような形をとる:</p>
 <pre><code>    c : (x1 : A1) → ... → (xn : An) → (y : F x1 ... xn) → (z : B) → C
 </code></pre>
 <p>ここで、<code>F</code> は再び型の族であり、<code>F x1 ... xn</code> は型の族に属する特定の型である。<code>B</code> と <code>C</code> は <code>x1, ..., xn, y</code> に依存することができる。この種類の強制により、<code>t</code> が <code>F a1 ... an</code> の項であるときは、いつでも <code>t s</code> と書くことができる。言い換えれば、この強制は <code>F a1 ... an</code> の項を関数として見ることを可能にする。上記の例の続きとして、半群 <code>S1</code> と <code>S2</code> の間の<em>morphism</em>(射)あるいは<em>homomorphism</em>(準同型)という概念を定義できる。射とは、<code>S1</code> の台から <code>S2</code> の台への、乗法を保存する(<code>mor (a * b) = (mor a) * (mor b)</code>)関数である。次のコードでは、<code>S1</code>、<code>S2</code>、<code>*</code> に関する暗黙の強制に注意してほしい。射影 <code>Morphism.mor</code> は、構造体 <code>Morphism S1 S2</code> の項を受け取り、射の台関数を返す:</p>

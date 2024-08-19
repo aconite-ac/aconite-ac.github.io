@@ -198,7 +198,7 @@ open Weekday
   | saturday
 </code></pre>
 <p><code>sunday</code>、<code>monday</code>、...、<code>saturday</code> は <code>Weekday</code> の互いに異なる項であり、それ以外に互いに異なる項はないと考えてほしい。除去則 <code>Weekday.rec</code> は 型 <code>Weekday</code> とそのコンストラクタを用いて定義されている。除去則は<em>recursor</em>(再帰子)とも呼ばれ、この型を<em>inductive</em>(帰納的)にしている: 除去則は、各コンストラクタに対応する値を割り当てることで、<code>Weekday</code> 上の関数を定義することを可能にしている。直感的には、帰納型の項は各コンストラクタによって網羅的に生成され、帰納型はコンストラクタが構築する項以外の項を持たないということである。</p>
-<p><code>Weekday</code> から自然数への関数を定義するには、<code>match</code> 文を使うことができる:</p>
+<p><code>Weekday</code> から自然数への関数を定義するには、<code>match</code> 式を使うことができる:</p>
 <pre><code class="language-lean"><span class="boring">inductive Weekday where
 </span><span class="boring"> | sunday : Weekday
 </span><span class="boring"> | monday : Weekday
@@ -993,7 +993,7 @@ example (x : Nat) {y : Nat} (h : y &gt; 0) : x % y &lt; y := by
       rw [← Nat.mod_eq_of_lt hgt] at hgt
       assumption
 </code></pre>
-<p>タクティク証明の中で <code>match</code> 記法を使うこともできる:</p>
+<p>タクティク証明の中で <code>match</code> を使うこともできる:</p>
 <pre><code class="language-lean">example : p ∨ q → q ∨ p := by
   intro h
   match h with
