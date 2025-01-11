@@ -230,7 +230,7 @@ instance : Add Float where
 <!--
 (訳者注: この時点では、大雑把に言えば、型クラスは型クラス解決によりインスタンスが自動合成される構造体だといえる。)
 -->
-<p>一般的に、インスタンスは複雑な方法で他のインスタンスに依存することがある。例えば、「もし <code>a</code> が加法を持つなら、<code>Array a</code> も加法を持つ」と主張する(匿名)インスタンスを宣言することができる:</p>
+<p>一般的に、インスタンスは複雑な方法で他のインスタンスに依存することがある。例えば、「もし <code>a</code> が加法を持つなら、<code>Array a</code> も加法を持つ」と主張する(無名)インスタンスを宣言することができる:</p>
 <pre><code class="language-lean">instance [Add a] : Add (Array a) where
   add x y := Array.zipWith x y (· + ·)
 

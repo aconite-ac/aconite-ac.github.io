@@ -351,7 +351,7 @@ example (h : p ∧ q) : q ∧ p :=
 <p>連言導入と連言除去は直積ペアの構築と射影の操作に似ていることに注意してほしい。<code>p : Prop</code>、<code>q : Prop</code>、<code>hp : p</code>、<code>hq : q</code> のとき、<code>And.intro hp hq</code> は型 <code>p ∧ q : Prop</code> を持つ。一方、<code>p : Type</code>、<code>q : Type</code>、<code>hp : p</code>、<code>hq : q</code> のとき、<code>Prod hp hq</code> は型 <code>p × q : Type</code> を持つ。
 この類似性は「カリー=ハワード同型対応」の別の例である。この類似性によると、今作った証明は直積ペアの要素を入れ替える関数に似ていることになる。しかし、含意と関数型コンストラクタとは対照的に、Leanでは <code>∧</code> と <code>×</code> は別々に扱われている。</p>
 <p><a href="./structures_and_records.html">9章 Structures and Records (構造体とレコード)</a>で、Leanには<em>structures</em>(構造体)と呼ばれる型があることを学ぶ。構造体 <code>S</code> は適切な引数の列から <code>S</code> の要素を構築する単一で正規の<em>constructor</em>(コンストラクタ)によって定義される。任意の <code>p q : Prop</code> に対して、<code>p ∧ q</code> は構造体の一例である。構造体 <code>p ∧ q</code> の要素を構築する正規の方法は、適切な引数 <code>hp : p</code> と <code>hq : q</code> に <code>And.intro</code> を適用することである。
-Leanでは、関連する型が帰納型であり、文脈から型推論できる場合、<em>anonymous constructor</em>(匿名コンストラクタ)表記 <code>⟨arg1, arg2, ...⟩</code> を使うことができる。特に、<code>And.intro hp hq</code> の代わりに <code>⟨hp, hq⟩</code> と書くことがよくある。</p>
+Leanでは、関連する型が帰納型であり、文脈から型推論できる場合、<em>anonymous constructor</em>(無名コンストラクタ)表記 <code>⟨arg1, arg2, ...⟩</code> を使うことができる。特に、<code>And.intro hp hq</code> の代わりに <code>⟨hp, hq⟩</code> と書くことがよくある。</p>
 <pre><code class="language-lean">variable (p q : Prop)
 variable (hp : p) (hq : q)
 
@@ -405,7 +405,7 @@ example (h : p ∨ q) : q ∨ p :=
   Or.elim h (fun hp =&gt; Or.inr hp) (fun hq =&gt; Or.inl hq)
 </code></pre>
 <p>この簡潔な式の中に、Leanが <code>hp</code> と <code>hq</code> の型を推論するのに十分な情報が含まれていることに注意してほしい。しかし、型注釈を用いた長い記述を用いることは、証明を読みやすくし、エラーを発見してデバッグするのに役立つ。</p>
-<p><code>Or</code> は2つのコンストラクタを持つ、つまり単一で正規のコンストラクタを持たないため、<code>Or</code> の構築のために匿名コンストラクタを使うことはできない。しかし、<code>Or.elim h</code> の代わりに <code>h.elim</code> と書くことはできる:</p>
+<p><code>Or</code> は2つのコンストラクタを持つ、つまり単一で正規のコンストラクタを持たないため、<code>Or</code> の構築のために無名コンストラクタを使うことはできない。しかし、<code>Or.elim h</code> の代わりに <code>h.elim</code> と書くことはできる:</p>
 <pre><code class="language-lean">variable (p q r : Prop)
 
 example (h : p ∨ q) : q ∨ p :=
@@ -454,7 +454,7 @@ theorem and_swap : p ∧ q ↔ q ∧ p :=
 variable (h : p ∧ q)
 example : q ∧ p := Iff.mp (and_swap p q) h
 </code></pre>
-<p>匿名コンストラクタ記法を使って、<code>p → q</code> の証明と　<code>q → p</code> の証明から <code>p ↔ q</code> の証明を構築することができる。また、<code>mp</code> と <code>mpr</code> について <code>.</code> に関する記法が使える。これらを使うと、上記の例は次のように簡潔に書くことができる:</p>
+<p>無名コンストラクタ記法を使って、<code>p → q</code> の証明と　<code>q → p</code> の証明から <code>p ↔ q</code> の証明を構築することができる。また、<code>mp</code> と <code>mpr</code> について <code>.</code> に関する記法が使える。これらを使うと、上記の例は次のように簡潔に書くことができる:</p>
 <pre><code class="language-lean">variable (p q : Prop)
 
 theorem and_swap : p ∧ q ↔ q ∧ p :=

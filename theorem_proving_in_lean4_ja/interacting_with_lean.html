@@ -432,7 +432,7 @@ notation:50 lhs:51 &quot; = &quot; rhs:51 =&gt; Eq lhs rhs
 notation:80 lhs:81 &quot; ^ &quot; rhs:80 =&gt; HPow.hPow lhs rhs
 notation:100 &quot;-&quot; arg:100 =&gt; Neg.neg arg
 set_option quotPrecheck false
-notation:1024 arg:1024 &quot;⁻¹&quot; =&gt; Inv.inv arg  -- ``max`` は優先度1024の略記
+notation:1024 arg:1024 &quot;⁻¹&quot; =&gt; Inv.inv arg  -- ``max`` はパース優先順位1024の略記
 </code></pre>
 <p>最初のコードブロックの全てのコマンドは、実際にはより一般的な <code>notation</code> コマンドに変換するコマンドマクロであることがわかった。このようなマクロの書き方は後の節で学ぶ。<code>notation</code> コマンドは、単一の記号の代わりに、記号と「優先順位を持つ名前付き項プレースホルダー」を組み合わせたシーケンスを受け付ける。このシーケンスは <code>=&gt;</code> の右辺で参照され、右辺にあるプレースホルダーはシーケンス内の位置に基づいてパースされた各項によって置換される。優先順位 <code>p</code> を持つプレースホルダーは、その場所で <code>p</code> 以上の優先順位を持つ表記のみを受け付ける。したがって、文字列 <code>a + b + c</code> を <code>a + (b + c)</code> とパースすることはできない。なぜなら、<code>infixl</code> コマンドの演算子の右辺は、演算子自体よりも優先順位が1大きいからである。対照的に、<code>infixr</code> コマンドの演算子の右辺は、演算子と同じ優先順位を持つ。そのため、<code>a ^ b ^ c</code> は <code>a ^ (b ^ c)</code> とパースされる。優先順位が結合性を明確に決定しない場合、<code>notation</code> コマンドを直接使って次のような中置演算子を導入すると、Leanはこの演算子をデフォルトで右結合的にパースすることに注意してほしい:</p>
 <pre><code class="language-lean"><span class="boring">set_option quotPrecheck false

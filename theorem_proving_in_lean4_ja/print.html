@@ -1050,7 +1050,7 @@ example (h : p ∧ q) : q ∧ p :=
 <p>連言導入と連言除去は直積ペアの構築と射影の操作に似ていることに注意してほしい。<code>p : Prop</code>、<code>q : Prop</code>、<code>hp : p</code>、<code>hq : q</code> のとき、<code>And.intro hp hq</code> は型 <code>p ∧ q : Prop</code> を持つ。一方、<code>p : Type</code>、<code>q : Type</code>、<code>hp : p</code>、<code>hq : q</code> のとき、<code>Prod hp hq</code> は型 <code>p × q : Type</code> を持つ。
 この類似性は「カリー=ハワード同型対応」の別の例である。この類似性によると、今作った証明は直積ペアの要素を入れ替える関数に似ていることになる。しかし、含意と関数型コンストラクタとは対照的に、Leanでは <code>∧</code> と <code>×</code> は別々に扱われている。</p>
 <p><a href="./structures_and_records.html">9章 Structures and Records (構造体とレコード)</a>で、Leanには<em>structures</em>(構造体)と呼ばれる型があることを学ぶ。構造体 <code>S</code> は適切な引数の列から <code>S</code> の要素を構築する単一で正規の<em>constructor</em>(コンストラクタ)によって定義される。任意の <code>p q : Prop</code> に対して、<code>p ∧ q</code> は構造体の一例である。構造体 <code>p ∧ q</code> の要素を構築する正規の方法は、適切な引数 <code>hp : p</code> と <code>hq : q</code> に <code>And.intro</code> を適用することである。
-Leanでは、関連する型が帰納型であり、文脈から型推論できる場合、<em>anonymous constructor</em>(匿名コンストラクタ)表記 <code>⟨arg1, arg2, ...⟩</code> を使うことができる。特に、<code>And.intro hp hq</code> の代わりに <code>⟨hp, hq⟩</code> と書くことがよくある。</p>
+Leanでは、関連する型が帰納型であり、文脈から型推論できる場合、<em>anonymous constructor</em>(無名コンストラクタ)表記 <code>⟨arg1, arg2, ...⟩</code> を使うことができる。特に、<code>And.intro hp hq</code> の代わりに <code>⟨hp, hq⟩</code> と書くことがよくある。</p>
 <pre><code class="language-lean">variable (p q : Prop)
 variable (hp : p) (hq : q)
 
@@ -1104,7 +1104,7 @@ example (h : p ∨ q) : q ∨ p :=
   Or.elim h (fun hp =&gt; Or.inr hp) (fun hq =&gt; Or.inl hq)
 </code></pre>
 <p>この簡潔な式の中に、Leanが <code>hp</code> と <code>hq</code> の型を推論するのに十分な情報が含まれていることに注意してほしい。しかし、型注釈を用いた長い記述を用いることは、証明を読みやすくし、エラーを発見してデバッグするのに役立つ。</p>
-<p><code>Or</code> は2つのコンストラクタを持つ、つまり単一で正規のコンストラクタを持たないため、<code>Or</code> の構築のために匿名コンストラクタを使うことはできない。しかし、<code>Or.elim h</code> の代わりに <code>h.elim</code> と書くことはできる:</p>
+<p><code>Or</code> は2つのコンストラクタを持つ、つまり単一で正規のコンストラクタを持たないため、<code>Or</code> の構築のために無名コンストラクタを使うことはできない。しかし、<code>Or.elim h</code> の代わりに <code>h.elim</code> と書くことはできる:</p>
 <pre><code class="language-lean">variable (p q r : Prop)
 
 example (h : p ∨ q) : q ∨ p :=
@@ -1153,7 +1153,7 @@ theorem and_swap : p ∧ q ↔ q ∧ p :=
 variable (h : p ∧ q)
 example : q ∧ p := Iff.mp (and_swap p q) h
 </code></pre>
-<p>匿名コンストラクタ記法を使って、<code>p → q</code> の証明と　<code>q → p</code> の証明から <code>p ↔ q</code> の証明を構築することができる。また、<code>mp</code> と <code>mpr</code> について <code>.</code> に関する記法が使える。これらを使うと、上記の例は次のように簡潔に書くことができる:</p>
+<p>無名コンストラクタ記法を使って、<code>p → q</code> の証明と　<code>q → p</code> の証明から <code>p ↔ q</code> の証明を構築することができる。また、<code>mp</code> と <code>mpr</code> について <code>.</code> に関する記法が使える。これらを使うと、上記の例は次のように簡潔に書くことができる:</p>
 <pre><code class="language-lean">variable (p q : Prop)
 
 theorem and_swap : p ∧ q ↔ q ∧ p :=
@@ -1675,7 +1675,7 @@ example (x y z : Nat) (hxy : x &lt; y) (hyz : y &lt; z) : ∃ w, x &lt; w ∧ w 
 
 #check @Exists.intro  -- @Exists.intro : ∀ {α : Sort u_1} {p : α → Prop} (w : α), p w → Exists p
 </code></pre>
-<p>型が文脈から明らかな場合、<code>Exists.intro t h</code> の代わりに、匿名コンストラクタ表記 <code>⟨t, h⟩</code> を使うことができる。</p>
+<p>型が文脈から明らかな場合、<code>Exists.intro t h</code> の代わりに、無名コンストラクタ表記 <code>⟨t, h⟩</code> を使うことができる。</p>
 <pre><code class="language-lean">example : ∃ x : Nat, x &gt; 0 :=
   have h : 1 &gt; 0 := Nat.zero_lt_succ 0
   ⟨1, h⟩
@@ -1712,7 +1712,7 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
 
 #check @Exists.elim  -- ∀ {α : Sort u_1} {p : α → Prop} {b : Prop}, (∃ x, p x) → (∀ (a : α), p a → b) → b
 </code></pre>
-<p>ここで、匿名コンストラクタ表記 <code>⟨w, hw.right, hw.left⟩</code> が入れ子になったコンストラクタの適用を省略していることに注意。<code>⟨w, hw.right, hw.left⟩</code> は <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> と書いたのと同じである。</p>
+<p>ここで、無名コンストラクタ表記 <code>⟨w, hw.right, hw.left⟩</code> が入れ子になったコンストラクタの適用を省略していることに注意。<code>⟨w, hw.right, hw.left⟩</code> は <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> と書いたのと同じである。</p>
 <p>存在量化子除去則と選言除去則を比較することは有用であろう: 主張 <code>∃ x : α, p x</code> は、 <code>a</code> が型 <code>α</code> の全ての項をわたるときの、命題 <code>p a</code> 全てを選言で繋げたものと考えることができる。</p>
 <p>存在命題は、2章の従属型の節で説明したシグマ型(依存直積型)に非常に似ていることに注目しよう。<code>a : α</code> と <code>h : p a</code> が与えられたとき、項 <code>Exists.intro a h</code> は型 <code>(∃ x : α, p x) : Prop</code> を持つ一方で、<code>Sigma.mk a h</code> は型 <code>(Σ x : α, p x) : Type</code> を持つ。この <code>∃</code> と <code>Σ</code> の類似性はカリー=ハワード同型のもう一つの例である。</p>
 <pre><code class="language-lean">section exist_prop
@@ -1780,7 +1780,7 @@ theorem even_plus_even2 : ∀ a b : Nat, is_even a → is_even b → is_even (a 
         _ = 2 * (w1 + w2)   := by rw [Nat.mul_add]
     ⟨(w1 + w2 : Nat), (hw3 : a + b = 2 * (w1 + w2))⟩
 </code></pre>
-<p>マッチ式、匿名コンストラクタ、<code>rewrite</code> タクティク……、この章で説明した様々な小道具を使ってこの証明を簡潔に書くと次のようになる:</p>
+<p>マッチ式、無名コンストラクタ、<code>rewrite</code> タクティク……、この章で説明した様々な小道具を使ってこの証明を簡潔に書くと次のようになる:</p>
 <pre><code class="language-lean"><span class="boring">def is_even (a : Nat) := ∃ b, a = 2 * b
 </span>theorem even_plus_even (h1 : is_even a) (h2 : is_even b) : is_even (a + b) :=
   match h1, h2 with
@@ -1895,7 +1895,7 @@ example : f 0 ≥ f 1 → f 1 ≥ f 2 → f 0 = f 2 :=
   have : f 0 ≤ f 2 := Nat.le_trans (h 0) (h 1)
   show f 0 = f 2 from Nat.le_antisymm this ‹f 0 ≥ f 2›
 </code></pre>
-<p>フランス語の引用符は、匿名で導入されたものだけでなくコンテキスト中の「あらゆるもの」を参照できることを覚えておこう。フランス語の引用符の適用範囲は命題だけにとどまらないが、これをデータに対して使うのはやや奇妙である:</p>
+<p>フランス語の引用符は、名無しで導入されたものだけでなくコンテキスト中の「あらゆるもの」を参照できることを覚えておこう。フランス語の引用符の適用範囲は命題だけにとどまらないが、これをデータに対して使うのはやや奇妙である:</p>
 <pre><code class="language-lean">example (n : Nat) : Nat := ‹Nat›
 </code></pre>
 <p>以降の章で、Leanのマクロシステムを使って証明言語を拡張する方法を紹介する。</p>
@@ -3258,7 +3258,7 @@ notation:50 lhs:51 &quot; = &quot; rhs:51 =&gt; Eq lhs rhs
 notation:80 lhs:81 &quot; ^ &quot; rhs:80 =&gt; HPow.hPow lhs rhs
 notation:100 &quot;-&quot; arg:100 =&gt; Neg.neg arg
 set_option quotPrecheck false
-notation:1024 arg:1024 &quot;⁻¹&quot; =&gt; Inv.inv arg  -- ``max`` は優先度1024の略記
+notation:1024 arg:1024 &quot;⁻¹&quot; =&gt; Inv.inv arg  -- ``max`` はパース優先順位1024の略記
 </code></pre>
 <p>最初のコードブロックの全てのコマンドは、実際にはより一般的な <code>notation</code> コマンドに変換するコマンドマクロであることがわかった。このようなマクロの書き方は後の節で学ぶ。<code>notation</code> コマンドは、単一の記号の代わりに、記号と「優先順位を持つ名前付き項プレースホルダー」を組み合わせたシーケンスを受け付ける。このシーケンスは <code>=&gt;</code> の右辺で参照され、右辺にあるプレースホルダーはシーケンス内の位置に基づいてパースされた各項によって置換される。優先順位 <code>p</code> を持つプレースホルダーは、その場所で <code>p</code> 以上の優先順位を持つ表記のみを受け付ける。したがって、文字列 <code>a + b + c</code> を <code>a + (b + c)</code> とパースすることはできない。なぜなら、<code>infixl</code> コマンドの演算子の右辺は、演算子自体よりも優先順位が1大きいからである。対照的に、<code>infixr</code> コマンドの演算子の右辺は、演算子と同じ優先順位を持つ。そのため、<code>a ^ b ^ c</code> は <code>a ^ (b ^ c)</code> とパースされる。優先順位が結合性を明確に決定しない場合、<code>notation</code> コマンドを直接使って次のような中置演算子を導入すると、Leanはこの演算子をデフォルトで右結合的にパースすることに注意してほしい:</p>
 <pre><code class="language-lean"><span class="boring">set_option quotPrecheck false
@@ -4753,7 +4753,7 @@ def cond : Bool → α → α → α
   | false, x, y =&gt; y
 <span class="boring">end Hidden
 </span></code></pre>
-<p>また、ある引数の値が出力を定義するのに必要ない場合は、その引数のパターンにアンダースコアを使うことができることに注意してほしい。このアンダースコアは<em>wildcard pattern</em>(ワイルドカードパターン)あるいは<em>anonymous variable</em>(匿名変数)として知られている。等式コンパイラ以外での使い方とは違い、ここでアンダースコアは暗黙の引数を表すものでは<strong>ない</strong>。ワイルドカードにアンダースコアを使うのは関数型プログラミング言語では一般的なので、Leanもその表記を採用した。節<a href="induction_and_recursion.html#wildcards-and-overlapping-patterns-%E3%83%AF%E3%82%A4%E3%83%AB%E3%83%89%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A8%E3%82%B1%E3%83%BC%E3%82%B9%E3%81%AE%E9%87%8D%E8%A4%87">Wildcards and Overlapping Patterns (ワイルドカードとケースの重複)</a>ではワイルドカードの概念を拡張し、節<a href="induction_and_recursion.html#inaccessible-patterns-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E4%B8%8D%E8%83%BD%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3">Inaccessible Patterns (アクセス不能パターン)</a>ではパターン内で暗黙の引数を使用する方法を説明する。</p>
+<p>また、ある引数の値が出力を定義するのに必要ない場合は、その引数のパターンにアンダースコアを使うことができることに注意してほしい。このアンダースコアは<em>wildcard pattern</em>(ワイルドカードパターン)あるいは<em>anonymous variable</em>(無名変数)として知られている。等式コンパイラ以外での使い方とは違い、ここでアンダースコアは暗黙の引数を表すものでは<strong>ない</strong>。ワイルドカードにアンダースコアを使うのは関数型プログラミング言語では一般的なので、Leanもその表記を採用した。節<a href="induction_and_recursion.html#wildcards-and-overlapping-patterns-%E3%83%AF%E3%82%A4%E3%83%AB%E3%83%89%E3%82%AB%E3%83%BC%E3%83%89%E3%81%A8%E3%82%B1%E3%83%BC%E3%82%B9%E3%81%AE%E9%87%8D%E8%A4%87">Wildcards and Overlapping Patterns (ワイルドカードとケースの重複)</a>ではワイルドカードの概念を拡張し、節<a href="induction_and_recursion.html#inaccessible-patterns-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E4%B8%8D%E8%83%BD%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3">Inaccessible Patterns (アクセス不能パターン)</a>ではパターン内で暗黙の引数を使用する方法を説明する。</p>
 <p><a href="./inductive_types.html">7章 Inductive Types (帰納型)</a>で説明したように、帰納データ型はパラメータに依存しうる。次の例では、パターンマッチングを用いて <code>tail</code> 関数を定義している。引数 <code>α : Type u</code> は帰納データ型のパラメータであり、パターンマッチングに参加しないことを示すために(関数名・引数リストと型名を区切る)コロンの前に置かれる。Leanは <code>:</code> の後に帰納型のパラメータが来ることも許可するが、パラメータをパターンマッチさせることはできない。</p>
 <pre><code class="language-lean">def tail1 {α : Type u} : List α → List α
   | []      =&gt; []
@@ -5882,7 +5882,7 @@ instance : Add Float where
 <!--
 (訳者注: この時点では、大雑把に言えば、型クラスは型クラス解決によりインスタンスが自動合成される構造体だといえる。)
 -->
-<p>一般的に、インスタンスは複雑な方法で他のインスタンスに依存することがある。例えば、「もし <code>a</code> が加法を持つなら、<code>Array a</code> も加法を持つ」と主張する(匿名)インスタンスを宣言することができる:</p>
+<p>一般的に、インスタンスは複雑な方法で他のインスタンスに依存することがある。例えば、「もし <code>a</code> が加法を持つなら、<code>Array a</code> も加法を持つ」と主張する(無名)インスタンスを宣言することができる:</p>
 <pre><code class="language-lean">instance [Add a] : Add (Array a) where
   add x y := Array.zipWith x y (· + ·)
 

@@ -468,7 +468,7 @@ example (x y z : Nat) (hxy : x &lt; y) (hyz : y &lt; z) : ∃ w, x &lt; w ∧ w 
 
 #check @Exists.intro  -- @Exists.intro : ∀ {α : Sort u_1} {p : α → Prop} (w : α), p w → Exists p
 </code></pre>
-<p>型が文脈から明らかな場合、<code>Exists.intro t h</code> の代わりに、匿名コンストラクタ表記 <code>⟨t, h⟩</code> を使うことができる。</p>
+<p>型が文脈から明らかな場合、<code>Exists.intro t h</code> の代わりに、無名コンストラクタ表記 <code>⟨t, h⟩</code> を使うことができる。</p>
 <pre><code class="language-lean">example : ∃ x : Nat, x &gt; 0 :=
   have h : 1 &gt; 0 := Nat.zero_lt_succ 0
   ⟨1, h⟩
@@ -505,7 +505,7 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
 
 #check @Exists.elim  -- ∀ {α : Sort u_1} {p : α → Prop} {b : Prop}, (∃ x, p x) → (∀ (a : α), p a → b) → b
 </code></pre>
-<p>ここで、匿名コンストラクタ表記 <code>⟨w, hw.right, hw.left⟩</code> が入れ子になったコンストラクタの適用を省略していることに注意。<code>⟨w, hw.right, hw.left⟩</code> は <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> と書いたのと同じである。</p>
+<p>ここで、無名コンストラクタ表記 <code>⟨w, hw.right, hw.left⟩</code> が入れ子になったコンストラクタの適用を省略していることに注意。<code>⟨w, hw.right, hw.left⟩</code> は <code>⟨w, ⟨hw.right, hw.left⟩⟩</code> と書いたのと同じである。</p>
 <p>存在量化子除去則と選言除去則を比較することは有用であろう: 主張 <code>∃ x : α, p x</code> は、 <code>a</code> が型 <code>α</code> の全ての項をわたるときの、命題 <code>p a</code> 全てを選言で繋げたものと考えることができる。</p>
 <p>存在命題は、2章の従属型の節で説明したシグマ型(依存直積型)に非常に似ていることに注目しよう。<code>a : α</code> と <code>h : p a</code> が与えられたとき、項 <code>Exists.intro a h</code> は型 <code>(∃ x : α, p x) : Prop</code> を持つ一方で、<code>Sigma.mk a h</code> は型 <code>(Σ x : α, p x) : Type</code> を持つ。この <code>∃</code> と <code>Σ</code> の類似性はカリー=ハワード同型のもう一つの例である。</p>
 <pre><code class="language-lean">section exist_prop
@@ -573,7 +573,7 @@ theorem even_plus_even2 : ∀ a b : Nat, is_even a → is_even b → is_even (a 
         _ = 2 * (w1 + w2)   := by rw [Nat.mul_add]
     ⟨(w1 + w2 : Nat), (hw3 : a + b = 2 * (w1 + w2))⟩
 </code></pre>
-<p>マッチ式、匿名コンストラクタ、<code>rewrite</code> タクティク……、この章で説明した様々な小道具を使ってこの証明を簡潔に書くと次のようになる:</p>
+<p>マッチ式、無名コンストラクタ、<code>rewrite</code> タクティク……、この章で説明した様々な小道具を使ってこの証明を簡潔に書くと次のようになる:</p>
 <pre><code class="language-lean"><span class="boring">def is_even (a : Nat) := ∃ b, a = 2 * b
 </span>theorem even_plus_even (h1 : is_even a) (h2 : is_even b) : is_even (a + b) :=
   match h1, h2 with
@@ -688,7 +688,7 @@ example : f 0 ≥ f 1 → f 1 ≥ f 2 → f 0 = f 2 :=
   have : f 0 ≤ f 2 := Nat.le_trans (h 0) (h 1)
   show f 0 = f 2 from Nat.le_antisymm this ‹f 0 ≥ f 2›
 </code></pre>
-<p>フランス語の引用符は、匿名で導入されたものだけでなくコンテキスト中の「あらゆるもの」を参照できることを覚えておこう。フランス語の引用符の適用範囲は命題だけにとどまらないが、これをデータに対して使うのはやや奇妙である:</p>
+<p>フランス語の引用符は、名無しで導入されたものだけでなくコンテキスト中の「あらゆるもの」を参照できることを覚えておこう。フランス語の引用符の適用範囲は命題だけにとどまらないが、これをデータに対して使うのはやや奇妙である:</p>
 <pre><code class="language-lean">example (n : Nat) : Nat := ‹Nat›
 </code></pre>
 <p>以降の章で、Leanのマクロシステムを使って証明言語を拡張する方法を紹介する。</p>
