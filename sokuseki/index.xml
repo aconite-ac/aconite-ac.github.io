@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>束跡</title>
+      <link>https://quartz.jzhao.xyz</link>
+      <description>Last 10 notes on 束跡</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>index</title>
+    <link>https://quartz.jzhao.xyz/</link>
+    <guid>https://quartz.jzhao.xyz/</guid>
+    <description><![CDATA[ root. ]]></description>
+    <pubDate>Sat, 07 Mar 2026 20:43:01 GMT</pubDate>
+  </item><item>
+    <title>root</title>
+    <link>https://quartz.jzhao.xyz/root</link>
+    <guid>https://quartz.jzhao.xyz/root</guid>
+    <description><![CDATA[  ]]></description>
+    <pubDate>Wed, 28 Jan 2026 08:09:55 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
