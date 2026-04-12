@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/dependent_type_theory.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/propositions_and_proofs.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/quantifiers_and_equality.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/tactics.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/interacting_with_lean.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/inductive_types.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/induction_and_recursion.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/structures_and_records.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/type_classes.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/conv.html</loc>
+  </url>
+  <url>
+    <loc>https://aconite-ac.github.io/theorem_proving_in_lean4_ja/axioms_and_computation.html</loc>
+  </url>
+</urlset>
