@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aconite-ac.github.io/sokuseki/sitemap.xml
+Sitemap: https://aconite-ac.github.io/sitemap_index.xml
