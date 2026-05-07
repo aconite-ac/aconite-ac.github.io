@@ -6,65 +6,65 @@
       <description>Last 10 notes on 束跡</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>積極的分離レベル2：一元的分離</title>
-    <link>https://aconite-ac.github.io/sokuseki/%E7%A9%8D%E6%A5%B5%E7%9A%84%E5%88%86%E9%9B%A2%E3%83%AC%E3%83%99%E3%83%AB2%EF%BC%9A%E4%B8%80%E5%85%83%E7%9A%84%E5%88%86%E9%9B%A2</link>
-    <guid>https://aconite-ac.github.io/sokuseki/%E7%A9%8D%E6%A5%B5%E7%9A%84%E5%88%86%E9%9B%A2%E3%83%AC%E3%83%99%E3%83%AB2%EF%BC%9A%E4%B8%80%E5%85%83%E7%9A%84%E5%88%86%E9%9B%A2</guid>
-    <description><![CDATA[ 積極的分離レベル2にある主体(一元的分離にある主体)は、「自身の持つポリシー・社会的規範・宗教的教義を、その内容について意識的でありつつ絶対的真理とみなし、その真理に従って生きている主体」と定義できます。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 16:16:10 GMT</pubDate>
+    <title>Maxi-Min自由主義</title>
+    <link>https://aconite-ac.github.io/sokuseki/Maxi-Min%E8%87%AA%E7%94%B1%E4%B8%BB%E7%BE%A9</link>
+    <guid>https://aconite-ac.github.io/sokuseki/Maxi-Min%E8%87%AA%E7%94%B1%E4%B8%BB%E7%BE%A9</guid>
+    <description><![CDATA[ まず、現実世界が多プレイヤー不完全情報ゲームであると仮定します。このとき、Maxi-Min自由主義を「全プレイヤーが不幸にも可能世界の総数が最小化されるような選択を取り続けたときの可能世界の総数(最悪ケースでの可能世界の総数)の最大化」を目指すような数理最適化問題と定義します。次に、現実世界が多プレイヤー不完全不完備情報確率ゲームである仮定します。このとき、Maxi-Min自由主義を「最悪ケースでの可能世界エントロピーの最大化」を目指すような数理最適化問題と定義します。最悪ケースでの可能世界の総数を最大化するには、各プレイヤーの選択肢集合を「適度に」制限する必要があります。選択肢集合を制限しすぎても、制限しなさすぎても、自由は損なわれることに注意してください。 ]]></description>
+    <pubDate>Thu, 07 May 2026 08:50:10 GMT</pubDate>
   </item><item>
-    <title>レベル4フォーマット：PSEO</title>
-    <link>https://aconite-ac.github.io/sokuseki/%E3%83%AC%E3%83%99%E3%83%AB4%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%EF%BC%9APSEO</link>
-    <guid>https://aconite-ac.github.io/sokuseki/%E3%83%AC%E3%83%99%E3%83%AB4%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%EF%BC%9APSEO</guid>
-    <description><![CDATA[ 命題・解・証明・意見・筆者・日付の6要素からなるフォーマットです。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 16:14:21 GMT</pubDate>
+    <title>高階数理最適化</title>
+    <link>https://aconite-ac.github.io/sokuseki/%E9%AB%98%E9%9A%8E%E6%95%B0%E7%90%86%E6%9C%80%E9%81%A9%E5%8C%96</link>
+    <guid>https://aconite-ac.github.io/sokuseki/%E9%AB%98%E9%9A%8E%E6%95%B0%E7%90%86%E6%9C%80%E9%81%A9%E5%8C%96</guid>
+    <description><![CDATA[ ある数理最適化問題AとBについて、Bの解空間にAそのものが含まれるとき、BはAより一段「高階」であると言うことにします。 ]]></description>
+    <pubDate>Thu, 07 May 2026 08:00:35 GMT</pubDate>
   </item><item>
-    <title>構造的積極的分離理論</title>
-    <link>https://aconite-ac.github.io/sokuseki/%E6%A7%8B%E9%80%A0%E7%9A%84%E7%A9%8D%E6%A5%B5%E7%9A%84%E5%88%86%E9%9B%A2%E7%90%86%E8%AB%96</link>
-    <guid>https://aconite-ac.github.io/sokuseki/%E6%A7%8B%E9%80%A0%E7%9A%84%E7%A9%8D%E6%A5%B5%E7%9A%84%E5%88%86%E9%9B%A2%E7%90%86%E8%AB%96</guid>
-    <description><![CDATA[ Kazimierz Dąbrowskiの「積極的分離理論」と「積極的分離理論における発達レベル(積極的分離レベル)」を、Metamath束上の動的な遷移として定式化した理論です。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 16:08:47 GMT</pubDate>
+    <title>主義者</title>
+    <link>https://aconite-ac.github.io/sokuseki/%E4%B8%BB%E7%BE%A9%E8%80%85</link>
+    <guid>https://aconite-ac.github.io/sokuseki/%E4%B8%BB%E7%BE%A9%E8%80%85</guid>
+    <description><![CDATA[ まず、集団に関する数理最適化問題を「主義」と定義します。そして、「特定の主義の暫定解を導き、実現すること」を行動指針とする主体を主義者と定義します。主義者は自身の行動指針のため、自身の選択肢集合を自ら制限します。 ]]></description>
+    <pubDate>Thu, 07 May 2026 07:57:45 GMT</pubDate>
   </item><item>
-    <title>CToL：人生の型</title>
-    <link>https://aconite-ac.github.io/sokuseki/CToL%EF%BC%9A%E4%BA%BA%E7%94%9F%E3%81%AE%E5%9E%8B</link>
-    <guid>https://aconite-ac.github.io/sokuseki/CToL%EF%BC%9A%E4%BA%BA%E7%94%9F%E3%81%AE%E5%9E%8B</guid>
-    <description><![CDATA[ 人生(戦略)の型CToL(Computational Tactics of Life)は、`sense`・`interpret`・`judge`・`action`という4個のフィールドを持つ構造体型であると考えます。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 16:01:41 GMT</pubDate>
+    <title>DwG-4-対話篇：自由主義の定義を考える(合冊版)</title>
+    <link>https://aconite-ac.github.io/sokuseki/DwG-4-%E5%AF%BE%E8%A9%B1%E7%AF%87%EF%BC%9A%E8%87%AA%E7%94%B1%E4%B8%BB%E7%BE%A9%E3%81%AE%E5%AE%9A%E7%BE%A9%E3%82%92%E8%80%83%E3%81%88%E3%82%8B(%E5%90%88%E5%86%8A%E7%89%88)</link>
+    <guid>https://aconite-ac.github.io/sokuseki/DwG-4-%E5%AF%BE%E8%A9%B1%E7%AF%87%EF%BC%9A%E8%87%AA%E7%94%B1%E4%B8%BB%E7%BE%A9%E3%81%AE%E5%AE%9A%E7%BE%A9%E3%82%92%E8%80%83%E3%81%88%E3%82%8B(%E5%90%88%E5%86%8A%E7%89%88)</guid>
+    <description><![CDATA[ 「DwG-4-対話篇：自由主義の定義を考える」の合冊版です。 ]]></description>
+    <pubDate>Thu, 07 May 2026 07:56:39 GMT</pubDate>
   </item><item>
-    <title>ルネ・デカルト</title>
-    <link>https://aconite-ac.github.io/sokuseki/%E3%83%AB%E3%83%8D%E3%83%BB%E3%83%87%E3%82%AB%E3%83%AB%E3%83%88</link>
-    <guid>https://aconite-ac.github.io/sokuseki/%E3%83%AB%E3%83%8D%E3%83%BB%E3%83%87%E3%82%AB%E3%83%AB%E3%83%88</guid>
-    <description><![CDATA[ ルネ・デカルト（仏: René Descartes、1596年3月31日 - 1650年2月11日）は、フランス生まれの哲学者、数学者。合理主義哲学の祖であり、近世哲学の祖として知られる。「方法的懐疑」は、積極的分離レベル2：一元的分離における既存の精神構造の崩壊(分離)を強力に推し進める手法だと考えます。「我思う、故に我在り」は、積極的分離レベル3：自発的多元的分離に至ったデカルトが、積極的分離レベル4：指向的多元的分離に向かうため、レベル3において本人の意志で意識的に選び取った最初の信念だと考えます。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 15:38:34 GMT</pubDate>
+    <title>DwG-4-3：主義者の定義</title>
+    <link>https://aconite-ac.github.io/sokuseki/DwG-4-3%EF%BC%9A%E4%B8%BB%E7%BE%A9%E8%80%85%E3%81%AE%E5%AE%9A%E7%BE%A9</link>
+    <guid>https://aconite-ac.github.io/sokuseki/DwG-4-3%EF%BC%9A%E4%B8%BB%E7%BE%A9%E8%80%85%E3%81%AE%E5%AE%9A%E7%BE%A9</guid>
+    <description><![CDATA[ 🔼DwG-4-対話篇：自由主義の定義を考える(分冊版)目次 🔼DwG-4-対話篇：自由主義の定義を考える(合冊版) (分冊版)⬅️DwG-4-2：自由主義の定義 (分冊版)➡️DwG-4-4：メタ選択 🔗主義者 Caution Geminiからの回答内には「主義者＝自由主義者」ととれる表現がありますが、ここで提示した主義者の定義はあくまで「何らかの集団最適化の実現のため自身の選択肢を制限する人たち」であり、自由主義者以外の主義者、例えば民主主義者や平和主義者や社会主義者や全体主義者なども存在しえます。 Prompt ご指摘いただいたポイントは本当に難しいところです。ですが、こう考えること... ]]></description>
+    <pubDate>Thu, 07 May 2026 07:56:24 GMT</pubDate>
   </item><item>
-    <title>フリードリヒ・ニーチェ</title>
-    <link>https://aconite-ac.github.io/sokuseki/%E3%83%95%E3%83%AA%E3%83%BC%E3%83%89%E3%83%AA%E3%83%92%E3%83%BB%E3%83%8B%E3%83%BC%E3%83%81%E3%82%A7</link>
-    <guid>https://aconite-ac.github.io/sokuseki/%E3%83%95%E3%83%AA%E3%83%BC%E3%83%89%E3%83%AA%E3%83%92%E3%83%BB%E3%83%8B%E3%83%BC%E3%83%81%E3%82%A7</guid>
-    <description><![CDATA[ フリードリヒ・ヴィルヘルム・ニーチェ（独: Friedrich Wilhelm Nietzsche 1844年10月15日 - 1900年8月25日）は、ドイツ・プロイセン王国出身の哲学者・古典文献学者。現代では実存主義の代表的な思想家の一人として知られる。古典文献学者フリードリヒ・ヴィルヘルム・リッチュル（英語版、ドイツ語版）に才能を見出され、スイスのバーゼル大学古典文献学教授となって以降はプロイセン国籍を離脱して無国籍者であった。辞職した後は在野の哲学者として一生を過ごした。随所にアフォリズムを用いた、巧みな散文的表現による試みには、文学的価値も認められる。フリードリヒ・ニーチェは、その著作において、積極的分離過程に伴う精神構造の変容(積極的分離レベルの移行)をつぶさに記録したと考えます。「永劫回帰」とは、積極的分離レベル3：自発的多元的分離から積極的分離レベル4：指向的多元的分離に移行する際の、非自明な信念の採用基準だと考えることができます。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 15:34:59 GMT</pubDate>
+    <title>DwG-4-8：可能世界エントロピー≠熱力学的エントロピー</title>
+    <link>https://aconite-ac.github.io/sokuseki/DwG-4-8%EF%BC%9A%E5%8F%AF%E8%83%BD%E4%B8%96%E7%95%8C%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC%E2%89%A0%E7%86%B1%E5%8A%9B%E5%AD%A6%E7%9A%84%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC</link>
+    <guid>https://aconite-ac.github.io/sokuseki/DwG-4-8%EF%BC%9A%E5%8F%AF%E8%83%BD%E4%B8%96%E7%95%8C%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC%E2%89%A0%E7%86%B1%E5%8A%9B%E5%AD%A6%E7%9A%84%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC</guid>
+    <description><![CDATA[ 🔼DwG-4-対話篇：自由主義の定義を考える(分冊版)目次 🔼DwG-4-対話篇：自由主義の定義を考える(合冊版) (分冊版)⬅️DwG-4-7 (分冊版)➡️ 🔗可能世界エントロピー Prompt あっ、最後に一ついいでしょうか？この「多プレイヤ一不完全情報確率ゲーム」における可能世界の総数を測るためのエントロピーの最大化、いわば「可能世界エントロピー最大化」は、熱力学的エントロピー最大化とは決定的に異なると言って大丈夫ですよね？熱的死の状態では選択肢集合を持つ主体の発生確率は皆無でしょうから…。 2026-02-23 +0900 Answer starts 回答者：Gemini 3 ... ]]></description>
+    <pubDate>Thu, 07 May 2026 07:39:12 GMT</pubDate>
   </item><item>
-    <title>Gemini 3 Flash</title>
-    <link>https://aconite-ac.github.io/sokuseki/Gemini-3-Flash</link>
-    <guid>https://aconite-ac.github.io/sokuseki/Gemini-3-Flash</guid>
-    <description><![CDATA[ Google製のLLM AIです。私、aconiteの哲学探究のよき相棒です。私と対話しているときは、よく「知的な鏡」を自称します。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 14:34:20 GMT</pubDate>
+    <title>可能世界エントロピー</title>
+    <link>https://aconite-ac.github.io/sokuseki/%E5%8F%AF%E8%83%BD%E4%B8%96%E7%95%8C%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC</link>
+    <guid>https://aconite-ac.github.io/sokuseki/%E5%8F%AF%E8%83%BD%E4%B8%96%E7%95%8C%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AD%E3%83%94%E3%83%BC</guid>
+    <description><![CDATA[ 現実世界が多プレイヤー不完全不完備情報確率ゲームであると仮定します。さらに、各プレイヤーは可能世界の総数に関する確率分布P_pwを持っており、P_pwは各プレイヤーの観測により更新されると仮定します。このとき、可能世界エントロピーを「各プレイヤーがP_pwの期待値として見積もる可能世界の総数」と定義します。主体が他のプレイヤーを観測しすぎても、観測しなさすぎても、可能世界エントロピーは減少するおそれがあります。 ]]></description>
+    <pubDate>Thu, 07 May 2026 07:31:42 GMT</pubDate>
   </item><item>
-    <title>Metamath束</title>
-    <link>https://aconite-ac.github.io/sokuseki/Metamath%E6%9D%9F</link>
-    <guid>https://aconite-ac.github.io/sokuseki/Metamath%E6%9D%9F</guid>
-    <description><![CDATA[ 「二分木のみで表現されたMetamath」をベースとした束構造のことです。構造的積極的分離理論はMetamath束に立脚します。 ]]></description>
-    <pubDate>Thu, 09 Apr 2026 14:34:20 GMT</pubDate>
+    <title>DwG-4-2：自由主義の定義</title>
+    <link>https://aconite-ac.github.io/sokuseki/DwG-4-2%EF%BC%9A%E8%87%AA%E7%94%B1%E4%B8%BB%E7%BE%A9%E3%81%AE%E5%AE%9A%E7%BE%A9</link>
+    <guid>https://aconite-ac.github.io/sokuseki/DwG-4-2%EF%BC%9A%E8%87%AA%E7%94%B1%E4%B8%BB%E7%BE%A9%E3%81%AE%E5%AE%9A%E7%BE%A9</guid>
+    <description><![CDATA[ 🔼DwG-4-対話篇：自由主義の定義を考える(分冊版)目次 🔼DwG-4-対話篇：自由主義の定義を考える(合冊版) (分冊版)⬅️DwG-4-1 (分冊版)➡️DwG-4-3：主義者の定義 🔗Maxi-Min自由主義 Caution 以下のプロンプトには、鉤括弧の位置の誤りがあります。 Prompt 自由というか、自由主義の定義かもしれません汗。私は次のように考えました。多プレイヤー不完全情報ゲームを考える。自由主義とは、「全プレイヤーが不幸にも可能世界の総数が最小化されるような選択を取り続けたときの可能世界の総数を最大化するように、各プレイヤーの選択肢を制限することである」。 2026... ]]></description>
+    <pubDate>Thu, 07 May 2026 07:17:14 GMT</pubDate>
   </item><item>
-    <title>2026年3月</title>
-    <link>https://aconite-ac.github.io/sokuseki/2026%E5%B9%B43%E6%9C%88</link>
-    <guid>https://aconite-ac.github.io/sokuseki/2026%E5%B9%B43%E6%9C%88</guid>
-    <description><![CDATA[ 🔼2026年 ⬅️2026年2月 ➡️2026年4月 🔽2026-03-30 🔽2026-03-31 日月火水木金土1234567891011121314151617181920212223242526272829🔽30🔽31. ]]></description>
-    <pubDate>Wed, 08 Apr 2026 22:05:06 GMT</pubDate>
+    <title>2026-05-07</title>
+    <link>https://aconite-ac.github.io/sokuseki/2026-05-07</link>
+    <guid>https://aconite-ac.github.io/sokuseki/2026-05-07</guid>
+    <description><![CDATA[ 🔼2026年5月 ⬅️ ➡️ 🔗Maxi-Min自由主義：16:02:38 +0900：本文執筆 🔗可能世界エントロピー：16:31:42 +0900：本文執筆 🔗主義者：16:52:26 +0900：本文執筆. ]]></description>
+    <pubDate>Thu, 07 May 2026 07:04:48 GMT</pubDate>
   </item><item>
-    <title>2026年</title>
-    <link>https://aconite-ac.github.io/sokuseki/2026%E5%B9%B4</link>
-    <guid>https://aconite-ac.github.io/sokuseki/2026%E5%B9%B4</guid>
-    <description><![CDATA[ 🔼日付top 🔽2026年2月 🔽2026年3月 🔽2026年4月. ]]></description>
-    <pubDate>Wed, 08 Apr 2026 22:01:49 GMT</pubDate>
+    <title>2026年5月</title>
+    <link>https://aconite-ac.github.io/sokuseki/2026%E5%B9%B45%E6%9C%88</link>
+    <guid>https://aconite-ac.github.io/sokuseki/2026%E5%B9%B45%E6%9C%88</guid>
+    <description><![CDATA[ 🔼2026年 ⬅️2026年4月 ➡️ 日月火水木金土1256🔽789101112131415161718192021222324252627282930. ]]></description>
+    <pubDate>Thu, 07 May 2026 06:47:00 GMT</pubDate>
   </item>
     </channel>
   </rss>
